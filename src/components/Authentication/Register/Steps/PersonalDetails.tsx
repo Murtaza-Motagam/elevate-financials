@@ -17,7 +17,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({ activeStep, onNext })
     const { hookform, onSubmitPersonalDetails, loading } = usePersonalDetails({ onNext, activeStep });
 
     return (
-        <form onSubmit={hookform.handleSubmit(onSubmitPersonalDetails)} className='grid grid-cols-1 md:grid-cols-2 w-full gap-5'>
+        <form onSubmit={hookform.handleSubmit(onSubmitPersonalDetails)} className='grid grid-cols-1 md:grid-cols-2 gap-5'>
             <InputField
                 label='First Name'
                 rest={hookform.register('firstName')}
@@ -34,13 +34,34 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({ activeStep, onNext })
                 error={hookform.errors?.lastName?.message}
                 mandatory
             />
-            <InputField
-                label='Email'
-                rest={hookform.register('email')}
-                placeholder='Enter your email'
-                type='email'
-                error={hookform.errors?.email?.message}
-                mandatory
+            <div className="md:col-span-2">
+                <InputField
+                    label='Email'
+                    rest={hookform.register('email')}
+                    placeholder='Enter your email'
+                    type='email'
+                    error={hookform.errors?.email?.message}
+                    mandatory
+                />
+            </div>
+            <div className="md:col-span-2">
+                <InputField
+                    label='Mobile Number'
+                    rest={hookform.register('mobNo')}
+                    placeholder='Enter your mobile number'
+                    type='number'
+                    error={hookform.errors?.mobNo?.message}
+                    mandatory
+                />
+            </div>
+            <SingleSelect
+                name="genderNm"
+                control={hookform.control}
+                label="Gender"
+                placeholder="Select your gender"
+                options={genderOptions}
+                dropdownClasses='md:w-[330px]'
+                error={hookform.errors.genderNm?.message}
             />
             <DatePicker
                 name="dob"
@@ -49,23 +70,6 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({ activeStep, onNext })
                 placeholder="Select Date of Birth"
                 error={hookform.errors?.dob?.message}
                 mandatory
-            />
-            <InputField
-                label='Mobile Number'
-                rest={hookform.register('mobNo')}
-                placeholder='Enter your mobile number'
-                type='number'
-                error={hookform.errors?.mobNo?.message}
-                mandatory
-            />
-            <SingleSelect
-                name="genderNm"
-                control={hookform.control}
-                label="Gender"
-                placeholder="Select your gender"
-                options={genderOptions}
-                dropdownClasses='w-[330px]'
-                error={hookform.errors.genderNm?.message}
             />
             <div className="md:col-span-2 w-full flex items-center justify-center mt-3">
                 <DefaultButton
@@ -78,7 +82,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({ activeStep, onNext })
                     }
                     type='submit'
                     title={!loading ? 'Submit' : ''}
-                    className='text-center w-[300px]'
+                    className='text-center w-[300px] rounded-full'
                 />
             </div>
         </form>

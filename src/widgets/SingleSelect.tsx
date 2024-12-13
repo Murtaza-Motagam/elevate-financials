@@ -65,7 +65,7 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
                   <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className={`w-[200px] p-0 ${dropdownClasses}`}>
+              <PopoverContent className={`w-[220px] p-0 ${dropdownClasses}`}>
                 <Command>
                   <CommandInput placeholder="Search..." />
                   <CommandList>

@@ -1,3 +1,5 @@
+export const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
 export const navLinks = [
     {
       name: 'Card',
@@ -26,3 +28,9 @@ export const genderOptions = [
   {value: 'Female', label: 'Female'},
   {value: 'Other', label: 'Other'},
 ]
+
+export const KEYS = {
+  personalDetails: 'personalDetails',
+  documentDetails: 'documentDetails',
+  bankingDetails: 'bankingDetails',
+}

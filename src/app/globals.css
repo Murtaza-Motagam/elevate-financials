@@ -2,20 +2,342 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
 }
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+    --primary: 262.1 83.3% 57.8%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 262.1 83.3% 57.8%;
+    --radius: 0.3rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --background: 224 71.4% 4.1%;
+    --foreground: 210 20% 98%;
+    --card: 224 71.4% 4.1%;
+    --card-foreground: 210 20% 98%;
+    --popover: 224 71.4% 4.1%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 263.4 70% 50.4%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+    --accent: 215 27.9% 16.9%;
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 263.4 70% 50.4%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Hide the spinner for all number inputs */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;  /* For Chrome, Safari, and newer versions of Opera */
+  margin: 0; /* To prevent extra space */
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* For Firefox */
+}
+
+
+/* Full page loader */
+/* From Uiverse.io by andrew-demchenk0 */ 
+.pyramid-loader {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: block;
+  transform-style: preserve-3d;
+  transform: rotateX(-20deg);
+}
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+.pyramid-loader .wrapper .side {
+  width: 70px;
+  height: 70px;
+/* you can choose any gradient or color you want */
+  /* background: radial-gradient( #2F2585 10%, #F028FD 70%, #2BDEAC 120%); */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  transform-origin: center top;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.pyramid-loader .wrapper .side1 {
+  transform: rotateZ(-30deg) rotateY(90deg);
+  background: conic-gradient( #2BDEAC, #F028FD, #D8CCE6, #2F2585);
+}
+
+.pyramid-loader .wrapper .side2 {
+  transform: rotateZ(30deg) rotateY(90deg);
+  background: conic-gradient( #2F2585, #D8CCE6, #F028FD, #2BDEAC);
+}
+
+.pyramid-loader .wrapper .side3 {
+  transform: rotateX(30deg);
+  background: conic-gradient( #2F2585, #D8CCE6, #F028FD, #2BDEAC);
+}
+
+.pyramid-loader .wrapper .side4 {
+  transform: rotateX(-30deg);
+  background: conic-gradient( #2BDEAC, #F028FD, #D8CCE6, #2F2585);
+}
+
+.pyramid-loader .wrapper .shadow {
+  width: 60px;
+  height: 60px;
+  background: #8B5AD5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  transform: rotateX(90deg) translateZ(-40px);
+  filter: blur(12px);
+}
+
+/* Normal Loader */
+
+/* From Uiverse.io by Shoh2008 */ 
+.loader {
+  width: 34px;
+  height: 34px;
+  position: relative;
+  overflow: hidden;
+}
+
+.loader:before , .loader:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  bottom: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: hsl(var(--primary));
+  transform: translate(-50% , 100%)  scale(0);
+  animation: push_4051 2s infinite ease-in;
+}
+
+.loader:after {
+  animation-delay: 1s;
+}
+
+@keyframes push_4051 {
+  0% {
+    transform: translate(-50% , 100%)  scale(1);
+  }
+
+  15% , 25% {
+    transform: translate(-50% , 50%)  scale(1);
+  }
+
+  50% , 75% {
+    transform: translate(-50%, -30%) scale(0.5);
+  }
+
+  80%,  100% {
+    transform: translate(-50%, -50%) scale(0);
+  }
+}
+  
+
+/* Data loader  */
+/* From Uiverse.io by csozidev */ 
+/* 3D tower loader made by: csozi | Website: www.csozi.hu*/
+
+.loaderData {
+  scale: 3;
+  height: 50px;
+  width: 40px;
+}
+
+.box {
+  position: relative;
+  opacity: 0;
+  left: 10px;
+}
+
+.side-left {
+  position: absolute;
+  background-color: #286cb5;
+  width: 19px;
+  height: 5px;
+  transform: skew(0deg, -25deg);
+  top: 14px;
+  left: 10px;
+}
+
+.side-right {
+  position: absolute;
+  background-color: #2f85e0;
+  width: 19px;
+  height: 5px;
+  transform: skew(0deg, 25deg);
+  top: 14px;
+  left: -9px;
+}
+
+.side-top {
+  position: absolute;
+  background-color: #5fa8f5;
+  width: 20px;
+  height: 20px;
+  rotate: 45deg;
+  transform: skew(-20deg, -20deg);
+}
+
+.box-1 {
+  animation: from-left 4s infinite;
+}
+
+.box-2 {
+  animation: from-right 4s infinite;
+  animation-delay: 1s;
+}
+
+.box-3 {
+  animation: from-left 4s infinite;
+  animation-delay: 2s;
+}
+
+.box-4 {
+  animation: from-right 4s infinite;
+  animation-delay: 3s;
+}
+
+@keyframes from-left {
+  0% {
+    z-index: 20;
+    opacity: 0;
+    translate: -20px -6px;
+  }
+
+  20% {
+    z-index: 10;
+    opacity: 1;
+    translate: 0px 0px;
+  }
+
+  40% {
+    z-index: 9;
+    translate: 0px 4px;
+  }
+
+  60% {
+    z-index: 8;
+    translate: 0px 8px;
+  }
+
+  80% {
+    z-index: 7;
+    opacity: 1;
+    translate: 0px 12px;
+  }
+
+  100% {
+    z-index: 5;
+    translate: 0px 30px;
+    opacity: 0;
+  }
+}
+
+@keyframes from-right {
+  0% {
+    z-index: 20;
+    opacity: 0;
+    translate: 20px -6px;
+  }
+
+  20% {
+    z-index: 10;
+    opacity: 1;
+    translate: 0px 0px;
+  }
+
+  40% {
+    z-index: 9;
+    translate: 0px 4px;
+  }
+
+  60% {
+    z-index: 8;
+    translate: 0px 8px;
+  }
+
+  80% {
+    z-index: 7;
+    opacity: 1;
+    translate: 0px 12px;
+  }
+
+  100% {
+    z-index: 5;
+    translate: 0px 30px;
+    opacity: 0;
+  }
 }

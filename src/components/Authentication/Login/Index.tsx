@@ -4,14 +4,12 @@ import Image from 'next/image';
 // import useLogin from './hooks/useLogin';
 import { authenticationRoutes, publicRoutes } from '@/lib/routes';
 import NextLink from '@/components/common/NextLink';
-import GoogleLogo from '@/icons/GoogleLogo'
 import useLogin from './hooks/useLogin';
 import { LogIn } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PasswordInput from '@/widgets/PasswordInput';
 import { ReloadIcon } from '@radix-ui/react-icons';
 import InputField from '@/widgets/Input';
-import LoginImg from '@/assets/loginImg.jpg';
 
 const Login = () => {
   const { hookform, onSubmit, loading } = useLogin();
@@ -50,25 +48,21 @@ const Login = () => {
                 {loading ? '' : 'Login'}
               </Button>
             </form>
-            <div className="my-6 w-full flex items-center justify-center gap-x-2 text-center dark:text-gray-400">
+            <div className="mt-5 mb-2 w-full flex items-center justify-center gap-x-2 text-center dark:text-gray-400">
               <span>Or visit </span>
               <NextLink title='Home' className='text-primary hover:underline !px-0 !py-0' href={publicRoutes.home} />
             </div>
-            <button className="w-full flex items-center justify-center border border-gray-300 py-2 rounded-md gap-x-2 dark:text-gray-200">
-              <GoogleLogo />
-              Login with Google
-            </button>
-            <p className="text-center mt-6 dark:text-gray-400">
+            <p className="text-center dark:text-gray-400">
               Don&apos;t have an account yet? <NextLink href={authenticationRoutes.register} title='Register' className="text-md text-primary hover:underline" />
             </p>
           </div>
         </div>
         <div className="hidden md:block relative w-1/2">
           <Image
-            src={LoginImg}
+            src='https://images.unsplash.com/photo-1691045118425-57e55304435e?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
             alt="Background"
+            fill
             className='w-full'
-          // fill
           />
         </div>
       </div>

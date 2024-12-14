@@ -9,7 +9,6 @@ import { useForm } from "react-hook-form";
 
 interface usePersonalDetailProps {
     onNext: () => void;
-    activeStep?: number;
 }
 
 interface personalDetailFieldProps {

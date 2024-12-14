@@ -8,13 +8,12 @@ import DefaultButton from '@/widgets/DefaultButton';
 import { PulseLoader } from 'react-spinners';
 
 interface PersonalDetailsProps {
-    activeStep: number;
     onNext: () => void;
 }
 
-const PersonalDetails: React.FC<PersonalDetailsProps> = ({ activeStep, onNext }) => {
+const PersonalDetails: React.FC<PersonalDetailsProps> = ({ onNext }) => {
 
-    const { hookform, onSubmitPersonalDetails, loading } = usePersonalDetails({ onNext, activeStep });
+    const { hookform, onSubmitPersonalDetails, loading } = usePersonalDetails({ onNext });
 
     return (
         <form onSubmit={hookform.handleSubmit(onSubmitPersonalDetails)} className='grid grid-cols-1 md:grid-cols-2 gap-5'>

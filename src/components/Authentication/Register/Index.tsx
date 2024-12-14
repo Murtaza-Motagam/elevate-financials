@@ -49,13 +49,13 @@ const Register = () => {
                             {/* Stepper Component */}
 
                             {activeStep === 1 && (
-                                <PersonalDetails activeStep={activeStep} onNext={() => setActiveStep(2)} />
+                                <PersonalDetails onNext={() => setActiveStep(2)} />
                             )}
                             {activeStep === 2 && (
-                                <DocumentDetails activeStep={activeStep} onNext={() => setActiveStep(3)} />
+                                <DocumentDetails onNext={() => setActiveStep(3)} />
                             )}
                             {activeStep === 3 && (
-                                <BankingDetails activeStep={activeStep} />
+                                <BankingDetails />
                             )}
 
                             <p className="text-center my-4 dark:text-gray-400">

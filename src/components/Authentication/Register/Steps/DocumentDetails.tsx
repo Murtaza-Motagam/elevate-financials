@@ -8,7 +8,6 @@ import DefaultButton from '@/widgets/DefaultButton';
 import { PulseLoader } from 'react-spinners';
 
 interface DocumentDetailsProps {
-    activeStep?: number;
     onNext?: () => void;
 }
 

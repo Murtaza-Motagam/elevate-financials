@@ -1,6 +1,9 @@
 export const publicRoutes = {
     home: '/',
-    bankingDetail: '/banking-details'
+    bankingDetail: '/banking-details',
+    privacyPolicy: '/privacy-policy',
+    helpCenter: '/help-center',
+    terms: '/terms'
 }
 
 export const protectedRoutes = {
@@ -10,4 +13,5 @@ export const protectedRoutes = {
 export const authenticationRoutes = {
     register: '/register',
     login: '/login',
+    forgotPassword: '/forgot-password',
 }

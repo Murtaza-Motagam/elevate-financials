@@ -27,7 +27,7 @@ const Header = () => {
                     <Landmark />
                     <span>Elevate Financials</span>
                 </h1>
-                <span className='text-[10px] ml-12 text-primary italic'>Empowering Your Financial Future.</span>
+                <span className='text-[10px] ml-12 dark:text-gray-300 text-gray-800'>Empowering Your Financial Future.</span>
             </div>
             <div className="hidden md:flex links items-center gap-x-4">
                 {navLinks.map((li) => {

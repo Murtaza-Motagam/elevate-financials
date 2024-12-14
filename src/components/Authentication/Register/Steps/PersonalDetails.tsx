@@ -81,7 +81,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({ onNext }) => {
                     }
                     type='submit'
                     title={!loading ? 'Submit' : ''}
-                    className='text-center w-[300px] rounded-full'
+                    className='text-center w-[300px] rounded-[5px]'
                 />
             </div>
         </form>

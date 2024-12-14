@@ -12,9 +12,10 @@ interface passwordProps {
     error?: string;
     parentClassName?: string;
     rest?: Record<string, unknown>;
+    mandatory?: boolean;
 }
 
-const PasswordInput: React.FC<passwordProps> = ({ label, placeholder, error, parentClassName, rest }) => {
+const PasswordInput: React.FC<passwordProps> = ({ label, placeholder, error, parentClassName, mandatory, rest }) => {
     const [isVisible, setIsVisible] = useState(false);
 
     const toggleVisibility = () => {
@@ -22,8 +23,8 @@ const PasswordInput: React.FC<passwordProps> = ({ label, placeholder, error, par
     };
 
     return (
-        <div className={`grid w-full max-w-sm items-center gap-1.5 ${parentClassName}`}>
-            <Label htmlFor={label}>{label} <span className='text-red-600'>*</span></Label>
+        <div className={`grid w-full w-full items-center gap-1.5 ${parentClassName}`}>
+            <Label htmlFor={label}>{label} {mandatory && <span className='text-red-600'>*</span>}</Label>
             <div className="relative">
                 <Inputs
                     className={`${error ? 'border-2 border-red-500' : ''

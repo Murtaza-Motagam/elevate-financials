@@ -59,3 +59,12 @@ export const dateTimeDisplay = (date: Date, locale = 'en', format = 'DD MMM YYYY
         return dayjs(date).locale(locale).format(format);
     }
 };
+
+export const formattedPath = (img: string) => {
+    return img.replace(/\\/g, '/');
+}
+
+export const copyToClipboard = async (text: string) => {
+    await navigator.clipboard.writeText(text);
+  };
+  

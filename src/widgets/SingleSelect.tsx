@@ -29,6 +29,7 @@ interface SingleSelectProps {
   error?: string;
   dropdownClasses?: string;
   searchError?: string;
+  mandatory?: boolean;
 }
 
 const SingleSelect: React.FC<SingleSelectProps> = ({
@@ -39,13 +40,14 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
   placeholder = "Select an option...",
   error,
   dropdownClasses,
+  mandatory,
   searchError,
 }) => {
   const [open, setOpen] = useState(false);
 
   return (
     <div className="flex flex-col mt-2">
-      {label && <Label htmlFor={name} className='mb-2.5'>{label}</Label>}
+      {label && <Label htmlFor={name} className='mb-2.5'>{label}{mandatory && <span className='text-red-600 ml-1'>*</span>}</Label>}
       <Controller
         name={name}
         control={control}

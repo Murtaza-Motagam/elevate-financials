@@ -18,7 +18,7 @@ const InputField: React.FC<InputFieldProps> = ({ id, label, error, placeholder, 
     return (
         <div className={`space-y-2 ${parentClass}`}>
             {/* Label */}
-            <Label htmlFor={id}>{label}{mandatory && <span className='text-red-600 ml-1'>*</span>}</Label>
+            <Label htmlFor={id} className="dark:text-gray-300">{label}{mandatory && <span className='text-red-600 ml-1'>*</span>}</Label>
 
             {/* Input field */}
             <Input

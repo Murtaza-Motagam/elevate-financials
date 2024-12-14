@@ -1,4 +1,7 @@
 export const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+export const backendUrlUpload = process.env.NEXT_PUBLIC_BACKEND_URL_UPLOAD;
+export const backendUrlPreview = process.env.NEXT_PUBLIC_BACKEND_URL_PREVIEW;
+export const compNm = 'Elevate Financials';
 
 export const navLinks = [
     {
@@ -29,8 +32,32 @@ export const genderOptions = [
   {value: 'Other', label: 'Other'},
 ]
 
+export const PROTECTED_ROUTES = [
+  '/profile'
+]
+
+export const accountTypeOptions = [
+  {value: 'Savings', label: 'Savings'},
+  {value: 'Current', label: 'Current'},
+  {value: 'Fixed Deposits', label: 'Fixed Deposits'},
+  {value: 'Recurring', label: 'Recurring'},
+]
+
+export const addressProofOptions = [
+  { value: 'Aadhar Card', label: 'Aadhar Card' },
+  { value: 'Voter ID', label: 'Voter ID' },
+  { value: 'Passport', label: 'Passport' },
+  { value: 'Driving Licence', label: 'Driving Licence' },
+  { value: 'Utility Bill', label: 'Utility Bill' },
+  { value: 'House Bill', label: 'House Bill' },
+  { value: 'Ration Card', label: 'Ration Card' },
+  { value: 'Bank Statement', label: 'Bank Statement' },
+];
+
+
 export const KEYS = {
   personalDetails: 'personalDetails',
   documentDetails: 'documentDetails',
   bankingDetails: 'bankingDetails',
+  authDetails: 'authDetails',
 }

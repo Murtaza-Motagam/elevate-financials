@@ -4,8 +4,8 @@ import Image from 'next/image';
 import { authenticationRoutes, publicRoutes } from '@/lib/routes';
 import NextLink from '@/components/common/NextLink';
 import PersonalDetails from './Steps/PersonalDetails';
-import BankingPreference from './Steps/BankingPreference';
-import FinalDetails from './Steps/FinalDetails';
+import DocumentDetails from './Steps/DocumentDetails';
+import BankingDetails from './Steps/BankingDetails';
 import useRegister from './hooks/useRegister';
 import PageLoader from '@/shared/Loaders/PageLoader';
 
@@ -19,13 +19,10 @@ const Register = () => {
         setLoading(true); 
     
         if (getPersonalDetails?.email && !getDocumentDetails?.aadharNo) {
-            console.log("Condition first");
             setActiveStep(2);
         } else if (getPersonalDetails?.email && getDocumentDetails?.aadharNo) {
-            console.log("Condition second");
             setActiveStep(3);
         } else {
-            console.log("Condition third");
             setActiveStep(1);
         }
     
@@ -55,10 +52,10 @@ const Register = () => {
                                 <PersonalDetails activeStep={activeStep} onNext={() => setActiveStep(2)} />
                             )}
                             {activeStep === 2 && (
-                                <BankingPreference activeStep={activeStep} onNext={() => setActiveStep(3)} />
+                                <DocumentDetails activeStep={activeStep} onNext={() => setActiveStep(3)} />
                             )}
                             {activeStep === 3 && (
-                                <FinalDetails activeStep={activeStep} />
+                                <BankingDetails activeStep={activeStep} />
                             )}
 
                             <p className="text-center my-4 dark:text-gray-400">

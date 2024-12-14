@@ -1,5 +1,6 @@
 export const publicRoutes = {
     home: '/',
+    bankingDetail: '/banking-details'
 }
 
 export const protectedRoutes = {

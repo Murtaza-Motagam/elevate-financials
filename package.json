@@ -21,6 +21,7 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
     "country-state-city": "^3.2.1",
+    "cropperjs": "^1.6.2",
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
     "js-cookie": "^3.0.5",
@@ -31,6 +32,7 @@
     "radix-ui": "^1.0.1",
     "react": "^19.0.0",
     "react-countup": "^6.5.3",
+    "react-cropper": "^2.3.3",
     "react-day-picker": "^8.10.1",
     "react-dom": "^19.0.0",
     "react-dropzone": "^14.3.5",
@@ -52,9 +54,10 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-lazy-load-image-component": "^1.6.4",
+    "autoprefixer": "^10.4.20",
     "eslint": "^9",
     "eslint-config-next": "15.1.0",
-    "postcss": "^8",
+    "postcss": "^8.4.49",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }

@@ -7,7 +7,7 @@ import useLogin from './hooks/useLogin';
 import PasswordInput from '@/widgets/PasswordInput';
 import InputField from '@/widgets/Input';
 import DefaultButton from '@/widgets/DefaultButton';
-import { PulseLoader } from 'react-spinners';
+import RollLoader from '@/shared/Loaders/RollLoader';
 
 const Login = () => {
   const { hookform, onSubmit, loading } = useLogin();
@@ -34,18 +34,16 @@ const Login = () => {
                 label='Password'
                 placeholder='Enter password'
                 error={hookform.errors?.password?.message}
+                mandatory
               />
               <DefaultButton
                 icon={
-                  loading &&
-                  <PulseLoader
-                    color="#ffffff"
-                    size={10}
-                  />
+                  loading && <RollLoader />
                 }
                 type='submit'
-                title={!loading ? 'Submit' : ''}
+                title={!loading ? 'Submit' : 'Processing'}
                 className='text-center w-full rounded-[5px]'
+                loading={loading}
               />
             </form>
             {/* Forgot password link */}

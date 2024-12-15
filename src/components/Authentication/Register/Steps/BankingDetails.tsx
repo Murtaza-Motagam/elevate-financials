@@ -5,7 +5,7 @@ import SingleSelect from '@/widgets/SingleSelect';
 import React from 'react'
 import useBankingDetails from '../hooks/useBankingDetails';
 import DefaultButton from '@/widgets/DefaultButton';
-import { PulseLoader } from 'react-spinners';
+import RollLoader from '@/shared/Loaders/RollLoader';
 
 const BankingDetails: React.FC = () => {
     const { hookform, onSubmitBankingDetails, loading } = useBankingDetails();
@@ -39,14 +39,12 @@ const BankingDetails: React.FC = () => {
             <DefaultButton
                 icon={
                     loading &&
-                    <PulseLoader
-                        color="#ffffff"
-                        size={10}
-                    />
+                    <RollLoader />
                 }
                 type='submit'
-                title={!loading ? 'Submit' : ''}
+                title={!loading ? 'Submit' : 'Processing'}
                 className='text-center'
+                loading={loading}
             />
         </form>
     )

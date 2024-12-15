@@ -10,6 +10,15 @@ export default {
 	],
 	theme: {
 		extend: {
+			animation: {
+				'spin-custom': 'spin-custom 1s linear infinite',
+			},
+			keyframes: {
+				'spin-custom': {
+					'0%': { transform: 'rotate(0deg)' },
+					'100%': { transform: 'rotate(360deg)' },
+				},
+			},
 			colors: {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',

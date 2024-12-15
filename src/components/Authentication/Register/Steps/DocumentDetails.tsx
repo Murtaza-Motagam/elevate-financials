@@ -5,7 +5,7 @@ import Uploader from '@/widgets/Uploader';
 import SingleSelect from '@/widgets/SingleSelect';
 import { addressProofOptions } from '@/lib/constant';
 import DefaultButton from '@/widgets/DefaultButton';
-import { PulseLoader } from 'react-spinners';
+import RollLoader from '@/shared/Loaders/RollLoader';
 
 interface DocumentDetailsProps {
     onNext?: () => void;
@@ -75,14 +75,12 @@ const DocumentDetails: React.FC<DocumentDetailsProps> = ({ onNext = () => { } })
                 <DefaultButton
                     icon={
                         loading &&
-                        <PulseLoader
-                            color="#ffffff"
-                            size={10}
-                        />
+                        <RollLoader />
                     }
                     type='submit'
-                    title={!loading ? 'Submit' : ''}
+                    title={!loading ? 'Submit' : 'Processing'}
                     className='text-center w-[300px] rounded-[5px]'
+                    loading={loading}
                 />
             </div>
         </form>

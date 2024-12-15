@@ -144,7 +144,7 @@ Balance: ${user?.accountDetails?.balance}
                                     <TextToImage nameText={`${user?.personalDetails?.firstName} ${user?.personalDetails?.lastName}`} className='rounded-full text-lg w-14 h-14 shadow-md shadow-gray-500' />
                                 )}
 
-                                <h1 className="text-lg font-semibold text-gray-700 dark:text-gray-400">{`${user?.personalDetails?.firstName || ''} ${user?.personalDetails?.lastName || ''}`}</h1>
+                                <h1 className="text-lg font-semibold text-gray-700 dark:text-white">{`${user?.personalDetails?.firstName || ''} ${user?.personalDetails?.lastName || ''}`}</h1>
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-3">
                                 <Details title='Email:' icon={<Mail size={15} className='text-primary' />} text={user?.personalDetails?.email} />

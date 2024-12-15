@@ -5,7 +5,7 @@ import DatePicker from '@/widgets/DatePicker';
 import SingleSelect from '@/widgets/SingleSelect';
 import { genderOptions } from '@/lib/constant';
 import DefaultButton from '@/widgets/DefaultButton';
-import { PulseLoader } from 'react-spinners';
+import RollLoader from '@/shared/Loaders/RollLoader';
 
 interface PersonalDetailsProps {
     onNext: () => void;
@@ -74,14 +74,12 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({ onNext }) => {
                 <DefaultButton
                     icon={
                         loading &&
-                        <PulseLoader
-                            color="#ffffff"
-                            size={10}
-                        />
+                        <RollLoader />
                     }
                     type='submit'
-                    title={!loading ? 'Submit' : ''}
+                    title={!loading ? 'Submit' : 'Processing'}
                     className='text-center w-[300px] rounded-[5px]'
+                    loading={loading}
                 />
             </div>
         </form>

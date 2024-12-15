@@ -62,7 +62,6 @@ const useBankingDetails = () => {
             console.error('error: ', err);
             showToast('Some error has occurred. Please wait for some time', 'error')
         }
-        setLoading(false);
     }
 
 

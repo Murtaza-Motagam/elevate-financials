@@ -36,32 +36,28 @@ const useLogin = () => {
 
   const onSubmit = async (data: LoginValues) => {
     setLoading(true)
-    try {
-      const url = `${backendUrl}/auth/login`;
-      const response = await axios({
-        url,
-        data: {
-          crnNumber: data?.crnNumber,
-          password: data?.password,
-        },
-        method: 'post'
-      });
-      const resData = response.data;
-      if (resData?.success) {
-        const LocalData = {
-          token: resData?.authtoken,
-        }
-        Cookies.set('Authorization-token', resData.authtoken, { expires: 7, secure: true });
-        LocalStorage.setJSON(KEYS.authDetails, LocalData);
-        showToast(resData?.message, 'success');
-        router.push(publicRoutes.home);
+
+    const url = `${backendUrl}/auth/login`;
+    const response = await axios({
+      url,
+      data: {
+        crnNumber: data?.crnNumber,
+        password: data?.password,
+      },
+      method: 'post'
+    });
+    const resData = response.data;
+    if (resData?.success) {
+      const LocalData = {
+        token: resData?.authtoken,
       }
-      else {
-        showToast(resData?.message, 'error')
-      }
-    } catch (err) {
-      console.error('error: ', err);
-      showToast('Some error has occurred. Please wait for some time', 'error')
+      Cookies.set('Authorization-token', resData.authtoken, { expires: 7, secure: true });
+      LocalStorage.setJSON(KEYS.authDetails, LocalData);
+      showToast(resData?.message, 'success');
+      router.push(publicRoutes.home);
+    }
+    else {
+      showToast(resData?.message, 'error')
     }
     setLoading(false)
   }

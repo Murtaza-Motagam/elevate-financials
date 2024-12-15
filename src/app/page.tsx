@@ -1,12 +1,8 @@
-import LayoutWrapper from '@/shared/wrapper/LayoutWrapper'
 import React from 'react'
+import Home from '@/components/Homepage/Index';
 
-const Home = () => {
-  return (
-    <LayoutWrapper>
-      Hello homepage
-    </LayoutWrapper>
-  )
+const HomePage = () => {
+  return <Home />
 }
 
-export default Home
+export default HomePage

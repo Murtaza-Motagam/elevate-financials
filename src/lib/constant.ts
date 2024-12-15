@@ -1,3 +1,5 @@
+import { ArrowLeftRight, Briefcase, CreditCard, Gift, Info, LayoutGrid, Lock, ShieldCheck, UserRoundPlus } from "lucide-react";
+
 export const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 export const backendUrlUpload = process.env.NEXT_PUBLIC_BACKEND_URL_UPLOAD;
 export const backendUrlPreview = process.env.NEXT_PUBLIC_BACKEND_URL_PREVIEW;
@@ -61,3 +63,67 @@ export const KEYS = {
   bankingDetails: 'bankingDetails',
   authDetails: 'authDetails',
 }
+
+export const sidebarLinks = [
+  {
+    category: 'Account Overview',
+    links: [
+      {
+        name: 'Dashboard',
+        icon: LayoutGrid,
+      },
+      {
+        name: 'My Account',
+        icon: UserRoundPlus,
+      },
+    ],
+  },
+  {
+    category: 'Financial Transactions',
+    links: [
+      {
+        name: 'Transaction',
+        icon: ArrowLeftRight,
+      },
+    ],
+  },
+  {
+    category: 'Security & Privacy',
+    links: [
+      {
+        name: 'Security Settings',
+        icon: Lock,
+      },
+      {
+        name: 'Privacy Settings',
+        icon: ShieldCheck,
+      },
+    ],
+  },
+  {
+    category: 'Loans & Credit Management',
+    links: [
+      {
+        name: 'Loans & Credit',
+        icon: CreditCard,
+      },
+      {
+        name: 'Rewards & Offers',
+        icon: Gift,
+      },
+    ],
+  },
+  {
+    category: 'Customer Support & Assistance',
+    links: [
+      {
+        name: 'Contact Support',
+        icon: Info,
+      },
+      {
+        name: 'Tax & Investment Information',
+        icon: Briefcase,
+      },
+    ],
+  },
+];

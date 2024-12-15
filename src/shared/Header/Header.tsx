@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import useHeader from './hooks/useHeader'
 import { authenticationRoutes, protectedRoutes, publicRoutes } from '@/lib/routes';
 import { backendUrlPreview, navLinks } from '@/lib/constant';
@@ -18,11 +18,16 @@ import LazyLoadImg from '@/widgets/LazyLoadImg';
 const Header = () => {
 
     const { router, pathname, theme, states, logout } = useHeader();
+    const [open, setOpen] = useState<boolean>(false);
     const { user = {} } = states;
+
+    const handleClose = () => {
+        setOpen(false); // Automatically closes the sheet
+    };
 
     return (
         <header className="w-full flex items-center justify-between p-4 shadow-md sticky top-0 backdrop-blur-lg z-20">
-            <div className="logo cursor-pointer flex flex-col items-center gap-x-1" onClick={() => router.push(publicRoutes.home)}>
+            <div onClick={() => router.push(publicRoutes.home)} className="logo cursor-pointer flex flex-col items-center gap-x-1" >
                 <h1 className='text-lg md:text-xl font-bold text-primary dark:text-white flex items-center gap-x-2'>
                     <Landmark />
                     <span>Elevate Financials</span>
@@ -40,12 +45,12 @@ const Header = () => {
                 {/* Mode toggle for mobile devices */}
                 <div className="md:hidden flex items-center gap-x-1">
                     <ModeToggle />
-                    <Sheet>
+                    <Sheet open={open} onOpenChange={setOpen}>
                         <SheetTrigger>
                             <Menu />
                         </SheetTrigger>
                         <SheetContent>
-                            <MobileHeader theme={theme} pathname={pathname} loading={states.loading} isUser={states.isUser} />
+                            <MobileHeader onClose={handleClose} theme={theme} pathname={pathname} loading={states.loading} isUser={states.isUser} />
                         </SheetContent>
                     </Sheet>
                 </div>

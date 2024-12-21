@@ -1,6 +1,9 @@
 import { Slide, toast, ToastOptions } from "react-toastify";
 import Cookies from 'js-cookie';
 import dayjs from 'dayjs';
+import axios from "axios";
+import { backendUrl } from "./constant";
+import { LocalStorage } from "./localStorage";
 
 export const isAuthenticated = () => {
     return !!Cookies.get('Authorization-token');
@@ -74,3 +77,20 @@ export const getActiveClassSidebar = (selectedTab: number | undefined, linkIndex
 
     return isActive ? colorClass : '';
 };
+
+export const getUserInfo = async () => {
+    const checkForModule = LocalStorage.getJSON('authDetails');
+    try {
+        const response = await axios({
+            url: `${backendUrl}/user/get-user`,
+            method: 'get',
+            headers: {
+                Authorization: checkForModule?.token
+            }
+        });
+        const resData = response.data;
+        return resData;
+    } catch (error) {
+        console.error(error);
+    }
+}

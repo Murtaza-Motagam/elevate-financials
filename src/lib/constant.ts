@@ -121,7 +121,7 @@ export const sidebarLinks = [
         icon: Info,
       },
       {
-        name: 'Tax & Investment Information',
+        name: 'Tax & Investment',
         icon: Briefcase,
       },
     ],

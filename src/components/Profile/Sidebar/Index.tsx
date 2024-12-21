@@ -8,15 +8,20 @@ import { protectedRoutes } from '@/lib/routes';
 import LazyLoadImg from '@/widgets/LazyLoadImg';
 import axios from 'axios';
 import { LocalStorage } from '@/lib/localStorage';
+import TextToImage from '@/components/common/TextToImage';
 
 const ProfileSidebar = ({
   selectedTab,
   setSelectedTab = () => { },
   setLoading = () => { },
+  handleClose = () => { },
+  onSmallDv = false,
 }: {
   selectedTab?: number;
   setSelectedTab?: React.Dispatch<SetStateAction<number>>;
   setLoading?: React.Dispatch<SetStateAction<boolean>>;
+  handleClose?: () => void;
+  onSmallDv?: boolean;
 }) => {
 
   const router = useRouter();
@@ -27,9 +32,10 @@ const ProfileSidebar = ({
   const [userLoad, setUserLoad] = useState<boolean>(true)
 
   const handleTab = (tabIndex: number) => {
-    router.push(`${protectedRoutes.profile}?tab=${tabIndex}`)
+    handleClose();
     setSelectedTab(tabIndex);
     setLoading(false);
+    router.push(`${protectedRoutes.profile}?tab=${tabIndex}`)
   }
 
   const getUserInfo = async () => {
@@ -55,41 +61,55 @@ const ProfileSidebar = ({
   }, [])
 
   return (
-    <div className="max-w-[250px] sticky left-0 py-1 border-r dark:border-gray-200">
-      {sidebarLinks.map((category, categoryIndex) => (
-        <div key={categoryIndex} className="w-full mt-5 pl-3">
-          <h1 className="text-xs text-gray-400 dark:text-gray-400">
-            {category.category}
-          </h1>
-          <div className="w-full links flex flex-col mt-2 space-y-1">
-            {category.links.map((link, linkIndex) => {
-              // Calculate unique index for each link in the flat structure
-              const tabIndex = sidebarLinks
-                .slice(0, categoryIndex)
-                .reduce((acc, cur) => acc + cur.links.length, 0) + linkIndex;
+    <div className={`${onSmallDv ? 'w-full' : ' max-w-[250px] border-r border-gray-300 dark:border-gray-800'} py-1`}>
+      <div className={`${!onSmallDv && 'h-[73vh]'}`}>
+        {sidebarLinks.map((category, categoryIndex) => (
+          <div key={categoryIndex} className="w-full mt-5 pl-3">
+            <h1 className="text-xs text-gray-400 dark:text-gray-400">
+              {category.category}
+            </h1>
+            <div className="w-full links flex flex-col mt-2 space-y-1">
+              {category.links.map((link, linkIndex) => {
+                // Calculate unique index for each link in the flat structure
+                const tabIndex = sidebarLinks
+                  .slice(0, categoryIndex)
+                  .reduce((acc, cur) => acc + cur.links.length, 0) + linkIndex;
 
-              return (
-                <div
-                  key={linkIndex}
-                  onClick={() => handleTab(tabIndex)}
-                  className={`flex text-sm items-center gap-x-1 p-2 cursor-pointer text-gray-700 dark:text-gray-200 hover:bg-primary hover:text-white transition ease-out duration-500 rounded-[6px] ${getActiveClassSidebar(selectedTab, tabIndex)}`}
-                >
-                  <link.icon size={16} />
-                  <span>{link.name}</span>
-                </div>
-              );
-            })}
+                return (
+                  <div
+                    key={linkIndex}
+                    onClick={() => handleTab(tabIndex)}
+                    className={`flex text-sm items-center gap-x-1 p-2 mr-2 cursor-pointer text-gray-700 dark:text-gray-200 hover:bg-primary hover:text-white transition ease-out duration-500 rounded-[6px] ${getActiveClassSidebar(selectedTab, tabIndex)}`}
+                  >
+                    <link.icon size={16} />
+                    <span>{link.name}</span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
       {!userLoad && (
-        <div className="w-full flex items-start justify-start mt-5 gap-x-3 border-t pl-2 border-gray-500 pt-2">
-          <LazyLoadImg src={`${backendUrlPreview}/${user?.documentDetails?.profileImg}`} className='w-10 h-10 object-contain rounded-full border-2 border-gray-800 dark:border-white'/>
+        <div className={`w-full flex items-start justify-start ${onSmallDv ? 'mt-20' : 'mt-5'} gap-x-3 border-t pl-2 pb-5 border-gray-500 pt-2 overflow-hidden`}>
+          {user?.documentDetails?.profileImg ? (
+            <LazyLoadImg
+              src={`${backendUrlPreview}/${user?.documentDetails?.profileImg}`}
+              className="w-10 h-10 object-contain rounded-full border-2 border-gray-800 dark:border-white"
+            />
+          ) : (
+            <TextToImage nameText={`${user?.personalDetails?.firstName} ${user?.personalDetails?.lastName}`} className='rounded-full text-lg w-10 h-10 border-2 border-gray-800 dark:border-white' />
+          )}
           <div className="flex flex-col">
-            <h1 className="text-sm text-black dark:text-gray-200">{`${user?.personalDetails?.firstName} ${user?.personalDetails?.lastName}`}</h1>
-            <p className="text-[12px] text-gray-600 dark:text-gray-400">{user?.personalDetails?.email}</p>
+            <h1 className="text-sm text-black dark:text-gray-200">
+              {`${user?.personalDetails?.firstName} ${user?.personalDetails?.lastName}`}
+            </h1>
+            <p className="text-[12px] text-gray-600 dark:text-gray-400 truncate overflow-hidden text-ellipsis whitespace-nowrap">
+              {user?.personalDetails?.email}
+            </p>
           </div>
         </div>
+
       )}
     </div>
   );

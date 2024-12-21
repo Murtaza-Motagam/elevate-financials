@@ -77,7 +77,7 @@ const Header = () => {
                                             className='w-10 h-10 object-contain border-2 border-gray-800 dark:border-2 dark:border-gray-200 rounded-full'
                                         />
                                     ) : (
-                                        <TextToImage nameText={user?.personalDetails?.email} />
+                                        <TextToImage nameText={`${user?.personalDetails?.firstName} ${user?.personalDetails?.lastName}`} />
                                     )}
                                     <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300 rounded-full"></div>
                                 </div>

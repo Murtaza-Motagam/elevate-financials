@@ -94,3 +94,8 @@ export const getUserInfo = async () => {
         console.error(error);
     }
 }
+
+export const formatWithCommas = (number: number) => {
+    if (typeof number !== 'number') return number;
+    return number.toLocaleString('en-IN');
+};

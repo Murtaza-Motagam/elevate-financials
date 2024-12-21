@@ -4,13 +4,14 @@ import LayoutWrapper from '@/shared/wrapper/LayoutWrapper';
 import ProfileSidebar from './Sidebar/Index';
 import { Tabs, TabPanel, TabList, Tab } from 'react-tabs';
 import { sidebarLinks } from '@/lib/constant';
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden"
 
 // Import Components (Add actual imports here)
 import MyAccounts from '@/components/Profile/MyAccounts/Index';
 import Dashboard from './Dashboard/Index';
 import PageLoader from '@/shared/Loaders/PageLoader';
 import { useSearchParams } from 'next/navigation';
-import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
+import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from '../ui/sheet';
 import { PanelRight } from 'lucide-react';
 
 // Components map
@@ -56,6 +57,12 @@ const Profile = () => {
                         <PanelRight size={35} className='dark:text-gray-200 dark:hover:text-white rounded-full p-2 cursor-pointer' />
                     </SheetTrigger>
                     <SheetContent>
+                        <VisuallyHidden>
+                            <SheetTitle>Hidden Dialog Title</SheetTitle>
+                        </VisuallyHidden>
+                        <VisuallyHidden>
+                            <SheetDescription>Hidden Dialog Title</SheetDescription>
+                        </VisuallyHidden>
                         <ProfileSidebar selectedTab={selectedTab} setSelectedTab={setSelectedTab} setLoading={setLoading} onSmallDv={true} handleClose={handleClose} />
                     </SheetContent>
                 </Sheet>
@@ -64,7 +71,7 @@ const Profile = () => {
                 <div className="hidden md:block w-[240px]">
                     <ProfileSidebar selectedTab={selectedTab} setSelectedTab={setSelectedTab} setLoading={setLoading} handleClose={handleClose} />
                 </div>
-                <div className="w-5/6">
+                <div className="w-full mr-3 md:w-5/6">
                     <Tabs selectedIndex={selectedTab} onSelect={(index) => setSelectedTab(index)}>
                         <TabList className="hidden">
                             {sidebarLinks.flatMap((category) =>

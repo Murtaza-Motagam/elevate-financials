@@ -9,6 +9,8 @@ import LazyLoadImg from '@/widgets/LazyLoadImg';
 import axios from 'axios';
 import { LocalStorage } from '@/lib/localStorage';
 import TextToImage from '@/components/common/TextToImage';
+import { Ellipsis } from 'lucide-react';
+import SettingModal from './Modals/SettingModal';
 
 const ProfileSidebar = ({
   selectedTab,
@@ -30,6 +32,8 @@ const ProfileSidebar = ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [user, setUser] = useState<any>({})
   const [userLoad, setUserLoad] = useState<boolean>(true)
+  const [open, setOpen] = useState<boolean>(false)
+  const [fullName, setFullName] = useState<string>('')
 
   const handleTab = (tabIndex: number) => {
     handleClose();
@@ -49,6 +53,7 @@ const ProfileSidebar = ({
       });
       const resData = response.data;
       setUser(resData?.details || '');
+      setFullName(`${resData?.details?.personalDetails?.firstName} ${resData?.details?.personalDetails?.lastName}`)
     } catch (error) {
       console.error(error);
     } finally {
@@ -58,6 +63,7 @@ const ProfileSidebar = ({
 
   useEffect(() => {
     getUserInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -95,15 +101,18 @@ const ProfileSidebar = ({
           {user?.documentDetails?.profileImg ? (
             <LazyLoadImg
               src={`${backendUrlPreview}/${user?.documentDetails?.profileImg}`}
-              className="w-10 h-10 object-contain rounded-full border-2 border-gray-800 dark:border-white"
+              className="w-10 h-10 object-contain rounded-full mt-1 border-2 border-gray-800 dark:border-white"
             />
           ) : (
-            <TextToImage nameText={`${user?.personalDetails?.firstName} ${user?.personalDetails?.lastName}`} className='rounded-full text-lg w-10 h-10 border-2 border-gray-800 dark:border-white' />
+            <TextToImage nameText={fullName} className='rounded-full text-lg mt-1 w-10 h-10 border-2 border-gray-800 dark:border-white' />
           )}
           <div className="flex flex-col">
-            <h1 className="text-sm text-black dark:text-gray-200">
-              {`${user?.personalDetails?.firstName} ${user?.personalDetails?.lastName}`}
-            </h1>
+            <div className="flex items-center justify-between">
+              <h1 className="text-sm text-black dark:text-gray-200">
+                {fullName?.length <= 20 ? fullName : `${fullName?.substring(0, 20)}...`}
+              </h1>
+              <Ellipsis onClick={() => setOpen(true)} className='rounded-full p-2 hover:bg-primary hover:text-white cursor-pointer' size={30} />
+            </div>
             <p className="text-[12px] text-gray-600 dark:text-gray-400 truncate overflow-hidden text-ellipsis whitespace-nowrap">
               {user?.personalDetails?.email}
             </p>
@@ -111,6 +120,13 @@ const ProfileSidebar = ({
         </div>
 
       )}
+
+      <SettingModal
+        user={user}
+        open={open}
+        setOpen={setOpen}
+      />
+
     </div>
   );
 };

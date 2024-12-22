@@ -56,7 +56,6 @@ const useDocumentDetails = ({ onNext = () => { } }: useDocumentDetailsProps) => 
             });
             const resData = response.data;
             if (resData?.success) {
-                console.log(resData)
                 LocalStorage.setJSON(KEYS.documentDetails, resData?.details);
                 showToast(resData?.message, 'success');
                 onNext();

@@ -1,35 +1,28 @@
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import React, { SetStateAction } from 'react'
-import {
-    Sheet,
-    SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
-} from "@/components/ui/sheet"
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden"
 
 interface LayoutModalProps {
     open: boolean;
     setOpen?: React.Dispatch<SetStateAction<boolean>>;
+    children: React.ReactNode;
 }
 
-const LayoutModal: React.FC<LayoutModalProps> = ({ open, setOpen = () => { } }) => {
+const LayoutModal: React.FC<LayoutModalProps> = ({ children, open, setOpen = () => { } }) => {
     return (
-        <Sheet open={open} onOpenChange={setOpen}>
-            <SheetContent>
-                <SheetHeader>
+        <Dialog open={open} onOpenChange={setOpen}>
+            <DialogContent>
+                <DialogHeader>
                     <VisuallyHidden>
-                        <SheetTitle>Hidden Dialog Title</SheetTitle>
+                        <DialogTitle>Hidden Dialog Title</DialogTitle>
                     </VisuallyHidden>
                     <VisuallyHidden>
-                        <SheetDescription>Hidden Dialog Title</SheetDescription>
+                        <DialogDescription>Hidden Dialog Title</DialogDescription>
                     </VisuallyHidden>
-                </SheetHeader>
-                <div className="grid gap-4 py-4">
-                    Hii
-                </div>
-            </SheetContent>
-        </Sheet>
+                </DialogHeader>
+                {children}
+            </DialogContent>
+        </Dialog>
     )
 }
 

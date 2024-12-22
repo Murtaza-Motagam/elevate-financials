@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 
 const useHeader = () => {
   const [loading, setLoading] = useState<boolean>(true);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [user, setUser] = useState<any>({});
   const [isUser, setIsUser] = useState<boolean>();
   const router = useRouter();

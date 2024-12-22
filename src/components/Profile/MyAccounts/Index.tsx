@@ -57,7 +57,6 @@ const MyAccounts = () => {
         fetchUserInfo();
     }, []);
 
-    console.log(userInfo);
     return (
         <div className="w-full mx-4 pr-4">
             <h1 className="border-b border-gray-400 pb-2 font-semibold text-lg md:text-xl">
@@ -151,6 +150,15 @@ const MyAccounts = () => {
                             <span className="font-bold">{userInfo?.accountDetails?.crnNumber || '-'}</span>
                         </div>
 
+                        {/* IFSC Code */}
+                        <div className="flex items-center justify-between p-4 rounded-lg border">
+                            <p className="font-medium flex items-center gap-x-2 text-gray-600 dark:text-gray-400">
+                                <CircleUser size={20} className='text-primary' />
+                                IFSC Code:
+                            </p>
+                            <span className="font-bold">{userInfo?.accountDetails?.ifscCode || '-'}</span>
+                        </div>
+
                         {/* Account Status */}
                         <div className="flex items-center justify-between p-4 rounded-lg border">
                             <p className="font-medium flex items-center gap-x-2 text-gray-600 dark:text-gray-400">
@@ -168,6 +176,7 @@ const MyAccounts = () => {
                             </p>
                             <span className="font-bold">{dateTimeDisplay(userInfo?.accountDetails?.createdAt) || '-'}</span>
                         </div>
+
                     </div>
 
                     {/* Show Balance Button */}

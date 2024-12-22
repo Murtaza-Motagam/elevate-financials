@@ -11,8 +11,6 @@ interface SettingModalProps {
     setOpen?: React.Dispatch<SetStateAction<boolean>>;
 }
 const SettingModal: React.FC<SettingModalProps> = ({ open, setOpen = () => { }, user }) => {
-    console.log('user: ', user);
-
     const handleSave = () => {
         setOpen(false)
     }

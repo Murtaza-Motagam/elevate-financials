@@ -32,6 +32,7 @@ const BankingDetails = () => {
 Username: ${user?.authentication?.username}
 Account Number: ${user?.accountDetails?.accountNumber}
 CRN Number: ${user?.accountDetails?.crnNumber}
+IFSC Code: ${user?.accountDetails?.ifscCode}
 Account Type: ${user?.accountDetails?.accountType}
 Balance: ${user?.accountDetails?.balance}
 `.trim(); // Trim removes unwanted spaces or newlines at the start/end
@@ -103,7 +104,6 @@ Balance: ${user?.accountDetails?.balance}
                                 <Skeleton className="h-5 p-6" />
                                 <Skeleton className="h-5 p-6" />
                                 <Skeleton className="h-5 p-6" />
-                                <Skeleton className="h-5 p-6" />
                             </div>
                             <div className="w-full flex flex-col space-y-2 md:space-y-0 md:flex-row items-center justify-end space-x-2">
                                 <Skeleton className="h-10 w-full md:w-[150px]" />
@@ -152,11 +152,11 @@ Balance: ${user?.accountDetails?.balance}
                                 <Details title='Username' icon={<User size={15} className='text-primary' />} text={user?.authentication?.username} />
                                 <Details title='Account Number' icon={<CircleUser size={15} className='text-primary' />} text={user?.accountDetails?.accountNumber} />
                                 <Details title='CRN Number' icon={<CircleUser size={15} className='text-primary' />} text={user?.accountDetails?.crnNumber} />
+                                <Details title='IFSC Code' icon={<CircleUser size={15} className='text-primary' />} text={user?.accountDetails?.ifscCode} />
                                 <Details title='Account Type' icon={<HandCoins size={15} className='text-primary' />} text={user?.accountDetails?.accountType} />
                                 <Details title='Balance' icon={<IndianRupee size={15} className='text-primary' />} text={`${user?.accountDetails?.balance}/-`} />
-                                <div className="md:col-span-3">
-                                    <Details title='Account Status' icon={<CircleCheck size={15} className='text-primary' />} innerClass='text-green-600 !font-extrabold  uppercase' text={capitalizeFirstLetter(user?.status)} />
-                                </div>
+                                <Details title='Account Status' icon={<CircleCheck size={15} className='text-primary' />} innerClass='text-green-600 !font-extrabold  uppercase' text={capitalizeFirstLetter(user?.status)} />
+
                             </div>
                             <div className="w-full flex flex-col space-y-2 md:space-y-0 md:flex-row items-center justify-end space-x-2">
                                 <DefaultButton onClick={handleCopy} icon={copy ? <ClipboardCheck /> : <Clipboard />} title={copy ? 'Copied' : 'Copy Details'} className='text-xs w-full md:w-fit' />

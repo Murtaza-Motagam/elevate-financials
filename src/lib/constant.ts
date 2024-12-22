@@ -1,9 +1,13 @@
 import { ArrowLeftRight, Briefcase, CreditCard, Gift, Info, LayoutGrid, Lock, ShieldCheck, UserRoundPlus } from "lucide-react";
+import { LocalStorage } from "./localStorage";
 
 export const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 export const backendUrlUpload = process.env.NEXT_PUBLIC_BACKEND_URL_UPLOAD;
 export const backendUrlPreview = process.env.NEXT_PUBLIC_BACKEND_URL_PREVIEW;
 export const compNm = 'Elevate Financials';
+
+export const checkForModule = LocalStorage.getJSON('authDetails');
+export const token = checkForModule.token;
 
 export const navLinks = [
   {

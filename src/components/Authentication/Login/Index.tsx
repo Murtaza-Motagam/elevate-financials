@@ -22,11 +22,11 @@ const Login = () => {
             <p className="text-sm mb-8 mt-1">Enter to get tons of rewards and cashbacks.</p>
             <form className="space-y-6" onSubmit={hookform.handleSubmit(onSubmit)}>
               <InputField
-                label='CRN Number'
-                rest={hookform.register('crnNumber')}
-                placeholder='Enter your CRN'
-                type='number'
-                error={hookform.errors?.crnNumber?.message}
+                label='Username/Crn-Number'
+                rest={hookform.register('username')}
+                placeholder='Enter your username or crn number'
+                type='text'
+                error={hookform.errors?.username?.message}
                 mandatory
               />
               <PasswordInput

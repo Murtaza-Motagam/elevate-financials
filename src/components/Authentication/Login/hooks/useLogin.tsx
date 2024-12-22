@@ -11,14 +11,13 @@ import { publicRoutes } from '@/lib/routes';
 import { useRouter } from 'next/navigation';
 
 interface LoginValues {
-  crnNumber: string;
+  username: string;
   password: string;
 }
 
 export const loginSchema = yup.object().shape({
-  crnNumber: yup
+  username: yup
     .string()
-    .matches(/^\d{8}$/, "CRN number must be exactly 8 digits")
     .required("CRN number is required"),
   password: yup
     .string()
@@ -41,7 +40,7 @@ const useLogin = () => {
     const response = await axios({
       url,
       data: {
-        crnNumber: data?.crnNumber,
+        username: data?.username,
         password: data?.password,
       },
       method: 'post'

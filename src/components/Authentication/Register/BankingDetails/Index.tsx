@@ -18,6 +18,7 @@ const BankingDetails = () => {
 
     const [loading, setLoading] = useState<boolean>(true);
     const [copy, setCopy] = useState<boolean>(false);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [user, setUser] = useState<any>();
     const checkForModule = LocalStorage.getJSON(KEYS.authDetails);
     const url = `${backendUrl}/user/get-user`;

@@ -6,32 +6,32 @@ export const backendUrlPreview = process.env.NEXT_PUBLIC_BACKEND_URL_PREVIEW;
 export const compNm = 'Elevate Financials';
 
 export const navLinks = [
-    {
-      name: 'Card',
-      redirectLink: '/card',
-    },
-    {
-      name: 'Travel',
-      redirectLink: '/travel',
-    },
-    {
-      name: 'Rewards',
-      redirectLink: '/rewards',
-    },
-    {
-      name: 'Insurance',
-      redirectLink: '/insurance',
-    },
-    {
-      name: 'Business',
-      redirectLink: '/business',
-    },
-  ];
-  
+  {
+    name: 'Card',
+    redirectLink: '/card',
+  },
+  {
+    name: 'Travel',
+    redirectLink: '/travel',
+  },
+  {
+    name: 'Rewards',
+    redirectLink: '/rewards',
+  },
+  {
+    name: 'Insurance',
+    redirectLink: '/insurance',
+  },
+  {
+    name: 'Business',
+    redirectLink: '/business',
+  },
+];
+
 export const genderOptions = [
-  {value: 'Male', label: 'Male'},
-  {value: 'Female', label: 'Female'},
-  {value: 'Other', label: 'Other'},
+  { value: 'Male', label: 'Male' },
+  { value: 'Female', label: 'Female' },
+  { value: 'Other', label: 'Other' },
 ]
 
 export const PROTECTED_ROUTES = [
@@ -39,10 +39,10 @@ export const PROTECTED_ROUTES = [
 ]
 
 export const accountTypeOptions = [
-  {value: 'Savings', label: 'Savings'},
-  {value: 'Current', label: 'Current'},
-  {value: 'Fixed Deposits', label: 'Fixed Deposits'},
-  {value: 'Recurring', label: 'Recurring'},
+  { value: 'Savings', label: 'Savings' },
+  { value: 'Current', label: 'Current' },
+  { value: 'Fixed Deposits', label: 'Fixed Deposits' },
+  { value: 'Recurring', label: 'Recurring' },
 ]
 
 export const addressProofOptions = [
@@ -82,7 +82,7 @@ export const sidebarLinks = [
     category: 'Financial Transactions',
     links: [
       {
-        name: 'Transaction',
+        name: 'Transactions',
         icon: ArrowLeftRight,
       },
     ],

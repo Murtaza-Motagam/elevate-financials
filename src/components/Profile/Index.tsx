@@ -13,11 +13,13 @@ import PageLoader from '@/shared/Loaders/PageLoader';
 import { useSearchParams } from 'next/navigation';
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from '../ui/sheet';
 import { PanelRight } from 'lucide-react';
+import Transactions from './Transactions/Index';
 
 // Components map
 const componentsMap: Record<string, React.ReactNode> = {
     Dashboard: <Dashboard />,
     "My Account": <MyAccounts />,
+    Transactions: <Transactions />,
 };
 
 const Profile = () => {

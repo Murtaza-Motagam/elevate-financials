@@ -23,7 +23,7 @@ const ProfileImage: React.FC<ProfileImgProps> = ({ open, setOpen = () => { }, us
                 {userInfo?.documentDetails?.profileImg && (
                     <LazyLoadImg
                         src={`${backendUrlPreview}/${userInfo?.documentDetails?.profileImg}`}
-                        className='w-full h-full object-contain'
+                        className='mt-2 w-full h-full object-contain'
                     />
                 )}
             </DialogContent>

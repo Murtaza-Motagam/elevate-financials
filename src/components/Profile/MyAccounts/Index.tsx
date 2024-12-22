@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { dateTimeDisplay, formatWithCommas, getUserInfo } from '@/lib/common'
 import { backendUrlPreview } from '@/lib/constant';
 import LazyLoadImg from '@/widgets/LazyLoadImg';
-import { Camera, CircleCheckBig, CircleX, EditIcon, IndianRupee } from 'lucide-react';
+import { Calendar, CircleCheck, CircleCheckBig, CircleUser, CircleX, EditIcon, IndianRupee } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import ProfileImage from './Modals/ProfileImage';
 import RollLoader from '@/shared/Loaders/RollLoader';
@@ -75,13 +75,12 @@ const MyAccounts = () => {
                         <TextToImage nameText={`${userInfo?.personalDetails?.firstName} ${userInfo?.personalDetails?.lastName}`} className='text-lg w-full h-full' />
                     )}
                     {userInfo?.documentDetails?.profileImg && (
-                        <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition pointer-events-none">
+                        <div className="absolute inset-0 hover:bg-gray-200 hover:bg-opacity-60 flex items-center justify-center group-hover:opacity-50 transition-opacity pointer-events-none">
                             <button
                                 className="w-full h-full flex items-center justify-center pointer-events-auto"
                                 aria-label="View Profile Image"
                                 onClick={() => setOpen(true)} // Trigger modal on click
                             >
-                                <Camera className="w-full h-full" />
                             </button>
                         </div>
                     )}
@@ -90,7 +89,7 @@ const MyAccounts = () => {
 
                 {/* Profile Details */}
                 <div className="flex-1">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 text-center md:text-left md:grid-cols-2 gap-4">
                         <div>
                             <h2 className="text-sm font-medium text-gray-500">Full Name: </h2>
                             <p className="text-lg font-semibold dark:text-gray-50">{`${userInfo?.personalDetails?.firstName || '-'} ${userInfo?.personalDetails?.lastName || '-'}`}</p>
@@ -136,25 +135,37 @@ const MyAccounts = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {/* Account Number */}
                         <div className="flex items-center justify-between p-4 rounded-lg border">
-                            <span className="font-medium text-gray-600 dark:text-gray-400">Account Number:</span>
+                            <p className="font-medium flex items-center gap-x-2 text-gray-600 dark:text-gray-400">
+                                <CircleUser size={20} className='text-primary' />
+                                Account Number:
+                            </p>
                             <span className="font-bold">{userInfo?.accountDetails?.accountNumber || '-'}</span>
                         </div>
 
                         {/* CRN Number */}
                         <div className="flex items-center justify-between p-4 rounded-lg border">
-                            <span className="font-medium text-gray-600 dark:text-gray-400">CRN Number:</span>
+                            <p className="font-medium flex items-center gap-x-2 text-gray-600 dark:text-gray-400">
+                                <CircleUser size={20} className='text-primary' />
+                                CRN Number:
+                            </p>
                             <span className="font-bold">{userInfo?.accountDetails?.crnNumber || '-'}</span>
                         </div>
 
                         {/* Account Status */}
                         <div className="flex items-center justify-between p-4 rounded-lg border">
-                            <span className="font-medium text-gray-600 dark:text-gray-400">Account Status:</span>
+                            <p className="font-medium flex items-center gap-x-2 text-gray-600 dark:text-gray-400">
+                                <CircleCheck size={20} className='text-primary' />
+                                Account Status:
+                            </p>
                             {checkForAccStatus(userInfo?.status)}
                         </div>
 
                         {/* Account Created Date */}
                         <div className="flex items-center justify-between p-4 rounded-lg border">
-                            <span className="font-medium text-gray-600 dark:text-gray-400">Created On:</span>
+                            <p className="font-medium flex items-center gap-x-2 text-gray-600 dark:text-gray-400">
+                                <Calendar size={20} className='text-primary' />
+                                Created On:
+                            </p>
                             <span className="font-bold">{dateTimeDisplay(userInfo?.accountDetails?.createdAt) || '-'}</span>
                         </div>
                     </div>

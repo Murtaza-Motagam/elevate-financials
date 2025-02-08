@@ -136,7 +136,7 @@ const Uploader = <T extends FieldValues>({
                 )}
 
                 {/* Image Preview */}
-                {preview && (
+                {preview && !showCropperModal && !uploading && (
                     <div className="mt-4 relative pb-5">
                         <LazyLoadImg
                             src={`${backendUrlPreview}/${preview}`}
@@ -155,7 +155,7 @@ const Uploader = <T extends FieldValues>({
 
                 {/* Uploading State */}
                 {uploading && (
-                    <p className="text-blue-600">Uploading...</p>
+                    <p className="text-blue-600 font-semibold text-base uppercase">Uploading...</p>
                 )}
 
                 {/* Error State */}
@@ -186,7 +186,7 @@ const Uploader = <T extends FieldValues>({
                     <button
                         type="button"
                         onClick={handleCrop}
-                        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+                        className="mt-4 px-4 py-2 bg-primary text-white rounded"
                     >
                         Crop & Upload
                     </button>

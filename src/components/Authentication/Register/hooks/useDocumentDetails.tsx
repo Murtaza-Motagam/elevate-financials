@@ -66,6 +66,8 @@ const useDocumentDetails = ({ onNext = () => { } }: useDocumentDetailsProps) => 
         } catch (err) {
             console.error('error: ', err);
             showToast('Some error has occurred. Please wait for some time', 'error')
+        } finally {
+            setLoading(false)
         }
     }
 

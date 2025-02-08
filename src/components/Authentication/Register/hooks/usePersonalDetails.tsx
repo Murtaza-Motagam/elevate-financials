@@ -42,7 +42,7 @@ const usePersonalDetails = ({ onNext = () => { } }: usePersonalDetailProps) => {
             const url = `${backendUrl}/auth/save-personal-details`;
             const response = await axios({
                 url,
-                data: {personalDetails},
+                data: { personalDetails },
                 method: 'post'
             });
             const resData = response.data;
@@ -57,6 +57,8 @@ const usePersonalDetails = ({ onNext = () => { } }: usePersonalDetailProps) => {
         } catch (err) {
             console.error('error: ', err);
             showToast('Some error has occurred. Please wait for some time', 'error')
+        } finally {
+            setLoading(false);
         }
     }
 

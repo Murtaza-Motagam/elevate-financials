@@ -60,6 +60,12 @@ export const addressProofOptions = [
   { value: 'Bank Statement', label: 'Bank Statement' },
 ];
 
+export const transactionType = [
+  { value: 'IMPS', label: 'IMPS' },
+  { value: 'RTGS', label: 'RTGS' },
+  { value: 'NEFT', label: 'NEFT' },
+];
+
 
 export const KEYS = {
   personalDetails: 'personalDetails',

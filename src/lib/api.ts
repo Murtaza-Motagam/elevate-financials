@@ -1,11 +1,13 @@
 import axios, { Method } from 'axios';
 import { LocalStorage } from './localStorage';
+import { backendUrl } from './constant';
+
 
 interface ApiRequestArgs {
     url: string;
-    method?: Method; 
+    method?: Method;
     params?: Record<string, unknown>;
-    data?: Record<string, unknown>;
+    data?: any;
     headers?: Record<string, unknown>;
 }
 
@@ -17,15 +19,13 @@ const apiRequest = async <T = unknown>({
     headers,
 }: ApiRequestArgs): Promise<T> => {
     try {
-        // Retrieve the Authorization token or any headers from local storage
-        const token = LocalStorage.get('authDetails');
-
-        // Make the API request
+        const { token } = LocalStorage.get('authDetails');
+        const fullUrl = `${backendUrl}${url}`;
         const response = await axios({
-            url,
+            url: fullUrl,
             method,
             headers: {
-                Authorization: token ? `${token?.authorization}` : '',
+                Authorization: token ?? '',
                 ...headers
             },
             params,

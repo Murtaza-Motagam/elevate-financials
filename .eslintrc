@@ -1,22 +1,92 @@
 {
-    "env": {
-      "browser": true,
-      "es2021": true
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true,
+  },
+  "plugins": [
+    "react",
+    "react-hooks",
+    "import",
+    "prettier",
+    "sonarjs"
+  ],
+  "extends": [
+    "next",
+    "google",
+    "prettier",
+    "plugin:prettier/recommended",
+    "eslint:recommended",
+    "plugin:sonarjs/recommended-legacy",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-      "eslint:recommended",
-      "plugin:react/recommended",
-      "plugin:@typescript-eslint/recommended",
-      "prettier"
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+  },
+  "rules": {
+    "eqeqeq": "error",
+    "no-trailing-spaces": "error",
+    "sonarjs/elseif-without-else": "error",
+    "sonarjs/no-extra-arguments": "error",
+    "sonarjs/no-empty-collection": "error",
+    "no-useless-catch": "error",
+    "sonarjs/no-identical-conditions": "error",
+    "sonarjs/no-duplicate-string": [
+      "error",
+      {
+        "threshold": 3
+      }
     ],
-    "parserOptions": {
-      "ecmaVersion": "latest",
-      "sourceType": "module"
-    },
-    "plugins": ["react", "@typescript-eslint"],
-    "rules": {
-      "semi": ["error", "always"],
-      "quotes": ["error", "double"]
-    }
-  }
-  
+    "no-unused-vars": "error",
+    "sonarjs/no-nested-template-literals": "error",
+    "no-duplicate-imports": "error",
+    "prefer-const": "error",
+    "prefer-arrow-callback": "error",
+    "sonarjs/prefer-object-literal": "error",
+    "sonarjs/prefer-single-boolean-return": "error",
+    "sonarjs/non-existent-operator": "error",
+    "react/jsx-uses-vars": "error",
+    "react/react-in-jsx-scope": "warn",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "newlines-between": "always",
+      },
+    ],
+    "prettier/prettier": [
+      "warn",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "quotes": [
+      "warn",
+      "single",
+      {
+        "avoidEscape": true
+      }
+    ],
+    // Override
+    "react/prop-types": "off",
+    "require-jsdoc": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "jsx-a11y/no-autofocus": "off",
+    "camelcase": [
+      "off"
+    ],
+  },
+}

@@ -23,8 +23,8 @@ const PasswordInput: React.FC<passwordProps> = ({ label, placeholder, error, par
     };
 
     return (
-        <div className={`grid w-full w-full items-center gap-1.5 ${parentClassName}`}>
-            <Label htmlFor={label}>{label} {mandatory && <span className='text-red-600'>*</span>}</Label>
+        <div className={`grid w-full items-center gap-1.5 ${parentClassName}`}>
+            <Label className='dark:text-gray-300' htmlFor={label}>{label} {mandatory && <span className='text-red-600'>*</span>}</Label>
             <div className="relative">
                 <Inputs
                     className={`${error ? 'border-2 border-red-500' : ''

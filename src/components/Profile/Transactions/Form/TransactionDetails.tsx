@@ -15,7 +15,6 @@ interface TransactionDetailProps {
 
 
 const TransactionDetails: React.FC<TransactionDetailProps> = ({ open, setOpen = () => { }, data }) => {
-    console.log('data: ', data);
 
     const transactionData = [
         { index: 1, name: 'Transaction ID:', data: data.transactionId },

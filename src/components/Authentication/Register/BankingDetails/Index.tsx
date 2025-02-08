@@ -155,7 +155,7 @@ Balance: ${user?.accountDetails?.balance}
                                 <Details title='IFSC Code' icon={<CircleUser size={15} className='text-primary' />} text={user?.accountDetails?.ifscCode} />
                                 <Details title='Account Type' icon={<HandCoins size={15} className='text-primary' />} text={user?.accountDetails?.accountType} />
                                 <Details title='Balance' icon={<IndianRupee size={15} className='text-primary' />} text={`${user?.accountDetails?.balance}/-`} />
-                                <Details title='Account Status' icon={<CircleCheck size={15} className='text-primary' />} innerClass='text-green-600 !font-extrabold  uppercase' text={capitalizeFirstLetter(user?.status)} />
+                                <Details title='Account Status' icon={<CircleCheck size={15} className='text-primary' />} innerClass='text-green-500 !font-extrabold  uppercase' text={capitalizeFirstLetter(user?.status)} />
 
                             </div>
                             <div className="w-full flex flex-col space-y-2 md:space-y-0 md:flex-row items-center justify-end space-x-2">

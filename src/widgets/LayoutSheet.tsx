@@ -26,7 +26,7 @@ const LayoutSheet: React.FC<LayoutModalProps> = ({ children, open, setOpen = () 
                         <SheetDescription>Hidden Dialog Title</SheetDescription>
                     </VisuallyHidden>
                 </SheetHeader>
-                <div>
+                <div className='h-full w-full'>
                     {children}
                 </div>
             </SheetContent>

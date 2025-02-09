@@ -51,6 +51,22 @@ const useLogin = () => {
         token: resData?.authtoken,
       }
       Cookies.set('Authorization-token', resData.authtoken, { expires: 7, secure: true });
+      await axios.post("/api/user", {
+        user: {
+          id: resData?.user?._id,
+          profileImg: resData?.user?.documentDetails?.profileImg,
+          firstName: resData?.user?.personalDetails?.firstName,
+          lastName: resData?.user?.personalDetails?.lastName,
+          name: `${resData?.user?.personalDetails?.firstName} ${resData?.user?.personalDetails?.lastName}`,
+          username: resData?.user?.authentication?.username,
+          mobNo: resData?.user?.personalDetails?.mobNo,
+          status: resData?.user?.status,
+          email: resData?.user?.personalDetails?.email,
+          role: resData?.user?.authentication?.roles?.[0],
+          accountDetails: resData?.user?.accountDetails,
+        },
+        token: resData?.authtoken,
+      });
       LocalStorage.setJSON(KEYS.authDetails, LocalData);
       showToast(resData?.message, 'success');
       router.push(publicRoutes.home);

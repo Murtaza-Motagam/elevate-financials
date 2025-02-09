@@ -20,6 +20,7 @@ const Header = () => {
     const { router, pathname, theme, states, logout } = useHeader();
     const [open, setOpen] = useState<boolean>(false);
     const { user = {} } = states;
+    console.log('user: ', user);
 
     const handleClose = () => {
         setOpen(false); // Automatically closes the sheet
@@ -70,21 +71,21 @@ const Header = () => {
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <div className=" rounded-full overflow-hidden cursor-pointer relative group">
-                                    {user?.documentDetails?.profileImg ? (
+                                    {user?.profileImg ? (
                                         <LazyLoadImg
-                                            src={`${backendUrlPreview}/${user?.documentDetails?.profileImg}`}
+                                            src={`${backendUrlPreview}/${user?.profileImg}`}
                                             alt="User Profile"
                                             className='w-10 h-10 object-contain border-2 border-gray-800 dark:border-2 dark:border-gray-200 rounded-full'
                                         />
                                     ) : (
-                                        <TextToImage nameText={`${user?.personalDetails?.firstName} ${user?.personalDetails?.lastName}`} />
+                                        <TextToImage nameText={`${user?.firstName} ${user?.lastName}`} />
                                     )}
                                     <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300 rounded-full"></div>
                                 </div>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent className="w-56 mr-10">
                                 <DropdownMenuLabel className='dark:text-gray-200'>My Account</DropdownMenuLabel>
-                                <p className='text-xs ml-2 dark:text-gray-400'>{user?.personalDetails?.email}</p>
+                                <p className='text-xs ml-2 dark:text-gray-400'>{user?.email}</p>
                                 <DropdownMenuSeparator className='bg-gray-200 mb-3 dark:bg-gray-800 mt-2' />
                                 <DropdownMenuGroup>
                                     <DropdownMenuItem

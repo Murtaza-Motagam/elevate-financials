@@ -16,13 +16,12 @@ const useHeader = () => {
   const router = useRouter();
   const pathname = usePathname();
   const { theme } = useTheme();
-  const url = `${backendUrl}/user/get-user`;
-  const checkForModule = LocalStorage.getJSON('authDetails');
 
   const states = { loading, user, isUser };
 
-  const logout = () => {
+  const logout = async () => {
     Cookies.remove('Authorization-token');
+    await axios.delete("/api/user");
     LocalStorage.remove(KEYS.authDetails);
     router.push(authenticationRoutes.login);
     showToast('You have successfully logged out. See you again soon!');
@@ -30,22 +29,21 @@ const useHeader = () => {
 
   useEffect(() => {
     const getUser = async () => {
-      const authenticated = isAuthenticated();
-      if (authenticated) {
-        setIsUser(authenticated)
-        const response = await axios({
-          url,
-          method: 'get',
-          headers: {
-            Authorization: checkForModule?.token
-          }
-        });
-        const resData = response.data;
-        setUser(resData?.details || '');
-      } else {
+      try {
+        const response = await axios.get("/api/user");
+        if (response.data.token) {
+          setIsUser(true);
+          setUser(response.data.data || '');
+        } else {
+          setIsUser(false);
+        }
+        setLoading(false);
+      } catch (error) {
+        console.error('error: ', error);
         setIsUser(false);
+      } finally {
+        setLoading(false)
       }
-      setLoading(false);
     }
 
     getUser();

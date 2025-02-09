@@ -20,7 +20,6 @@ const Header = () => {
     const { router, pathname, theme, states, logout } = useHeader();
     const [open, setOpen] = useState<boolean>(false);
     const { user = {} } = states;
-    console.log('user: ', user);
 
     const handleClose = () => {
         setOpen(false); // Automatically closes the sheet

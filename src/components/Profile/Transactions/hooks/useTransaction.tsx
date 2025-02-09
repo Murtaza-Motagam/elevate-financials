@@ -1,8 +1,16 @@
+import apiRequest from '@/lib/api';
+import { endpoints } from '@/lib/apiEndpoint';
 import { dateTimeDisplay } from '@/lib/common';
-import { backendUrl, token } from '@/lib/constant';
-import axios from 'axios';
 import { CircleAlert, CircleCheck, CircleX } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
+
+interface apiRequestProps {
+  url: string;
+  method: string;
+  success: string;
+  message: string;
+  transactions?: any;
+}
 
 const useTransaction = () => {
   const [transactionList, setTransactionList] = useState<any>([]);
@@ -11,15 +19,11 @@ const useTransaction = () => {
 
   const getTransactions = async () => {
     try {
-      const response = await axios({
-        url: `${backendUrl}/transactions/get-transaction`,
+      const response = await apiRequest<apiRequestProps>({
+        url: endpoints.getTransaction,
         method: 'get',
-        headers: {
-          Authorization: token
-        }
       });
-      const resData = response.data;
-      setTransactionList(resData?.transactions || []);
+      setTransactionList(response?.transactions || []);
       setLoading(false);
     } catch (error) {
       console.error('error: ', error);

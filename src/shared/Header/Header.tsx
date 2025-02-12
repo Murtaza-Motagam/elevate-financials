@@ -26,7 +26,8 @@ import LazyLoadImg from '@/widgets/LazyLoadImg';
 const Header = () => {
   const { router, pathname, theme, states, logout } = useHeader();
   const [open, setOpen] = useState<boolean>(false);
-  const { user = {} } = states;
+
+  const { mainUser } = states;
 
   const handleClose = () => {
     setOpen(false); // Automatically closes the sheet
@@ -71,7 +72,7 @@ const Header = () => {
                 onClose={handleClose}
                 theme={theme}
                 pathname={pathname}
-                loading={states.loading}
+                loading={states.contextLoading}
                 isUser={states.isUser}
               />
             </SheetContent>
@@ -82,9 +83,9 @@ const Header = () => {
           suppressHydrationWarning
         >
           <ModeToggle />
-          {states.loading ? (
+          {states.contextLoading ? (
             <BasicLoader />
-          ) : !states.isUser && !states.loading ? (
+          ) : !states.isUser && !states.contextLoading ? (
             <Button
               onClick={() => router.push(authenticationRoutes.login)}
               className='rounded-full px-5 text-sm dark:text-white'
@@ -96,21 +97,21 @@ const Header = () => {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <div className=' rounded-full overflow-hidden cursor-pointer relative group'>
-                  {user?.profileImg ? (
+                  {mainUser?.profileImg ? (
                     <LazyLoadImg
-                      src={`${backendUrlPreview}/${user?.profileImg}`}
+                      src={`${backendUrlPreview}/${mainUser?.profileImg}`}
                       alt='User Profile'
                       className='w-10 h-10 object-contain border-2 border-gray-800 dark:border-2 dark:border-gray-200 rounded-full'
                     />
                   ) : (
-                    <TextToImage nameText={`${user?.firstName} ${user?.lastName}`} />
+                    <TextToImage nameText={`${mainUser?.firstName} ${mainUser?.lastName}`} />
                   )}
                   <div className='absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300 rounded-full'></div>
                 </div>
               </DropdownMenuTrigger>
               <DropdownMenuContent className='w-56 mr-10'>
                 <DropdownMenuLabel className='dark:text-gray-200'>My Account</DropdownMenuLabel>
-                <p className='text-xs ml-2 dark:text-gray-400'>{user?.email}</p>
+                <p className='text-xs ml-2 dark:text-gray-400'>{mainUser?.email}</p>
                 <DropdownMenuSeparator className='bg-gray-200 mb-3 dark:bg-gray-800 mt-2' />
                 <DropdownMenuGroup>
                   <DropdownMenuItem

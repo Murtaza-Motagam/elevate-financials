@@ -2,7 +2,7 @@ import { Slide, toast, ToastOptions } from 'react-toastify';
 import Cookies from 'js-cookie';
 import dayjs from 'dayjs';
 import axios from 'axios';
-import { backendUrl } from './constant';
+import { backendUrl, KEYS } from './constant';
 import { LocalStorage } from './localStorage';
 
 export const isAuthenticated = () => {
@@ -97,4 +97,14 @@ export const getUserInfo = async () => {
 export const formatWithCommas = (number: number) => {
   if (typeof number !== 'number') return number;
   return number.toLocaleString('en-IN');
+};
+
+export const logout = async () => {
+  Cookies.remove('Authorization-token');
+  await axios.delete('/api/user');
+  LocalStorage.remove(KEYS.authDetails);
+  showToast('You have successfully logged out. See you again soon!');
+  setTimeout(() => {
+    window.open('http://localhost:3000/login', '_self');
+  }, 600);
 };

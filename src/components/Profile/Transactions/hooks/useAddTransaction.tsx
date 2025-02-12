@@ -12,7 +12,6 @@ interface useAddTransactionProps {
   remarks?: string | undefined;
   transactionTypeNm: string;
 }
-
 interface apiRequestProps {
   url: string;
   method: string;

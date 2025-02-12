@@ -3,6 +3,7 @@ import './globals.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
+import { UserProvider } from '@/context/UserContext';
 
 export const metadata: Metadata = {
   title: 'Elevate Financials | Credit Cards, Rewards, Travel, Offers',
@@ -30,7 +31,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <UserProvider>
+            {children}
+          </UserProvider>
         </ThemeProvider>
         <ToastContainer />
       </body>

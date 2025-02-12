@@ -9,6 +9,7 @@ import { LocalStorage } from '@/lib/localStorage';
 import { showToast } from '@/lib/common';
 import { publicRoutes } from '@/lib/routes';
 import { useRouter } from 'next/navigation';
+import { useUser } from '@/context/UserContext';
 
 interface LoginValues {
   username: string;
@@ -23,6 +24,7 @@ export const loginSchema = yup.object().shape({
 const useLogin = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
+  const { fetchUser } = useUser();
 
   const {
     register,
@@ -69,6 +71,7 @@ const useLogin = () => {
         },
         token: resData?.authtoken,
       });
+      fetchUser();
       LocalStorage.setJSON(KEYS.authDetails, LocalData);
       showToast(resData?.message, 'success');
       router.push(publicRoutes.home);

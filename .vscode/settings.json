@@ -8,6 +8,7 @@
     "source.fixAll.eslint": "explicit",
     "source.fixAll.format": "explicit"
   },
+  "prettier.configPath": "./.prettierrc",
   "eslint.options": {
     "overrideConfigFile": "./.eslintrc"
   },
@@ -25,10 +26,10 @@
     "javascriptreact",
     "typescriptreact"
   ],
-  "[typescriptreact]": {
+  "[typescript]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
   },
-  "[typescript]": {
+  "[typescriptreact]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
   }
 }

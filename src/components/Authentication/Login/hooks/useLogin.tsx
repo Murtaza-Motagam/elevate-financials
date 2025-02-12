@@ -16,25 +16,25 @@ interface LoginValues {
 }
 
 export const loginSchema = yup.object().shape({
-  username: yup
-    .string()
-    .required("CRN number is required"),
-  password: yup
-    .string()
-    .trim()
-    .required("Password is required"),
+  username: yup.string().required('CRN number is required'),
+  password: yup.string().trim().required('Password is required'),
 });
 
 const useLogin = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
-  const { register, reset, handleSubmit, formState: { errors } } = useForm<LoginValues>({
-    resolver: yupResolver(loginSchema)
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginValues>({
+    resolver: yupResolver(loginSchema),
   });
 
   const onSubmit = async (data: LoginValues) => {
-    setLoading(true)
+    setLoading(true);
 
     const url = `${backendUrl}/auth/login`;
     const response = await axios({
@@ -43,15 +43,17 @@ const useLogin = () => {
         username: data?.username,
         password: data?.password,
       },
-      method: 'post'
+      method: 'post',
     });
     const resData = response.data;
     if (resData?.success) {
       const LocalData = {
         token: resData?.authtoken,
-      }
-      Cookies.set('Authorization-token', resData.authtoken, { expires: 7, secure: true });
-      await axios.post("/api/user", {
+      };
+      Cookies.set('Authorization-token', resData.authtoken, {
+        expires: 7,
+      });
+      await axios.post('/api/user', {
         user: {
           id: resData?.user?._id,
           profileImg: resData?.user?.documentDetails?.profileImg,
@@ -70,13 +72,11 @@ const useLogin = () => {
       LocalStorage.setJSON(KEYS.authDetails, LocalData);
       showToast(resData?.message, 'success');
       router.push(publicRoutes.home);
+    } else {
+      showToast(resData?.message, 'error');
     }
-    else {
-      showToast(resData?.message, 'error')
-    }
-    setLoading(false)
-  }
-
+    setLoading(false);
+  };
 
   const hookform = { register, reset, handleSubmit, errors };
 
@@ -84,7 +84,7 @@ const useLogin = () => {
     hookform,
     onSubmit,
     loading,
-  }
-}
+  };
+};
 
-export default useLogin
+export default useLogin;

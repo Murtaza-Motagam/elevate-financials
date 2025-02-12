@@ -1,5 +1,15 @@
-import { ArrowLeftRight, Briefcase, CreditCard, Gift, Info, LayoutGrid, Lock, ShieldCheck, UserRoundPlus } from "lucide-react";
-import { LocalStorage } from "./localStorage";
+import {
+  ArrowLeftRight,
+  Briefcase,
+  CreditCard,
+  Gift,
+  Info,
+  LayoutGrid,
+  Lock,
+  ShieldCheck,
+  UserRoundPlus,
+} from 'lucide-react';
+import { LocalStorage } from './localStorage';
 
 export const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 export const backendUrlUpload = process.env.NEXT_PUBLIC_BACKEND_URL_UPLOAD;
@@ -36,18 +46,16 @@ export const genderOptions = [
   { value: 'Male', label: 'Male' },
   { value: 'Female', label: 'Female' },
   { value: 'Other', label: 'Other' },
-]
+];
 
-export const PROTECTED_ROUTES = [
-  '/profile'
-]
+export const PROTECTED_ROUTES = ['/profile'];
 
 export const accountTypeOptions = [
   { value: 'Savings', label: 'Savings' },
   { value: 'Current', label: 'Current' },
   { value: 'Fixed Deposits', label: 'Fixed Deposits' },
   { value: 'Recurring', label: 'Recurring' },
-]
+];
 
 export const addressProofOptions = [
   { value: 'Aadhar Card', label: 'Aadhar Card' },
@@ -66,13 +74,12 @@ export const transactionType = [
   { value: 'NEFT', label: 'NEFT' },
 ];
 
-
 export const KEYS = {
   personalDetails: 'personalDetails',
   documentDetails: 'documentDetails',
   bankingDetails: 'bankingDetails',
   authDetails: 'authDetails',
-}
+};
 
 export const sidebarLinks = [
   {

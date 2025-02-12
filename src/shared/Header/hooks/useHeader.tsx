@@ -1,12 +1,12 @@
-import { isAuthenticated, showToast } from "@/lib/common";
-import { backendUrl, KEYS } from "@/lib/constant";
-import { LocalStorage } from "@/lib/localStorage";
-import { authenticationRoutes } from "@/lib/routes";
-import axios from "axios";
+import { showToast } from '@/lib/common';
+import { KEYS } from '@/lib/constant';
+import { LocalStorage } from '@/lib/localStorage';
+import { authenticationRoutes } from '@/lib/routes';
+import axios from 'axios';
 import Cookies from 'js-cookie';
-import { useTheme } from "next-themes";
-import { usePathname, useRouter } from "next/navigation"
-import { useEffect, useState } from "react";
+import { useTheme } from 'next-themes';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 const useHeader = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -21,42 +21,45 @@ const useHeader = () => {
 
   const logout = async () => {
     Cookies.remove('Authorization-token');
-    await axios.delete("/api/user");
+    await axios.delete('/api/user');
     LocalStorage.remove(KEYS.authDetails);
     router.push(authenticationRoutes.login);
     showToast('You have successfully logged out. See you again soon!');
   };
 
-  useEffect(() => {
-    const getUser = async () => {
-      try {
-        const response = await axios.get("/api/user");
-        if (response.data.token) {
-          setIsUser(true);
-          setUser(response.data.data || '');
-        } else {
-          setIsUser(false);
-        }
-        setLoading(false);
-      } catch (error) {
-        console.error('error: ', error);
-        setIsUser(false);
-      } finally {
-        setLoading(false)
-      }
-    }
+  const getUser = async () => {
+    try {
+      const response = await axios.get('/api/user');
 
+      if (response.data?.token) {
+        setIsUser(true);
+        setUser(response.data.data || '');
+      } else {
+        setIsUser(false);
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.status === 401) {
+        console.warn('User is not authenticated.');
+      } else {
+        console.error('API error: ', error);
+      }
+      setIsUser(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     getUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   return {
     router,
     pathname,
     theme,
     states,
-    logout
-  }
-}
+    logout,
+  };
+};
 
-export default useHeader
+export default useHeader;

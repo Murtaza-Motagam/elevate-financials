@@ -3,7 +3,7 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "node": true,
+    "node": true
   },
   "plugins": [
     "react",
@@ -20,14 +20,14 @@
     "eslint:recommended",
     "plugin:sonarjs/recommended-legacy",
     "plugin:react/recommended",
-    "plugin:jsx-a11y/recommended",
+    "plugin:jsx-a11y/recommended"
   ],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
     "ecmaVersion": "latest",
-    "sourceType": "module",
+    "sourceType": "module"
   },
   "rules": {
     "eqeqeq": "error",
@@ -64,8 +64,8 @@
           "sibling",
           "index"
         ],
-        "newlines-between": "always",
-      },
+        "newlines-between": "always"
+      }
     ],
     "prettier/prettier": [
       "warn",
@@ -87,6 +87,6 @@
     "jsx-a11y/no-autofocus": "off",
     "camelcase": [
       "off"
-    ],
-  },
+    ]
+  }
 }

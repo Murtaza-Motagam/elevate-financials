@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Check, ChevronsUpDown } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import React, { useState } from 'react';
+import { Check, ChevronsUpDown } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 import {
   Command,
   CommandEmpty,
@@ -9,11 +9,11 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Label } from "@/components/ui/label";
-import { Controller } from "react-hook-form";
-import InfoIcon from "@/Icons/InfoIcon";
+} from '@/components/ui/command';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Label } from '@/components/ui/label';
+import { Controller } from 'react-hook-form';
+import InfoIcon from '@/Icons/InfoIcon';
 
 interface Option {
   value: string;
@@ -22,6 +22,7 @@ interface Option {
 
 interface SingleSelectProps {
   name: string; // Form field name
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: any; // React Hook Form control
   options: Option[];
   label?: string;
@@ -37,7 +38,7 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
   control,
   options,
   label,
-  placeholder = "Select an option...",
+  placeholder = 'Select an option...',
   error,
   dropdownClasses,
   mandatory,
@@ -46,8 +47,13 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="flex flex-col mt-2">
-      {label && <Label htmlFor={name} className='mb-2.5 dark:text-gray-300'>{label}{mandatory && <span className='text-red-600 ml-1'>*</span>}</Label>}
+    <div className='flex flex-col mt-2'>
+      {label && (
+        <Label htmlFor={name} className='mb-2.5 dark:text-gray-300'>
+          {label}
+          {mandatory && <span className='text-red-600 ml-1'>*</span>}
+        </Label>
+      )}
       <Controller
         name={name}
         control={control}
@@ -56,20 +62,20 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
             <Popover open={open} onOpenChange={setOpen}>
               <PopoverTrigger asChild>
                 <Button
-                  variant="outline"
-                  role="combobox"
+                  variant='outline'
+                  role='combobox'
                   aria-expanded={open}
-                  className="w-full justify-between"
+                  className='w-full justify-between'
                 >
                   {field.value
                     ? field.value // Directly show the selected label
                     : placeholder}
-                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
                 </Button>
               </PopoverTrigger>
               <PopoverContent className={`w-[220px] p-0 ${dropdownClasses}`}>
                 <Command>
-                  <CommandInput placeholder="Search..." />
+                  <CommandInput placeholder='Search...' />
                   <CommandList>
                     <CommandEmpty>{searchError}</CommandEmpty>
                     <CommandGroup>
@@ -83,8 +89,8 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
                         >
                           <Check
                             className={cn(
-                              "mr-2 h-4 w-4",
-                              field.value === option.label ? "opacity-100" : "opacity-0" // Compare with the label
+                              'mr-2 h-4 w-4',
+                              field.value === option.label ? 'opacity-100' : 'opacity-0', // Compare with the label
                             )}
                           />
                           {option.label}
@@ -96,9 +102,9 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
               </PopoverContent>
             </Popover>
             {error && (
-              <div className="flex items-center justify-start mt-1">
-                <InfoIcon size={14} className="text-red-600" />
-                <p className="!ml-1 text-red-600 text-xs">{error}</p>
+              <div className='flex items-center justify-start mt-1'>
+                <InfoIcon size={14} className='text-red-600' />
+                <p className='!ml-1 text-red-600 text-xs'>{error}</p>
               </div>
             )}
           </>

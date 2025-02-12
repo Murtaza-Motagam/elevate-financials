@@ -88,7 +88,6 @@ body {
   border-radius: 50px;
 }
 
-
 @layer base {
   * {
     @apply border-border;
@@ -99,19 +98,18 @@ body {
 }
 
 /* Hide the spinner for all number inputs */
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;  /* For Chrome, Safari, and newer versions of Opera */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none; /* For Chrome, Safari, and newer versions of Opera */
   margin: 0; /* To prevent extra space */
 }
 
-input[type="number"] {
+input[type='number'] {
   -moz-appearance: textfield; /* For Firefox */
 }
 
-
 /* Full page loader */
-/* From Uiverse.io by andrew-demchenk0 */ 
+/* From Uiverse.io by andrew-demchenk0 */
 .pyramid-loader {
   position: relative;
   width: 300px;
@@ -138,7 +136,7 @@ input[type="number"] {
 .pyramid-loader .wrapper .side {
   width: 70px;
   height: 70px;
-/* you can choose any gradient or color you want */
+  /* you can choose any gradient or color you want */
   /* background: radial-gradient( #2F2585 10%, #F028FD 70%, #2BDEAC 120%); */
   position: absolute;
   top: 0;
@@ -152,28 +150,28 @@ input[type="number"] {
 
 .pyramid-loader .wrapper .side1 {
   transform: rotateZ(-30deg) rotateY(90deg);
-  background: conic-gradient( #2BDEAC, #F028FD, #D8CCE6, #2F2585);
+  background: conic-gradient(#2bdeac, #f028fd, #d8cce6, #2f2585);
 }
 
 .pyramid-loader .wrapper .side2 {
   transform: rotateZ(30deg) rotateY(90deg);
-  background: conic-gradient( #2F2585, #D8CCE6, #F028FD, #2BDEAC);
+  background: conic-gradient(#2f2585, #d8cce6, #f028fd, #2bdeac);
 }
 
 .pyramid-loader .wrapper .side3 {
   transform: rotateX(30deg);
-  background: conic-gradient( #2F2585, #D8CCE6, #F028FD, #2BDEAC);
+  background: conic-gradient(#2f2585, #d8cce6, #f028fd, #2bdeac);
 }
 
 .pyramid-loader .wrapper .side4 {
   transform: rotateX(-30deg);
-  background: conic-gradient( #2BDEAC, #F028FD, #D8CCE6, #2F2585);
+  background: conic-gradient(#2bdeac, #f028fd, #d8cce6, #2f2585);
 }
 
 .pyramid-loader .wrapper .shadow {
   width: 60px;
   height: 60px;
-  background: #8B5AD5;
+  background: #8b5ad5;
   position: absolute;
   top: 0;
   left: 0;
@@ -186,7 +184,7 @@ input[type="number"] {
 
 /* Normal Loader */
 
-/* From Uiverse.io by Shoh2008 */ 
+/* From Uiverse.io by Shoh2008 */
 .loader {
   width: 34px;
   height: 34px;
@@ -194,8 +192,9 @@ input[type="number"] {
   overflow: hidden;
 }
 
-.loader:before , .loader:after {
-  content: "";
+.loader:before,
+.loader:after {
+  content: '';
   position: absolute;
   left: 50%;
   top: 10%;
@@ -204,7 +203,7 @@ input[type="number"] {
   height: 34px;
   border-radius: 50%;
   background: hsl(var(--primary));
-  transform: translate(-50% , 100%)  scale(0);
+  transform: translate(-50%, 100%) scale(0);
   animation: push_4051 2s infinite ease-in;
 }
 
@@ -214,25 +213,27 @@ input[type="number"] {
 
 @keyframes push_4051 {
   0% {
-    transform: translate(-50% , 100%)  scale(1);
+    transform: translate(-50%, 100%) scale(1);
   }
 
-  15% , 25% {
-    transform: translate(-50% , 50%)  scale(1);
+  15%,
+  25% {
+    transform: translate(-50%, 50%) scale(1);
   }
 
-  50% , 75% {
+  50%,
+  75% {
     transform: translate(-50%, -30%) scale(0.5);
   }
 
-  80%,  100% {
+  80%,
+  100% {
     transform: translate(-50%, -50%) scale(0);
   }
 }
-  
 
 /* Data loader  */
-/* From Uiverse.io by csozidev */ 
+/* From Uiverse.io by csozidev */
 /* 3D tower loader made by: csozi | Website: www.csozi.hu*/
 
 .loaderData {

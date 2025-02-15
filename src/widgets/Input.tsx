@@ -11,6 +11,7 @@ interface InputFieldProps {
   placeholder?: string;
   type?: string;
   parentClass?: string;
+  disabled?: boolean;
   rest?: Record<string, unknown>;
 }
 
@@ -22,6 +23,7 @@ const InputField: React.FC<InputFieldProps> = ({
   parentClass = '',
   mandatory = false,
   type,
+  disabled,
   rest,
 }) => {
   return (
@@ -37,9 +39,10 @@ const InputField: React.FC<InputFieldProps> = ({
         id={id}
         type={type}
         placeholder={placeholder}
+        disabled={disabled}
         className={`w-full px-4 py-2 text-sm border rounded-md focus:outline-none ${
           error ? 'border-red-500' : 'border-gray-300'
-        }`}
+        } ${disabled && 'bg-gray-300 dark:bg-gray-600'}`}
         {...rest}
       />
 

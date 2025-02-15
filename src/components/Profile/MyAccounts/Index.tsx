@@ -17,6 +17,7 @@ import React, { useEffect, useState } from 'react';
 import ProfileImage from './Modals/ProfileImage';
 import RollLoader from '@/shared/Loaders/RollLoader';
 import DefaultButton from '@/widgets/DefaultButton';
+import EditProfile from './Modals/EditProfile';
 
 const checkForAccStatus = (accStatus: string) => {
   if (accStatus) {
@@ -44,6 +45,7 @@ const MyAccounts = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [userInfo, setUserInfo] = useState<any>();
   const [open, setOpen] = useState<boolean>(false);
+  const [editProfile, setEditProfile] = useState<boolean>(false);
   const [balanceLoader, setBalanceLoader] = useState<boolean>(false);
   const [userBalance, setUserBalance] = useState(null);
 
@@ -55,12 +57,12 @@ const MyAccounts = () => {
     }, 2000);
   };
 
-  useEffect(() => {
-    const fetchUserInfo = async () => {
-      const userData = await getUserInfo();
-      setUserInfo(userData?.details);
-    };
+  const fetchUserInfo = async () => {
+    const userData = await getUserInfo();
+    setUserInfo(userData?.details);
+  };
 
+  useEffect(() => {
     fetchUserInfo();
   }, []);
 
@@ -127,6 +129,7 @@ const MyAccounts = () => {
           <div className='hidden md:block'>
             <Button
               variant='outline'
+              onClick={() => setEditProfile(true)}
               className='hover:bg-primary hover:text-white rounded-full p-2'
             >
               <EditIcon />
@@ -218,6 +221,7 @@ const MyAccounts = () => {
 
       {/* Profile Image modal */}
       <ProfileImage userInfo={userInfo} open={open} setOpen={setOpen} />
+      <EditProfile open={editProfile} setOpen={setEditProfile} fetchUserInfo={fetchUserInfo} />
     </div>
   );
 };

@@ -5,7 +5,8 @@ import { backendUrl } from './constant';
 interface ApiRequestArgs {
   url: string;
   method?: Method;
-  params?: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  params?: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data?: any;
   headers?: Record<string, unknown>;

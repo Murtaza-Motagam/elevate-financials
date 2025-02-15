@@ -1,14 +1,9 @@
 import { useUser } from '@/context/UserContext';
-import { logout, showToast } from '@/lib/common';
-import { KEYS } from '@/lib/constant';
-import { LocalStorage } from '@/lib/localStorage';
-import { authenticationRoutes } from '@/lib/routes';
-import axios from 'axios';
-import Cookies from 'js-cookie';
+import { logout } from '@/lib/common';
 import { useTheme } from 'next-themes';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { isEmpty } from "lodash";
+import { isEmpty } from 'lodash';
 
 const useHeader = () => {
   const [isUser, setIsUser] = useState<boolean>();

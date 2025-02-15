@@ -31,9 +31,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <UserProvider>
-            {children}
-          </UserProvider>
+          <UserProvider>{children}</UserProvider>
         </ThemeProvider>
         <ToastContainer />
       </body>

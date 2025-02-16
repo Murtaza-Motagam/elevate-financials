@@ -51,7 +51,7 @@ const Profile = () => {
   }
 
   return (
-    <LayoutWrapper>
+    <LayoutWrapper showFooter={false}>
       <div className='w-full mx-4 md:hidden block'>
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger onClick={() => setOpen(true)}>

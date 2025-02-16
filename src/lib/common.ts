@@ -94,7 +94,7 @@ export const getUserInfo = async () => {
   }
 };
 
-export const formatWithCommas = (number: number) => {
+export const formatWithCommas = (number: number | undefined) => {
   if (typeof number !== 'number') return number;
   return `${number.toLocaleString('en-IN')}/-`;
 };

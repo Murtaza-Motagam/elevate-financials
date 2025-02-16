@@ -4,58 +4,43 @@ import { Button } from '@/components/ui/button';
 import { dateTimeDisplay, formatWithCommas, getUserInfo } from '@/lib/common';
 import { backendUrlPreview } from '@/lib/constant';
 import LazyLoadImg from '@/widgets/LazyLoadImg';
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Calendar,
-  CircleCheck,
   CircleCheckBig,
   CircleUser,
   CircleX,
   EditIcon,
   IndianRupee,
+  Hash,
+  Landmark,
+  ShieldCheck,
+  Download,
 } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import ProfileImage from './Modals/ProfileImage';
-import RollLoader from '@/shared/Loaders/RollLoader';
-import DefaultButton from '@/widgets/DefaultButton';
 import EditProfile from './Modals/EditProfile';
+import AccountTabs from './AccountTabs';
 
 const checkForAccStatus = (accStatus: string) => {
-  if (accStatus) {
-    if (accStatus === 'active') {
-      return (
-        <span className='flex items-center gap-x-2 font-bold'>
-          <CircleCheckBig className='text-[#198754]' />
-          Active
-        </span>
-      );
-    } else {
-      return (
-        <span className='flex items-center gap-x-2 font-bold'>
-          <CircleX className='text-red-600' />
-          Not Active
-        </span>
-      );
-    }
-  } else {
-    return '';
+  if (accStatus === 'active') {
+    return (
+      <span className='flex items-center gap-x-2 text-green-500 font-semibold'>
+        Active
+      </span>
+    );
   }
+  return (
+    <span className='flex items-center gap-x-2 text-red-500 font-semibold'>
+      Not Active
+    </span>
+  );
 };
 
 const MyAccounts = () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [userInfo, setUserInfo] = useState<any>();
   const [open, setOpen] = useState<boolean>(false);
   const [editProfile, setEditProfile] = useState<boolean>(false);
-  const [balanceLoader, setBalanceLoader] = useState<boolean>(false);
-  const [userBalance, setUserBalance] = useState(null);
-
-  const ShowBalance = () => {
-    setBalanceLoader(true);
-    setTimeout(() => {
-      setUserBalance(userInfo?.accountDetails?.balance || 'N/A');
-      setBalanceLoader(false);
-    }, 2000);
-  };
 
   const fetchUserInfo = async () => {
     const userData = await getUserInfo();
@@ -66,18 +51,44 @@ const MyAccounts = () => {
     fetchUserInfo();
   }, []);
 
+  const accInfo = {
+    balance: userInfo?.accountDetails?.balance,
+    accNumber: userInfo?.accountDetails?.accountNumber
+  }
+
   return (
-    <div className='w-full mx-4 pr-4'>
-      <h1 className='border-b border-gray-400 pb-2 font-semibold text-lg md:text-xl'>
-        Account Overview
-      </h1>
-      <div className='mt-6 bg-[#EFEFEF] dark:bg-gray-900 rounded-lg shadow-lg p-6 flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6'>
+    <div className='w-full overflow-y-scroll mx-4 pr-4'>
+      {/* Account Overview */}
+      <Card className="bg-primary text-white p-6 rounded-2xl shadow-lg">
+        <CardContent className="flex justify-between items-center">
+          <div>
+            <p className="text-lg">Account Balance</p>
+            <h2 className="text-3xl font-bold">${formatWithCommas(userInfo?.accountDetails?.balance)}</h2>
+            <p className="text-sm mt-1">Account N/O • <span className='italic'>{userInfo?.accountDetails?.accountNumber}</span></p>
+          </div>
+          <Button className="bg-white text-primary hover:bg-transparent hover:border hover:border-white hover:text-white mt-6">
+            View statements <Download className="ml-2 h-4 w-4" />
+          </Button>
+        </CardContent>
+      </Card>
+      <div className='border-b border-gray-400 pb-3 mt-5 font-bold flex items-center justify-between text-xl text-gray-800 dark:text-white'>
+        <span>Profile Details</span>
+        <Button
+          variant='outline'
+          onClick={() => setEditProfile(true)}
+          className='hover:bg-primary hover:text-white rounded-full p-2'
+        >
+          <EditIcon />
+        </Button>
+      </div>
+
+      <div className='mt-6 bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8'>
         {/* Profile Image */}
-        <div className='relative w-32 h-32 rounded-full shadow-md shadow-gray-400 overflow-hidden'>
+        <div className='relative w-36 h-36 rounded-full shadow-md overflow-hidden border-2 border-gray-300 dark:border-gray-700'>
           {userInfo?.documentDetails?.profileImg ? (
             <LazyLoadImg
               src={`${backendUrlPreview}/${userInfo?.documentDetails?.profileImg}`}
-              className='w-full h-full object-contain'
+              className='w-full h-full object-cover'
             />
           ) : (
             <TextToImage
@@ -86,139 +97,67 @@ const MyAccounts = () => {
             />
           )}
           {userInfo?.documentDetails?.profileImg && (
-            <div className='absolute inset-0 hover:bg-gray-200 hover:bg-opacity-60 flex items-center justify-center group-hover:opacity-50 transition-opacity pointer-events-none'>
-              <button
-                className='w-full h-full flex items-center justify-center pointer-events-auto'
-                aria-label='View Profile Image'
-                onClick={() => setOpen(true)} // Trigger modal on click
-              ></button>
-            </div>
+            <button
+              className='absolute inset-0 bg-black bg-opacity-40 hover:bg-opacity-60 flex items-center justify-center transition-opacity'
+              aria-label='View Profile Image'
+              onClick={() => setOpen(true)}
+            />
           )}
         </div>
 
         {/* Profile Details */}
-        <div className='flex-1'>
-          <div className='grid grid-cols-1 text-center md:text-left md:grid-cols-2 gap-4'>
-            <div>
-              <h2 className='text-sm font-medium text-gray-500'>Full Name: </h2>
-              <p className='text-lg font-semibold dark:text-gray-50'>{`${userInfo?.personalDetails?.firstName || '-'} ${userInfo?.personalDetails?.lastName || '-'}`}</p>
-            </div>
-            <div>
-              <h2 className='text-sm font-medium text-gray-500'>Username: </h2>
-              <p className='text-lg font-semibold dark:text-gray-50'>
-                {userInfo?.authentication?.username || '-'}
-              </p>
-            </div>
-            <div>
-              <h2 className='text-sm font-medium text-gray-500'>Account Type: </h2>
-              <p className='text-lg font-semibold dark:text-gray-50'>
-                {userInfo?.accountDetails?.accountType || '-'}
-              </p>
-            </div>
-            <div>
-              <h2 className='text-sm font-medium text-gray-500'>Email: </h2>
-              <p className='text-lg font-semibold dark:text-gray-50'>
-                {userInfo?.personalDetails?.email || '-'}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Edit Button */}
-        <div className='w-full md:w-fit'>
-          <div className='hidden md:block'>
-            <Button
-              variant='outline'
-              onClick={() => setEditProfile(true)}
-              className='hover:bg-primary hover:text-white rounded-full p-2'
-            >
-              <EditIcon />
-            </Button>
-          </div>
-          <div className='my-2 md:hidden'>
-            <Button variant='outline' className='!w-full hover:bg-primary hover:text-white p-2'>
-              <EditIcon />
-              Edit Profile
-            </Button>
+        <div className='flex-1 w-full'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+            {[
+              { label: 'Full name', value: `${userInfo?.personalDetails?.firstName || '-'} ${userInfo?.personalDetails?.lastName || '-'}`, icon: <CircleUser /> },
+              { label: 'Username', value: userInfo?.authentication?.username || '-', icon: <Hash /> },
+              { label: 'Account type', value: userInfo?.accountDetails?.accountType || '-', icon: <Landmark /> },
+              { label: 'Email', value: userInfo?.personalDetails?.email || '-', icon: <ShieldCheck /> },
+            ].map(({ label, value, icon }) => (
+              <div key={label} className='flex items-center space-x-3'>
+                <span className='text-primary dark:text-white'>{icon}</span>
+                <div>
+                  <h2 className='text-sm font-medium text-gray-500'>{label}:</h2>
+                  <p className='text-lg font-semibold dark:text-gray-100'>{value}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
-      <div className='w-full mx-4 mt-8 pr-4'>
-        <h1 className='border-b border-gray-400 pb-2 flex items-centerr justify-between font-semibold text-lg md:text-xl'>
-          <span>Banking Details</span>
-          <DefaultButton
-            icon={balanceLoader ? <RollLoader /> : <IndianRupee />}
-            title={
-              balanceLoader
-                ? 'Please wait...'
-                : userBalance !== null
-                  ? `${formatWithCommas(userBalance)}`
-                  : 'Show Balance'
-            }
-            className={`text-center ${userBalance !== null && 'text-lg'}`}
-            onClick={ShowBalance}
-            loading={balanceLoader}
-          />
+      {/* Banking Details */}
+      <div className='w-full mt-8 mb-4'>
+        <h1 className='border-b border-gray-400 pb-3 font-bold text-xl text-gray-800 dark:text-white'>
+          Banking Details
         </h1>
 
-        <div className='w-full p-2 mt-3 md:mt-0 md:p-6 shadow-md rounded-lg'>
-          {/* Details Grid */}
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-            {/* Account Number */}
-            <div className='flex items-center justify-between p-4 rounded-lg border'>
-              <p className='font-medium flex items-center gap-x-2 text-gray-600 dark:text-gray-400'>
-                <CircleUser size={20} className='text-primary' />
-                Account Number:
-              </p>
-              <span className='font-bold'>{userInfo?.accountDetails?.accountNumber || '-'}</span>
+        <div className='w-full mt-4 grid grid-cols-1 md:grid-cols-2 gap-4'>
+          {[
+            { label: 'Account Number', value: userInfo?.accountDetails?.accountNumber || '-', icon: <Hash /> },
+            { label: 'CRN Number', value: userInfo?.accountDetails?.crnNumber || '-', icon: <Landmark /> },
+            { label: 'IFSC Code', value: userInfo?.accountDetails?.ifscCode || '-', icon: <ShieldCheck /> },
+            { label: 'Account Status', value: checkForAccStatus(userInfo?.status), icon: <CircleCheckBig /> },
+            { label: 'Created On', value: dateTimeDisplay(userInfo?.accountDetails?.createdAt) || '-', icon: <Calendar /> },
+          ].map(({ label, value, icon }) => (
+            <div key={label} className='p-4 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm flex items-center space-x-3'>
+              <span className='text-primary dark:text-white'>{icon}</span>
+              <div>
+                <p className='text-gray-600 dark:text-gray-400 font-medium'>{label}:</p>
+                <span className='font-bold text-gray-800 dark:text-gray-100'>{value}</span>
+              </div>
             </div>
-
-            {/* CRN Number */}
-            <div className='flex items-center justify-between p-4 rounded-lg border'>
-              <p className='font-medium flex items-center gap-x-2 text-gray-600 dark:text-gray-400'>
-                <CircleUser size={20} className='text-primary' />
-                CRN Number:
-              </p>
-              <span className='font-bold'>{userInfo?.accountDetails?.crnNumber || '-'}</span>
-            </div>
-
-            {/* IFSC Code */}
-            <div className='flex items-center justify-between p-4 rounded-lg border'>
-              <p className='font-medium flex items-center gap-x-2 text-gray-600 dark:text-gray-400'>
-                <CircleUser size={20} className='text-primary' />
-                IFSC Code:
-              </p>
-              <span className='font-bold'>{userInfo?.accountDetails?.ifscCode || '-'}</span>
-            </div>
-
-            {/* Account Status */}
-            <div className='flex items-center justify-between p-4 rounded-lg border'>
-              <p className='font-medium flex items-center gap-x-2 text-gray-600 dark:text-gray-400'>
-                <CircleCheck size={20} className='text-primary' />
-                Account Status:
-              </p>
-              {checkForAccStatus(userInfo?.status)}
-            </div>
-
-            {/* Account Created Date */}
-            <div className='flex items-center justify-between p-4 rounded-lg border'>
-              <p className='font-medium flex items-center gap-x-2 text-gray-600 dark:text-gray-400'>
-                <Calendar size={20} className='text-primary' />
-                Created On:
-              </p>
-              <span className='font-bold'>
-                {dateTimeDisplay(userInfo?.accountDetails?.createdAt) || '-'}
-              </span>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
+      <AccountTabs accInfo={accInfo} />
+
+      {/* Modals */}
       {/* Profile Image modal */}
       <ProfileImage userInfo={userInfo} open={open} setOpen={setOpen} />
       <EditProfile open={editProfile} setOpen={setEditProfile} fetchUserInfo={fetchUserInfo} />
-    </div>
+    </div >
   );
 };
 

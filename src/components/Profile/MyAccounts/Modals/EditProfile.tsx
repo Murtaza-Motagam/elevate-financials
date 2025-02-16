@@ -17,8 +17,8 @@ interface EditProfileProps {
 
 const EditProfile: React.FC<EditProfileProps> = ({
   open,
-  setOpen = () => {},
-  fetchUserInfo = () => {},
+  setOpen = () => { },
+  fetchUserInfo = () => { },
 }) => {
   const closeModal = () => {
     setOpen(false);
@@ -69,7 +69,7 @@ const EditProfile: React.FC<EditProfileProps> = ({
             <DefaultButton
               icon={loading && <RollLoader />}
               type='submit'
-              title={!loading ? 'Submit' : 'Processing'}
+              title={!loading ? 'Update' : 'Processing'}
               onClick={hookform.handleSubmit(onSubmit)}
               loading={loading}
             />

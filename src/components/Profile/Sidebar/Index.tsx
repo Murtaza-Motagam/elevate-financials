@@ -14,9 +14,9 @@ import SettingModal from './Modals/SettingModal';
 
 const ProfileSidebar = ({
   selectedTab,
-  setSelectedTab = () => {},
-  setLoading = () => {},
-  handleClose = () => {},
+  setSelectedTab = () => { },
+  setLoading = () => { },
+  handleClose = () => { },
   onSmallDv = false,
 }: {
   selectedTab?: number;
@@ -74,7 +74,7 @@ const ProfileSidebar = ({
       <div className={`${!onSmallDv && 'h-[73vh]'}`}>
         {sidebarLinks.map((category, categoryIndex) => (
           <div key={categoryIndex} className='w-full mt-5 pl-3'>
-            <h1 className='text-xs text-gray-400 dark:text-gray-400'>{category.category}</h1>
+            <h1 className='text-xs text-gray-600 dark:text-gray-400'>{category.category}</h1>
             <div className='w-full links flex flex-col mt-2 space-y-1'>
               {category.links.map((link, linkIndex) => {
                 // Calculate unique index for each link in the flat structure

@@ -145,8 +145,21 @@ const MyAccounts = () => {
       </div>
 
       <div className='w-full mx-4 mt-8 pr-4'>
-        <h1 className='border-b border-gray-400 pb-2 font-semibold text-lg md:text-xl'>
-          Banking Details
+        <h1 className='border-b border-gray-400 pb-2 flex items-centerr justify-between font-semibold text-lg md:text-xl'>
+          <span>Banking Details</span>
+          <DefaultButton
+            icon={balanceLoader ? <RollLoader /> : <IndianRupee />}
+            title={
+              balanceLoader
+                ? 'Please wait...'
+                : userBalance !== null
+                  ? `${formatWithCommas(userBalance)}`
+                  : 'Show Balance'
+            }
+            className={`text-center ${userBalance !== null && 'text-lg'}`}
+            onClick={ShowBalance}
+            loading={balanceLoader}
+          />
         </h1>
 
         <div className='w-full p-2 mt-3 md:mt-0 md:p-6 shadow-md rounded-lg'>
@@ -198,23 +211,6 @@ const MyAccounts = () => {
                 {dateTimeDisplay(userInfo?.accountDetails?.createdAt) || '-'}
               </span>
             </div>
-          </div>
-
-          {/* Show Balance Button */}
-          <div className='mt-6 flex justify-end'>
-            <DefaultButton
-              icon={balanceLoader ? <RollLoader /> : <IndianRupee />}
-              title={
-                balanceLoader
-                  ? 'Please wait...'
-                  : userBalance !== null
-                    ? `${formatWithCommas(userBalance)}`
-                    : 'Show Balance'
-              }
-              className={`text-center ${userBalance !== null && 'text-lg'}`}
-              onClick={ShowBalance}
-              loading={balanceLoader}
-            />
           </div>
         </div>
       </div>

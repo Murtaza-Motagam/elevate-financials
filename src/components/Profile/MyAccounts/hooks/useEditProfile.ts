@@ -32,8 +32,8 @@ interface apiRequestProps {
 
 const useEditProfile = ({
   open = false,
-  closeModal = () => {},
-  fetchUserInfo = () => {},
+  closeModal = () => { },
+  fetchUserInfo = () => { },
 }: {
   open: boolean;
   closeModal: () => void;
@@ -78,7 +78,7 @@ const useEditProfile = ({
       const resData = response.user;
       if (response.success) {
         showToast(response?.message);
-        await axios.post('/api/updateUser', {
+        await axios.put('/api/user', {
           user: {
             id: resData?._id,
             profileImg: resData?.documentDetails?.profileImg,

@@ -14,12 +14,14 @@ import { useSearchParams } from 'next/navigation';
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from '../ui/sheet';
 import { PanelRight } from 'lucide-react';
 import Transactions from './Transactions/Index';
+import ContactSupport from './ContactSupport';
 
 // Components map
 const componentsMap: Record<string, React.ReactNode> = {
   Dashboard: <Dashboard />,
   'My Account': <MyAccounts />,
   Transactions: <Transactions />,
+  'Contact Support': <ContactSupport />,
 };
 
 const Profile = () => {

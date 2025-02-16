@@ -59,14 +59,14 @@ const MyAccounts = () => {
   return (
     <div className='w-full overflow-y-scroll mx-4 pr-4'>
       {/* Account Overview */}
-      <Card className="bg-primary text-white p-6 rounded-2xl shadow-lg">
-        <CardContent className="flex justify-between items-center">
+      <Card className="bg-gradient-to-r from-primary to-bg-primary-70 shadow-md shadow-gray-500 text-white p-6 rounded-lg">
+        <CardContent className="flex md:justify-between justify-center flex-col md:flex-row items-center">
           <div>
-            <p className="text-lg">Account Balance</p>
+            <p className="text-lg">Current balance</p>
             <h2 className="text-3xl font-bold">${formatWithCommas(userInfo?.accountDetails?.balance)}</h2>
             <p className="text-sm mt-1">Account N/O • <span className='italic'>{userInfo?.accountDetails?.accountNumber}</span></p>
           </div>
-          <Button className="bg-white text-primary hover:bg-transparent hover:border hover:border-white hover:text-white mt-6">
+          <Button className="dark:bg-white text-white dark:text-primary dark:hover:bg-transparent dark:hover:border dark:hover:border-white dark:hover:text-white mt-6">
             View statements <Download className="ml-2 h-4 w-4" />
           </Button>
         </CardContent>

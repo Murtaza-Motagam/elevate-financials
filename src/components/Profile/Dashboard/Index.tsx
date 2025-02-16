@@ -69,61 +69,42 @@ const Dashboard = () => {
       <h1 className='border-b border-gray-400 pb-2 font-semibold text-lg md:text-xl uppercase'>
         Accounts Dashboard
       </h1>
-      <div className='w-full grid grid-cols-3 gap-4 p-4'>
-        <Chart
-          chartTitle='Account Overview'
-          chartDesc='January - November 2024'
-          chartFooterHead='Trending up by 5.2% this month'
-          chartFooterSubHead='Showing total balance graph of last 11 months'
-          config={chartConfigAccOverview}
-        >
-          <LineChart
-            accessibilityLayer
-            data={accOverviewData}
-            margin={{
-              left: 12,
-              right: 12,
-            }}
+      <div className='w-full grid grid-cols-4 gap-4 pr-5 py-2 h-full'>
+        <div className="col-span-2 h-full">
+          <Chart
+            chartTitle='Account Overview'
+            chartDesc='January - November 2024'
+            chartFooterHead='Trending up by 5.2% this month'
+            chartFooterSubHead='Showing total balance graph of last 11 months'
+            config={chartConfigAccOverview}
           >
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey='month'
-              tickLine={false}
-              axisLine={false}
-              tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 3)}
-            />
-            <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-            <Line
-              dataKey='balance'
-              type='natural'
-              stroke='var(--color-desktop)'
-              strokeWidth={2}
-              dot={false}
-            />
-          </LineChart>
-        </Chart>
-
-        <Chart
-          chartTitle='Debit/Credit Transaction History'
-          chartDesc='January - November 2024'
-          chartFooterHead='Credit transactions increased by 5% this month'
-          chartFooterSubHead=' Showing debit/credit transactions of last 11 months'
-          config={chartConfigDtCt}
-        >
-          <PieChart>
-            <ChartTooltip content={<ChartTooltipContent nameKey='transactionType' hideLabel />} />
-            <Pie data={chartDataDtCt} dataKey='transactions' nameKey='transactionType'>
-              <LabelList
-                dataKey='transactionType'
-                className='fill-background'
-                stroke='none'
-                fontSize={12}
-                formatter={(value: keyof typeof chartConfigDtCt) => chartConfigDtCt[value]?.label}
+            <LineChart
+              accessibilityLayer
+              data={accOverviewData}
+              margin={{
+                left: 12,
+                right: 12,
+              }}
+            >
+              <CartesianGrid vertical={false} />
+              <XAxis
+                dataKey='month'
+                tickLine={false}
+                axisLine={false}
+                tickMargin={8}
+                tickFormatter={(value) => value.slice(0, 3)}
               />
-            </Pie>
-          </PieChart>
-        </Chart>
+              <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
+              <Line
+                dataKey='balance'
+                type='natural'
+                stroke='var(--color-desktop)'
+                strokeWidth={2}
+                dot={false}
+              />
+            </LineChart>
+          </Chart>
+        </div>
 
         <Chart
           chartTitle='Account Transaction History'
@@ -167,6 +148,29 @@ const Dashboard = () => {
             />
           </AreaChart>
         </Chart>
+
+        <div className="h-full">
+          <Chart
+            chartTitle='Debit/Credit Transaction History'
+            chartDesc='January - November 2024'
+            chartFooterHead='Credit transactions increased by 5% this month'
+            chartFooterSubHead=' Showing debit/credit transactions of last 11 months'
+            config={chartConfigDtCt}
+          >
+            <PieChart>
+              <ChartTooltip content={<ChartTooltipContent nameKey='transactionType' hideLabel />} />
+              <Pie data={chartDataDtCt} dataKey='transactions' nameKey='transactionType'>
+                <LabelList
+                  dataKey='transactionType'
+                  className='fill-background'
+                  stroke='none'
+                  fontSize={12}
+                  formatter={(value: keyof typeof chartConfigDtCt) => chartConfigDtCt[value]?.label}
+                />
+              </Pie>
+            </PieChart>
+          </Chart>
+        </div>
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ import { LocalStorage } from '@/lib/localStorage';
 import TextToImage from '@/components/common/TextToImage';
 import { Ellipsis } from 'lucide-react';
 import SettingModal from './Modals/SettingModal';
+import { useUser } from '@/context/UserContext';
 
 const ProfileSidebar = ({
   selectedTab,
@@ -26,13 +27,11 @@ const ProfileSidebar = ({
   onSmallDv?: boolean;
 }) => {
   const router = useRouter();
-  const url = `${backendUrl}/user/get-user`;
-  const checkForModule = LocalStorage.getJSON('authDetails');
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [user, setUser] = useState<any>({});
   const [userLoad, setUserLoad] = useState<boolean>(true);
   const [open, setOpen] = useState<boolean>(false);
-  const [fullName, setFullName] = useState<string>('');
+  const { mainUser, contextLoading } = useUser();
 
   const handleTab = (tabIndex: number) => {
     handleClose();
@@ -42,34 +41,19 @@ const ProfileSidebar = ({
   };
 
   const getUserInfo = async () => {
-    try {
-      const response = await axios({
-        url,
-        method: 'get',
-        headers: {
-          Authorization: checkForModule?.token,
-        },
-      });
-      const resData = response.data;
-      setUser(resData?.details || '');
-      setFullName(
-        `${resData?.details?.personalDetails?.firstName} ${resData?.details?.personalDetails?.lastName}`,
-      );
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setUserLoad(false);
-    }
+    setUserLoad(true);
+    setUser(mainUser || '');
+    setUserLoad(false);
   };
 
   useEffect(() => {
     getUserInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [mainUser, contextLoading]);
 
   return (
     <div
-      className={`${onSmallDv ? 'w-full' : ' max-w-[250px] border-r border-gray-300 dark:border-gray-800'} py-1`}
+      className={`${onSmallDv ? 'w-full' : '!max-w-[250px] border-r border-gray-300 dark:border-gray-800'} w-full md:fixed md:w-[240px] md:left-0 py-1`}
     >
       <div className={`${!onSmallDv && 'h-[73vh]'}`}>
         {sidebarLinks.map((category, categoryIndex) => (
@@ -87,7 +71,7 @@ const ProfileSidebar = ({
                   <div
                     key={linkIndex}
                     onClick={() => handleTab(tabIndex)}
-                    className={`flex text-sm items-center gap-x-1 p-2 mr-2 cursor-pointer text-gray-700 dark:text-gray-200 hover:bg-primary hover:text-white transition ease-out duration-500 rounded-[6px] ${getActiveClassSidebar(selectedTab, tabIndex)}`}
+                    className={`flex text-sm items-center gap-x-1 p-2 mr-2 cursor-pointer text-black dark:text-gray-200 hover:bg-primary hover:text-white transition ease-out duration-500 rounded-[6px] ${getActiveClassSidebar(selectedTab, tabIndex)}`}
                   >
                     <link.icon size={16} />
                     <span>{link.name}</span>
@@ -102,21 +86,21 @@ const ProfileSidebar = ({
         <div
           className={`w-full flex items-start justify-start ${onSmallDv ? 'mt-20' : 'mt-5'} gap-x-3 border-t pl-2 pb-5 border-gray-500 pt-2 overflow-hidden`}
         >
-          {user?.documentDetails?.profileImg ? (
+          {user?.profileImg ? (
             <LazyLoadImg
-              src={`${backendUrlPreview}/${user?.documentDetails?.profileImg}`}
+              src={`${backendUrlPreview}/${user?.profileImg}`}
               className='w-10 h-10 object-contain rounded-full mt-1 border-2 border-gray-800 dark:border-white'
             />
           ) : (
             <TextToImage
-              nameText={fullName}
+              nameText={user?.name}
               className='rounded-full text-lg mt-1 w-10 h-10 border-2 border-gray-800 dark:border-white'
             />
           )}
           <div className='flex flex-col'>
             <div className='flex items-center justify-between'>
               <h1 className='text-sm text-black dark:text-gray-200'>
-                {fullName?.length <= 20 ? fullName : `${fullName?.substring(0, 20)}...`}
+                {user?.name?.length <= 20 ? user?.name : `${user?.name?.substring(0, 20)}...`}
               </h1>
               <Ellipsis
                 onClick={() => setOpen(true)}
@@ -125,7 +109,7 @@ const ProfileSidebar = ({
               />
             </div>
             <p className='text-[12px] text-gray-600 dark:text-gray-400 truncate overflow-hidden text-ellipsis whitespace-nowrap'>
-              {user?.personalDetails?.email}
+              {user?.email}
             </p>
           </div>
         </div>

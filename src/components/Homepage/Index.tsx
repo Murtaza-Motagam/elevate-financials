@@ -3,7 +3,9 @@ import React from 'react';
 import Image from 'next/image';
 import LayoutWrapper from '@/shared/wrapper/LayoutWrapper';
 import DefaultButton from '@/widgets/DefaultButton';
+import { motion } from "framer-motion";
 import ImgSlider from '@/widgets/ImgSlider';
+import { Button } from '../ui/button';
 
 const sliderData = [
   { name: 'Visa', src: '/images/visa_logo.png' },
@@ -19,7 +21,48 @@ const Home = () => {
   return (
     <LayoutWrapper>
       <div className='mainHome'>
-        {/* Component 1 */}
+
+        {/* Hero */}
+        <section className="relative w-full h-[90vh] flex items-center justify-center px-6 md:px-12 lg:px-24 bg-gradient-to-b from-purple-900 to-purple-600 text-white">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-7xl w-full">
+            {/* Left Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="flex flex-col justify-center space-y-6"
+            >
+              <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
+                Banking Made <span className="text-blue-500">Simple</span> & Secure
+              </h1>
+              <p className="text-lg md:text-xl text-gray-300 dark:text-gray-300">
+                Open an account in minutes and experience seamless digital banking with high security and smart features.
+              </p>
+              <div className="flex gap-4">
+                <DefaultButton title='Get started' className='bg-white text-black' />
+                <DefaultButton variant='outline' className='text-black' title='Learn more' />
+              </div>
+            </motion.div>
+
+            {/* Right Image */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="flex justify-center"
+            >
+              <Image
+                src="/images/banking-image.svg" // Add your image in public folder
+                alt="Banking App"
+                width={500}
+                height={500}
+                className="w-full max-w-md md:max-w-lg"
+              />
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Component 2 */}
         <section className=''>
           <div className='grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12'>
             <div className='mr-auto place-self-center lg:col-span-7'>
@@ -47,13 +90,14 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Component 2 */}
-        <div className='w-full bg-gray-200 dark:bg-gray-900 shadow-lg p-4'>
+        {/* Component 3 */}
+        <div className='w-full mt-10 shadow-lg p-4'>
           <h1 className='text-2xl  text-center font-bold uppercase text-gray-800 dark:text-white mb-7'>
             Marketing Partners
           </h1>
           <ImgSlider data={sliderData} />
         </div>
+
       </div>
     </LayoutWrapper>
   );

@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Overview from './tabs/Overview';
 import Cards from './tabs/Cards';
 import ChangePassword from './tabs/ChangePassword';
 import { Button } from '@/components/ui/button';
 import { Bell } from 'lucide-react';
+import "react-tabs/style/react-tabs.css"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const account_tabs = {
     overview: 'overview',
@@ -38,28 +39,23 @@ const AccountTabs = ({ accInfo }: AccountTabsProps) => {
             </div>
 
             {/* Tabs for Different Sections */}
-            <Tabs value={selectedTab} onValueChange={setSelectedTab}>
-                <TabsList className="grid grid-cols-4 pl-5 gap-4 rounded-md md:py-6">
-                    <TabsTrigger className='md:-mt-[17.5px] md:py-2' value="overview">Overview</TabsTrigger>
-                    <TabsTrigger className='md:-mt-[17.5px] md:py-2' value="cards">Cards</TabsTrigger>
-                    <TabsTrigger className='md:-mt-[17.5px] md:py-2' value="changePassword">Security</TabsTrigger>
+
+            <Tabs defaultValue={account_tabs.overview} className="w-full !h-[40vh]">
+                <TabsList className='mb-5'>
+                    <TabsTrigger className='md:w-[200px]' value="overview">Overview</TabsTrigger>
+                    <TabsTrigger className='md:w-[200px]' value="cards">Cards</TabsTrigger>
+                    <TabsTrigger className='md:w-[200px]' value="changePassword">Security</TabsTrigger>
                 </TabsList>
-            </Tabs>
-
-            {/* Tab Content */}
-            <div className="mt-6">
-                {selectedTab === account_tabs.overview && (
+                <TabsContent value={account_tabs.overview}>
                     <Overview accInfo={accInfo} />
-                )}
-
-                {selectedTab === account_tabs.cards && (
+                </TabsContent>
+                <TabsContent value={account_tabs.cards}>
                     <Cards accInfo={accInfo} />
-                )}
-
-                {selectedTab === account_tabs.changePassword && (
+                </TabsContent>
+                <TabsContent value={account_tabs.changePassword}>
                     <ChangePassword />
-                )}
-            </div>
+                </TabsContent>
+            </Tabs>
         </div>
     )
 }

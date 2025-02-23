@@ -4,6 +4,7 @@ export const publicRoutes = {
   privacyPolicy: '/privacy-policy',
   helpCenter: '/help-center',
   terms: '/terms',
+  services: '/services',
 };
 
 export const protectedRoutes = {

@@ -93,8 +93,8 @@ const Footer = () => {
         </div>
 
         {/* Copyright Section */}
-        <div className='border-t border-gray-700 mt-8 pt-4 text-center dark:text-gray-400'>
-          © Copyright {new Date().getFullYear()} elevate-financials. All Rights Reserved.
+        <div className='border-t border-gray-700 mt-8 pt-4 text-center'>
+          © Copyright {new Date().getFullYear()} Elevate-financials. All Rights Reserved.
         </div>
       </div>
     </footer>

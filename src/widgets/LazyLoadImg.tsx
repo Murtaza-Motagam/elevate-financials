@@ -5,10 +5,9 @@ interface LazyImgProps {
   alt?: string;
   src: string;
   className?: string;
-  width?: number;
-  height?: number;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  rest?: any;
+  width?: string | number;
+  height?: string | number;
+  [key: string]: any;
 }
 
 const LazyLoadImg: React.FC<LazyImgProps> = ({ alt, src, className, height, width, ...rest }) => {

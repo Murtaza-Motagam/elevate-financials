@@ -21,8 +21,8 @@ export const token = checkForModule.token;
 
 export const navLinks = [
   {
-    name: 'Card',
-    redirectLink: '/card',
+    name: 'Services',
+    redirectLink: '/services',
   },
   {
     name: 'Travel',
@@ -144,3 +144,10 @@ export const sidebarLinks = [
     ],
   },
 ];
+
+export const profile_tabs = {
+  dashboard: 0,
+  accounts: 1,
+  transaction: 2,
+  contact: 7,
+}

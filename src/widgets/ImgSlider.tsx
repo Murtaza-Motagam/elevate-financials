@@ -30,7 +30,7 @@ const ImgSlider: React.FC<SliderProps> = ({ data = [] }) => {
       {data.map((dt, index) => (
         <div key={index} className='keen-slider__slide flex justify-center'>
           <div className='w-36 h-16 flex items-center justify-center'>
-            <Image src={dt.src} alt={dt.name} width={140} height={50} className='object-contain' />
+            <Image src={dt.src} alt={dt.name} fill className='object-contain size-auto' />
           </div>
         </div>
       ))}

@@ -7,28 +7,30 @@ import { motion } from "framer-motion";
 import ImgSlider from '@/widgets/ImgSlider';
 import { Card, CardContent } from '../ui/card';
 import { mainHeroContent, sliderData } from './utils';
+import LazyLoadImg from '@/widgets/LazyLoadImg';
 
 
 const Home = () => {
+
   return (
     <LayoutWrapper>
       <div className='mainHome'>
 
         {/* Hero */}
-        <section className="relative w-full min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 px-6">
+        <section className="relative w-full min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 pb-10 px-6">
           {/* Background Blur Effects */}
           <div className="absolute inset-0 flex justify-center items-center">
-            <div className="w-96 h-96 bg-blue-400 opacity-30 blur-3xl rounded-full"></div>
-            <div className="w-72 h-72 bg-purple-500 opacity-20 blur-[100px] rounded-full absolute top-10 left-20"></div>
+            <div className="w-64 h-64 md:w-96 md:h-96 bg-blue-400 opacity-30 blur-3xl rounded-full"></div>
+            <div className="w-48 h-48 md:w-72 md:h-72 bg-purple-500 opacity-20 blur-[80px] md:blur-[100px] rounded-full absolute top-10 left-10 md:left-20"></div>
           </div>
 
           {/* Content Section */}
-          <div className="relative z-10 flex flex-col items-center text-center">
+          <div className="relative z-10 flex flex-col items-center text-center mt-20 md:m-0 max-w-lg md:max-w-2xl">
             <motion.h1
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 }}
-              className="text-5xl md:text-6xl font-extrabold tracking-tight leading-tight"
+              className="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tight leading-tight"
             >
               Smart & Secure <span className="text-primary">Banking</span>
             </motion.h1>
@@ -36,7 +38,7 @@ const Home = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="mt-4 text-lg md:text-xl dark:text-gray-300 max-w-2xl"
+              className="mt-4 text-base sm:text-lg md:text-xl dark:text-gray-300 max-w-sm sm:max-w-md md:max-w-2xl"
             >
               Experience the future of banking with AI-driven insights, seamless transactions, and top-tier security.
             </motion.p>
@@ -45,32 +47,35 @@ const Home = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="mt-6 flex gap-4"
+              className="mt-6 flex flex-wrap gap-4 justify-center"
             >
-              <DefaultButton title='Get started' className='rounded-full px-7 py-5' />
+              <DefaultButton title="Get started" className="rounded-full px-6 py-3 sm:px-7 sm:py-4" />
             </motion.div>
           </div>
 
           {/* Floating Banking Cards */}
-          <div className="absolute bottom-10 flex gap-6 w-full justify-center">
-            {mainHeroContent.map((hc) => (
-              <motion.div
-                key={hc.name}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.5 }}
-              >
-                <Card className="bg-white/10 border border-white/20 shadow-lg w-72 p-4 text-center">
-                  <CardContent className="flex flex-col items-center">
-                    <hc.icon className={hc.iconClass} />
-                    <h3 className="text-xl dark:text-white font-semibold mt-2">{hc.name}</h3>
-                    <p className="text-gray-700 dark:text-gray-100 text-sm">{hc.content}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+          <div className="md:absolute md:bottom-10 mt-10 w-full px-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:flex gap-6 justify-center">
+              {mainHeroContent.map((hc) => (
+                <motion.div
+                  key={hc.name}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, delay: 0.5 }}
+                >
+                  <Card className="bg-white/10 border border-white/20 shadow-lg w-full max-w-xs p-4 text-center mx-auto">
+                    <CardContent className="flex flex-col items-center">
+                      <hc.icon className={hc.iconClass} />
+                      <h3 className="text-lg sm:text-xl dark:text-white font-semibold mt-2">{hc.name}</h3>
+                      <p className="text-gray-700 dark:text-gray-100 text-sm sm:text-base">{hc.content}</p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
+
 
         {/* Component 1 */}
         <section className="relative w-full h-[90vh] flex items-center justify-center px-6 md:px-12 lg:px-24">
@@ -119,8 +124,8 @@ const Home = () => {
             <motion.div
               whileInView={{ opacity: 1, y: 0 }}
               initial={{ opacity: 0, y: -50 }}
-              transition={{ duration: 0.9, ease: 'easeOut' }}
               viewport={{ once: false, amount: 0.2 }} // Animation triggers every time it enters the viewport
+              transition={{ duration: 0.9, ease: 'easeOut' }}
               className='hidden lg:mt-0 lg:col-span-5 lg:flex'
             >
               <Image
@@ -160,6 +165,44 @@ const Home = () => {
           </h1>
           <ImgSlider data={sliderData} />
         </div>
+
+        {/* Component - 4 */}
+        <section
+          className="relative flex items-center justify-center my-5 md:my-20 h-[90vh] w-full px-6 md:px-12 lg:px-24 overflow-hidden"
+        >
+          {/* Background Vector Image */}
+          <div className="absolute inset-0">
+            <LazyLoadImg
+              src="images/digital-transaction.svg"
+              alt="Background"
+              className="w-full h-full object-contain opacity-70"
+            />
+          </div>
+
+          <div className="relative z-10 max-w-4xl text-center">
+            {/* Animated Title with Popup Effect */}
+            <motion.h1
+              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: false, amount: 0.5 }}
+              className="text-5xl md:text-7xl font-extrabold leading-tight"
+            >
+              The Future of <span className="text-primary">Digital Banking</span>
+            </motion.h1>
+
+            {/* Animated Subtitle with Popup Effect */}
+            <motion.p
+              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+              viewport={{ once: false, amount: 0.5 }}
+              className="mt-6 text-lg md:text-xl text-black dark:text-gray-300"
+            >
+              Secure. Seamless. Smart. Elevate your financial experience with our innovative banking solutions tailored for the modern era.
+            </motion.p>
+          </div>
+        </section>
 
       </div>
     </LayoutWrapper>

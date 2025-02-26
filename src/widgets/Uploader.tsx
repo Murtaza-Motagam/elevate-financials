@@ -33,7 +33,7 @@ const Uploader = <T extends FieldValues>({
   setError,
   mandatory,
   accept = { 'image/*': [] },
-  maxSize = 5 * 1024 * 1024, // 5 MB limit
+  maxSize = 15 * 1024 * 1024, // 5 MB limit
 }: FileUploadProps<T>) => {
   const [preview, setPreview] = useState<string | null>(img); // Image preview state
   const [uploading, setUploading] = useState<boolean>(false); // Uploading state

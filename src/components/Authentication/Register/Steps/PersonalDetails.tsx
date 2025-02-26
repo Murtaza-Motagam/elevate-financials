@@ -20,7 +20,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({ onNext }) => {
       className='grid grid-cols-1 md:grid-cols-2 gap-5'
     >
       <InputField
-        label='First Name'
+        label='First name'
         rest={hookform.register('firstName')}
         placeholder='Enter your first name'
         type='text'
@@ -28,7 +28,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({ onNext }) => {
         mandatory
       />
       <InputField
-        label='Last Name'
+        label='Last name'
         rest={hookform.register('lastName')}
         placeholder='Enter your last name'
         type='text'
@@ -47,7 +47,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({ onNext }) => {
       </div>
       <div className='md:col-span-2'>
         <InputField
-          label='Mobile Number'
+          label='Mobile number'
           rest={hookform.register('mobNo')}
           placeholder='Enter your mobile number'
           type='number'
@@ -66,7 +66,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({ onNext }) => {
       />
       <DatePicker
         name='dob'
-        label='Date of Birth'
+        label='Date of birth'
         control={hookform.control}
         placeholder='Select Date of Birth'
         error={hookform.errors?.dob?.message}

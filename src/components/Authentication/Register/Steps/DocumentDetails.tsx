@@ -11,7 +11,7 @@ interface DocumentDetailsProps {
   onNext?: () => void;
 }
 
-const DocumentDetails: React.FC<DocumentDetailsProps> = ({ onNext = () => {} }) => {
+const DocumentDetails: React.FC<DocumentDetailsProps> = ({ onNext = () => { } }) => {
   const { hookform, onSubmitDocumentDetails, loading } = useDocumentDetails({ onNext });
 
   return (
@@ -37,7 +37,7 @@ const DocumentDetails: React.FC<DocumentDetailsProps> = ({ onNext = () => {} }) 
       />
       <div className='md:col-span-2'>
         <InputField
-          label='Driving Licence'
+          label='Driving licence'
           rest={hookform.register('driverLicence')}
           placeholder='Enter your driving licence number'
           type='number'
@@ -47,7 +47,7 @@ const DocumentDetails: React.FC<DocumentDetailsProps> = ({ onNext = () => {} }) 
         <SingleSelect
           name='addressProofType'
           control={hookform.control}
-          label='Address Proof Type'
+          label='Address proof type'
           placeholder='Select your address proof type'
           options={addressProofOptions}
           dropdownClasses='md:w-[330px]'
@@ -60,7 +60,7 @@ const DocumentDetails: React.FC<DocumentDetailsProps> = ({ onNext = () => {} }) 
         setImg={(url = '') => hookform.setValue('profileImg', url || '')}
         clearErrors={hookform.clearErrors}
         setError={hookform.setError}
-        label='Upload Profile Image'
+        label='Profile image'
       />
       {hookform.watch('addressProofType') && (
         <Uploader

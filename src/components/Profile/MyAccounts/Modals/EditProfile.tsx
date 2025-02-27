@@ -42,7 +42,7 @@ const EditProfile: React.FC<EditProfileProps> = ({
             setImg={(url = '') => hookform.setValue('profileImg', url || '')}
             clearErrors={hookform.clearErrors}
             setError={hookform.setError}
-            label='Upload Profile Image'
+            label='Upload profile image'
           />
           <InputField
             label='Username'

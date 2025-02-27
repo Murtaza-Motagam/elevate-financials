@@ -3,12 +3,15 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useDropzone, Accept } from 'react-dropzone';
 import LazyLoadImg from './LazyLoadImg';
 import Cropper from 'react-cropper';
+import { showToast } from '@/lib/common';
 import 'cropperjs/dist/cropper.css'; // Import Cropper styles
 import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'; // ShadCN Modal components
 import axios from 'axios';
 import { backendUrlPreview, backendUrlUpload } from '@/lib/constant';
 import { FieldValues, UseFormClearErrors, UseFormSetError, Path } from 'react-hook-form';
+import DefaultButton from './DefaultButton';
+import RollLoader from '@/shared/Loaders/RollLoader';
 
 interface FileUploadProps<T extends FieldValues> {
   name: Path<T>;
@@ -33,13 +36,13 @@ const Uploader = <T extends FieldValues>({
   setError,
   mandatory,
   accept = { 'image/*': [] },
-  maxSize = 15 * 1024 * 1024, // 5 MB limit
+  maxSize = 15 * 1024 * 1024, // 15 MB limit
 }: FileUploadProps<T>) => {
   const [preview, setPreview] = useState<string | null>(img); // Image preview state
   const [uploading, setUploading] = useState<boolean>(false); // Uploading state
   const [error, setErrorState] = useState<string | null>(null); // Error state
   const [showCropperModal, setShowCropperModal] = useState<boolean>(false); // Modal visibility state
-  const cropperRef = useRef<HTMLImageElement>(null); // Reference for the Cropper
+  const cropperRef = useRef<HTMLImageElement | null>(null); // Reference for the Cropper
 
   const handleDrop = useCallback((acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
@@ -58,6 +61,7 @@ const Uploader = <T extends FieldValues>({
   });
 
   const handleCrop = async () => {
+    setUploading(true); // Start uploading
     if (cropperRef.current) {
       const croppedCanvas = cropperRef.current.cropper.getCroppedCanvas();
       if (croppedCanvas) {
@@ -67,7 +71,6 @@ const Uploader = <T extends FieldValues>({
 
         // Upload cropped image
         try {
-          setUploading(true); // Start uploading
           const blob = await (await fetch(croppedImage)).blob(); // Convert Base64 to Blob
           const formData = new FormData();
           formData.append('image', blob, 'cropped-image.png');
@@ -82,6 +85,7 @@ const Uploader = <T extends FieldValues>({
             setImg(resData?.data?.path); // Update img state with the uploaded file path
             clearErrors(name); // Clear any errors for this field
           } else {
+            showToast(resData?.message, 'error')
             setError(name, {
               type: 'manual',
               message: 'Failed to upload the image. Please try again.',
@@ -111,6 +115,16 @@ const Uploader = <T extends FieldValues>({
       setPreview(img); // Update preview when img prop changes
     }
   }, [img]);
+
+  // Handle file rejection to prevent infinite toast loop
+  useEffect(() => {
+    if (fileRejections.length > 0) {
+      showToast('File is too large or not a valid type.', 'error');
+    }
+    if (error) {
+      showToast(error, 'error');
+    }
+  }, [fileRejections, error]);
 
   return (
     <div className='space-y-2'>
@@ -148,16 +162,9 @@ const Uploader = <T extends FieldValues>({
           </div>
         )}
 
-        {/* Uploading State */}
         {uploading && (
           <p className='text-blue-600 font-semibold text-base uppercase'>Uploading...</p>
         )}
-
-        {/* Error State */}
-        {fileRejections.length > 0 && (
-          <p className='text-red-600 text-sm mt-2'>File is too large or not a valid type.</p>
-        )}
-        {error && <p className='text-red-600 text-sm mt-2'>{error}</p>}
       </div>
 
       {/* ShadCN Modal for Cropping */}
@@ -176,13 +183,14 @@ const Uploader = <T extends FieldValues>({
               ref={cropperRef}
             />
           )}
-          <button
+          {/* <button
             type='button'
             onClick={handleCrop}
             className='mt-4 px-4 py-2 bg-primary text-white rounded'
           >
             Crop & Upload
-          </button>
+          </button> */}
+          <DefaultButton onClick={handleCrop} loading={uploading} icon={uploading && <RollLoader />} title={uploading ? 'Uploading...' : 'Crop & upload'} />
         </DialogContent>
       </Dialog>
     </div>

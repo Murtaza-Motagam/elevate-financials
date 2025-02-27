@@ -49,16 +49,8 @@ const Register = () => {
                 </h2>
                 <p className='text-xs mb-3'>Enter to get tons of rewards and cashbacks.</p>
               </div>
-
-              <div className='my-4 w-full'>
-                <h2 className='text-base md:text-lg flex items-center justify-center uppercase gap-x-2 mb-2 flex-wrap font-semibold border p-2 border-gray-400'>
-                  {activeStep === 1 && 'Personal Details'}
-                  {activeStep === 2 && 'Document Details'}
-                  {activeStep === 3 && 'Account Details'}
-                </h2>
-              </div>
+              <div className="my-5" />
               {/* Stepper Component */}
-
               {activeStep === 1 && <PersonalDetails onNext={() => setActiveStep(2)} />}
               {activeStep === 2 && <DocumentDetails onNext={() => setActiveStep(3)} />}
               {activeStep === 3 && <BankingDetails />}

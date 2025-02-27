@@ -68,7 +68,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({ onNext }) => {
         name='dob'
         label='Date of birth'
         control={hookform.control}
-        placeholder='Select Date of Birth'
+        placeholder='Select date of birth'
         error={hookform.errors?.dob?.message}
         mandatory
       />

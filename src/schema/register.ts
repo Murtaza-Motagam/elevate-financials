@@ -2,8 +2,8 @@ import * as yup from 'yup';
 import { alphanumeric, mobNoValidate, passwordValidate } from '@/lib/regex';
 
 export const personalDetails = yup.object().shape({
-  firstName: yup.string().required('First Name is required'),
-  lastName: yup.string().required('Last Name is required'),
+  firstName: yup.string().required('First name is required'),
+  lastName: yup.string().required('Last name is required'),
   dob: yup.date().typeError('Invalid date format').required('Date of birth is required'),
   email: yup.string().email('Invalid email address').required('Email is required'),
   genderNm: yup.string().required('Gender is required'),

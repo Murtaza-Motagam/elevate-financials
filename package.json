@@ -28,7 +28,7 @@
     "cmdk": "^1.0.0",
     "country-state-city": "^3.2.1",
     "cropperjs": "^1.6.2",
-    "date-fns": "^3.6.0",
+    "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
     "flowbite": "^2.5.2",
     "framer-motion": "^12.4.3",

@@ -13,7 +13,7 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Label } from '@/components/ui/label';
 import { Controller } from 'react-hook-form';
-import InfoIcon from '@/Icons/InfoIcon';
+import InfoIcon from '@/icons/InfoIcon';
 
 interface Option {
   value: string;

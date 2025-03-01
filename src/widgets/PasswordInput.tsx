@@ -2,9 +2,9 @@
 import { Label } from '@/components/ui/label';
 import { Input as Inputs } from '@/components/ui/input';
 import React, { useState } from 'react';
-import EyeOpen from '@/Icons/EyeOpen';
-import EyeClose from '@/Icons/EyeClose';
-import InfoIcon from '@/Icons/InfoIcon';
+import EyeOpen from '@/icons/EyeOpen';
+import EyeClose from '@/icons/EyeClose';
+import InfoIcon from '@/icons/InfoIcon';
 
 interface passwordProps {
   label?: string;
@@ -36,9 +36,8 @@ const PasswordInput: React.FC<passwordProps> = ({
       </Label>
       <div className='relative'>
         <Inputs
-          className={`${
-            error ? 'border-2 border-red-500' : ''
-          } text-sm focus:!outline-none focus:ring-0 focus:border-none`}
+          className={`${error ? 'border-2 border-red-500' : ''
+            } text-sm focus:!outline-none focus:ring-0 focus:border-none`}
           placeholder={placeholder}
           type={isVisible ? 'text' : 'password'}
           {...rest}

@@ -1,4 +1,4 @@
-import Login from '@/components/Authentication/Login/Index';
+import Login from '@/components/Authentication/Login';
 import React, { Suspense } from 'react';
 
 const LoginPage = () => {

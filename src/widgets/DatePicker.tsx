@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
-import InfoIcon from '@/Icons/InfoIcon';
+import InfoIcon from '@/icons/InfoIcon';
 
 interface DatePickerProps {
   name: string;

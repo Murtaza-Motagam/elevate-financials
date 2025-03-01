@@ -1,6 +1,6 @@
 import Profile from '@/components/Profile/Index';
 import Head from 'next/head';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 const ProfilePage = () => {
   return (
@@ -8,7 +8,9 @@ const ProfilePage = () => {
       <Head>
         <meta name='viewport' content='width=1500'></meta>
       </Head>
-      <Profile />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Profile />
+      </Suspense>
     </>
   );
 };

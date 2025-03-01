@@ -1,8 +1,12 @@
 import Login from '@/components/Authentication/Login/Index';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 const LoginPage = () => {
-  return <Login />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Login />
+    </Suspense>
+  );
 };
 
 export default LoginPage;

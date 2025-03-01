@@ -42,7 +42,8 @@ const Uploader = <T extends FieldValues>({
   const [uploading, setUploading] = useState<boolean>(false); // Uploading state
   const [error, setErrorState] = useState<string | null>(null); // Error state
   const [showCropperModal, setShowCropperModal] = useState<boolean>(false); // Modal visibility state
-  const cropperRef = useRef<HTMLImageElement | null>(null); // Reference for the Cropper
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const cropperRef = useRef<HTMLImageElement | null | any>(null); // Reference for the Cropper
 
   const handleDrop = useCallback((acceptedFiles: File[]) => {
     const file = acceptedFiles[0];

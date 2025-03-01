@@ -32,8 +32,8 @@ interface apiRequestProps {
 
 const useEditProfile = ({
   open = false,
-  closeModal = () => { },
-  fetchUserInfo = () => { },
+  closeModal = () => {},
+  fetchUserInfo = () => {},
 }: {
   open: boolean;
   closeModal: () => void;
@@ -121,6 +121,7 @@ const useEditProfile = ({
     if (open) {
       getProfileData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   return {

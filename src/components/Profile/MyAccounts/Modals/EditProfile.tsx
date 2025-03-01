@@ -17,8 +17,8 @@ interface EditProfileProps {
 
 const EditProfile: React.FC<EditProfileProps> = ({
   open,
-  setOpen = () => { },
-  fetchUserInfo = () => { },
+  setOpen = () => {},
+  fetchUserInfo = () => {},
 }) => {
   const closeModal = () => {
     setOpen(false);

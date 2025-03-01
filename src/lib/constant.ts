@@ -48,7 +48,7 @@ export const genderOptions = [
   { value: 'Other', label: 'Other' },
 ];
 
-export const PROTECTED_ROUTES = ['/profile'];
+export const PROTECTED_ROUTES = ['/profile', '/services', '/one-time-transfer'];
 
 export const accountTypeOptions = [
   { value: 'Savings', label: 'Savings' },
@@ -150,4 +150,4 @@ export const profile_tabs = {
   accounts: 1,
   transaction: 2,
   contact: 7,
-}
+};

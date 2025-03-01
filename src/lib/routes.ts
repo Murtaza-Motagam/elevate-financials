@@ -9,6 +9,8 @@ export const publicRoutes = {
 
 export const protectedRoutes = {
   profile: '/profile',
+  services: '/services',
+  oneTimeTransfer: '/services/one-time-transfer',
 };
 
 export const authenticationRoutes = {

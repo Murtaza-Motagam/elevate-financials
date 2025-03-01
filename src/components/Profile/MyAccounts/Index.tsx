@@ -4,14 +4,12 @@ import { Button } from '@/components/ui/button';
 import { dateTimeDisplay, formatWithCommas, getUserInfo } from '@/lib/common';
 import { backendUrlPreview } from '@/lib/constant';
 import LazyLoadImg from '@/widgets/LazyLoadImg';
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from '@/components/ui/card';
 import {
   Calendar,
   CircleCheckBig,
   CircleUser,
-  CircleX,
   EditIcon,
-  IndianRupee,
   Hash,
   Landmark,
   ShieldCheck,
@@ -24,20 +22,13 @@ import AccountTabs from './AccountTabs';
 
 const checkForAccStatus = (accStatus: string) => {
   if (accStatus === 'active') {
-    return (
-      <span className='flex items-center gap-x-2 text-green-500 font-semibold'>
-        Active
-      </span>
-    );
+    return <span className='flex items-center gap-x-2 text-green-500 font-semibold'>Active</span>;
   }
-  return (
-    <span className='flex items-center gap-x-2 text-red-500 font-semibold'>
-      Not Active
-    </span>
-  );
+  return <span className='flex items-center gap-x-2 text-red-500 font-semibold'>Not Active</span>;
 };
 
 const MyAccounts = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [userInfo, setUserInfo] = useState<any>();
   const [open, setOpen] = useState<boolean>(false);
   const [editProfile, setEditProfile] = useState<boolean>(false);
@@ -53,21 +44,26 @@ const MyAccounts = () => {
 
   const accInfo = {
     balance: userInfo?.accountDetails?.balance,
-    accNumber: userInfo?.accountDetails?.accountNumber
-  }
+    accNumber: userInfo?.accountDetails?.accountNumber,
+  };
 
   return (
     <div className='w-full overflow-y-scroll mx-4 pr-4'>
       {/* Account Overview */}
-      <Card className="bg-gradient-to-r from-primary to-bg-primary-70 shadow-md shadow-gray-500 text-white p-6 rounded-lg">
-        <CardContent className="flex md:justify-between justify-center flex-col md:flex-row items-center">
+      <Card className='bg-gradient-to-r from-primary to-bg-primary-70 shadow-md shadow-gray-500 text-white p-6 rounded-lg'>
+        <CardContent className='flex md:justify-between justify-center flex-col md:flex-row items-center'>
           <div>
-            <p className="text-lg">Current balance</p>
-            <h2 className="text-3xl font-bold">${formatWithCommas(userInfo?.accountDetails?.balance)}</h2>
-            <p className="text-sm mt-1">Account N/O • <span className='italic'>{userInfo?.accountDetails?.accountNumber}</span></p>
+            <p className='text-lg'>Current balance</p>
+            <h2 className='text-3xl font-bold'>
+              ${formatWithCommas(userInfo?.accountDetails?.balance)}
+            </h2>
+            <p className='text-sm mt-1'>
+              Account N/O •{' '}
+              <span className='italic'>{userInfo?.accountDetails?.accountNumber}</span>
+            </p>
           </div>
-          <Button className="dark:bg-white text-white dark:text-primary dark:hover:bg-transparent dark:hover:border dark:hover:border-white dark:hover:text-white mt-6">
-            View statements <Download className="ml-2 h-4 w-4" />
+          <Button className='dark:bg-white text-white dark:text-primary dark:hover:bg-transparent dark:hover:border dark:hover:border-white dark:hover:text-white mt-6'>
+            View statements <Download className='ml-2 h-4 w-4' />
           </Button>
         </CardContent>
       </Card>
@@ -109,10 +105,26 @@ const MyAccounts = () => {
         <div className='flex-1 w-full'>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
             {[
-              { label: 'Full name', value: `${userInfo?.personalDetails?.firstName || '-'} ${userInfo?.personalDetails?.lastName || '-'}`, icon: <CircleUser /> },
-              { label: 'Username', value: userInfo?.authentication?.username || '-', icon: <Hash /> },
-              { label: 'Account type', value: userInfo?.accountDetails?.accountType || '-', icon: <Landmark /> },
-              { label: 'Email', value: userInfo?.personalDetails?.email || '-', icon: <ShieldCheck /> },
+              {
+                label: 'Full name',
+                value: `${userInfo?.personalDetails?.firstName || '-'} ${userInfo?.personalDetails?.lastName || '-'}`,
+                icon: <CircleUser />,
+              },
+              {
+                label: 'Username',
+                value: userInfo?.authentication?.username || '-',
+                icon: <Hash />,
+              },
+              {
+                label: 'Account type',
+                value: userInfo?.accountDetails?.accountType || '-',
+                icon: <Landmark />,
+              },
+              {
+                label: 'Email',
+                value: userInfo?.personalDetails?.email || '-',
+                icon: <ShieldCheck />,
+              },
             ].map(({ label, value, icon }) => (
               <div key={label} className='flex items-center space-x-3'>
                 <span className='text-primary dark:text-white'>{icon}</span>
@@ -134,13 +146,36 @@ const MyAccounts = () => {
 
         <div className='w-full mt-4 grid grid-cols-1 md:grid-cols-2 gap-4'>
           {[
-            { label: 'Account Number', value: userInfo?.accountDetails?.accountNumber || '-', icon: <Hash /> },
-            { label: 'CRN Number', value: userInfo?.accountDetails?.crnNumber || '-', icon: <Landmark /> },
-            { label: 'IFSC Code', value: userInfo?.accountDetails?.ifscCode || '-', icon: <ShieldCheck /> },
-            { label: 'Account Status', value: checkForAccStatus(userInfo?.status), icon: <CircleCheckBig /> },
-            { label: 'Created On', value: dateTimeDisplay(userInfo?.accountDetails?.createdAt) || '-', icon: <Calendar /> },
+            {
+              label: 'Account Number',
+              value: userInfo?.accountDetails?.accountNumber || '-',
+              icon: <Hash />,
+            },
+            {
+              label: 'CRN Number',
+              value: userInfo?.accountDetails?.crnNumber || '-',
+              icon: <Landmark />,
+            },
+            {
+              label: 'IFSC Code',
+              value: userInfo?.accountDetails?.ifscCode || '-',
+              icon: <ShieldCheck />,
+            },
+            {
+              label: 'Account Status',
+              value: checkForAccStatus(userInfo?.status),
+              icon: <CircleCheckBig />,
+            },
+            {
+              label: 'Created On',
+              value: dateTimeDisplay(userInfo?.accountDetails?.createdAt) || '-',
+              icon: <Calendar />,
+            },
           ].map(({ label, value, icon }) => (
-            <div key={label} className='p-4 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm flex items-center space-x-3'>
+            <div
+              key={label}
+              className='p-4 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm flex items-center space-x-3'
+            >
               <span className='text-primary dark:text-white'>{icon}</span>
               <div>
                 <p className='text-gray-600 dark:text-gray-400 font-medium'>{label}:</p>
@@ -157,7 +192,7 @@ const MyAccounts = () => {
       {/* Profile Image modal */}
       <ProfileImage userInfo={userInfo} open={open} setOpen={setOpen} />
       <EditProfile open={editProfile} setOpen={setEditProfile} fetchUserInfo={fetchUserInfo} />
-    </div >
+    </div>
   );
 };
 

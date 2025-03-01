@@ -85,7 +85,7 @@ const Uploader = <T extends FieldValues>({
             setImg(resData?.data?.path); // Update img state with the uploaded file path
             clearErrors(name); // Clear any errors for this field
           } else {
-            showToast(resData?.message, 'error')
+            showToast(resData?.message, 'error');
             setError(name, {
               type: 'manual',
               message: 'Failed to upload the image. Please try again.',
@@ -190,7 +190,12 @@ const Uploader = <T extends FieldValues>({
           >
             Crop & Upload
           </button> */}
-          <DefaultButton onClick={handleCrop} loading={uploading} icon={uploading && <RollLoader />} title={uploading ? 'Uploading...' : 'Crop & upload'} />
+          <DefaultButton
+            onClick={handleCrop}
+            loading={uploading}
+            icon={uploading && <RollLoader />}
+            title={uploading ? 'Uploading...' : 'Crop & upload'}
+          />
         </DialogContent>
       </Dialog>
     </div>

@@ -8,7 +8,11 @@ interface LayoutWrapperType {
   showFooter?: boolean;
 }
 
-const LayoutWrapper: React.FC<LayoutWrapperType> = ({ children, parentClass = '', showFooter = true }) => {
+const LayoutWrapper: React.FC<LayoutWrapperType> = ({
+  children,
+  parentClass = '',
+  showFooter = true,
+}) => {
   return (
     <div className={`w-full ${parentClass}`}>
       <Header />

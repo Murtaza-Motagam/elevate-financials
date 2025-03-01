@@ -7,6 +7,7 @@ interface LazyImgProps {
   className?: string;
   width?: string | number;
   height?: string | number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
 

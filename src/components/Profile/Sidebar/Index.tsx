@@ -1,13 +1,11 @@
 'use client';
 
 import React, { SetStateAction, useEffect, useState } from 'react';
-import { backendUrl, backendUrlPreview, sidebarLinks } from '@/lib/constant';
+import { backendUrlPreview, sidebarLinks } from '@/lib/constant';
 import { getActiveClassSidebar } from '@/lib/common';
 import { useRouter } from 'next/navigation';
 import { protectedRoutes } from '@/lib/routes';
 import LazyLoadImg from '@/widgets/LazyLoadImg';
-import axios from 'axios';
-import { LocalStorage } from '@/lib/localStorage';
 import TextToImage from '@/components/common/TextToImage';
 import { Ellipsis } from 'lucide-react';
 import SettingModal from './Modals/SettingModal';
@@ -15,9 +13,9 @@ import { useUser } from '@/context/UserContext';
 
 const ProfileSidebar = ({
   selectedTab,
-  setSelectedTab = () => { },
-  setLoading = () => { },
-  handleClose = () => { },
+  setSelectedTab = () => {},
+  setLoading = () => {},
+  handleClose = () => {},
   onSmallDv = false,
 }: {
   selectedTab?: number;

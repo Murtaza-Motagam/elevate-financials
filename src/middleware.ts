@@ -8,6 +8,7 @@ export function middleware(request: NextRequest) {
   const protectedRoutes = PROTECTED_ROUTES;
 
   if (!token && protectedRoutes?.some((route) => request.nextUrl.pathname.startsWith(route))) {
+    loginUrl.searchParams.set('redirect', request.nextUrl.pathname);
     return NextResponse.redirect(loginUrl);
   }
 

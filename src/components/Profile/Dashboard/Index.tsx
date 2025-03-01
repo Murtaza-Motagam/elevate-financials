@@ -70,7 +70,7 @@ const Dashboard = () => {
         Accounts Dashboard
       </h1>
       <div className='w-full grid grid-cols-4 gap-4 pr-5 py-2 h-full'>
-        <div className="col-span-2 h-full">
+        <div className='col-span-2 h-full'>
           <Chart
             chartTitle='Account Overview'
             chartDesc='January - November 2024'
@@ -149,7 +149,7 @@ const Dashboard = () => {
           </AreaChart>
         </Chart>
 
-        <div className="h-full">
+        <div className='h-full'>
           <Chart
             chartTitle='Debit/Credit Transaction History'
             chartDesc='January - November 2024'

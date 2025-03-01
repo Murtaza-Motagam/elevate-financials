@@ -49,7 +49,7 @@ const Register = () => {
                 </h2>
                 <p className='text-xs mb-3'>Enter to get tons of rewards and cashbacks.</p>
               </div>
-              <div className="my-5" />
+              <div className='my-5' />
               {/* Stepper Component */}
               {activeStep === 1 && <PersonalDetails onNext={() => setActiveStep(2)} />}
               {activeStep === 2 && <DocumentDetails onNext={() => setActiveStep(3)} />}

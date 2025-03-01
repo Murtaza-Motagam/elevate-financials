@@ -1,19 +1,19 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import LayoutWrapper from '@/shared/wrapper/LayoutWrapper';
-import ProfileSidebar from './Sidebar/Index';
+import ProfileSidebar from './Sidebar';
 import { Tabs, TabPanel, TabList, Tab } from 'react-tabs';
 import { sidebarLinks } from '@/lib/constant';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 // Import Components (Add actual imports here)
-import MyAccounts from '@/components/Profile/MyAccounts/Index';
-import Dashboard from './Dashboard/Index';
+import MyAccounts from '@/components/Profile/MyAccounts';
+import Dashboard from './Dashboard';
 import PageLoader from '@/shared/Loaders/PageLoader';
 import { useSearchParams } from 'next/navigation';
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from '../ui/sheet';
 import { PanelRight } from 'lucide-react';
-import Transactions from './Transactions/Index';
+import Transactions from './Transactions';
 import ContactSupport from './ContactSupport';
 
 // Components map

@@ -1,4 +1,4 @@
-import BankingDetails from '@/components/Authentication/Register/BankingDetails/Index';
+import BankingDetails from '@/components/Authentication/Register/BankingDetails';
 import React from 'react';
 
 const BankingDetailsPage = () => {

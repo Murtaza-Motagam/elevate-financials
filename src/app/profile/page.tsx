@@ -1,4 +1,4 @@
-import Profile from '@/components/Profile/Index';
+import Profile from '@/components/Profile';
 import Head from 'next/head';
 import React, { Suspense } from 'react';
 

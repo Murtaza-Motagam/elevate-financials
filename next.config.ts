@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   publicRuntimeConfig: {
     NEXT_PUBLIC_BACKEND_URL: process.env.NEXT_PUBLIC_BACKEND_URL,
     NEXT_PUBLIC_BACKEND_URL_UPLOAD: process.env.NEXT_PUBLIC_BACKEND_URL_UPLOAD,
+    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
   },
   images: {
     remotePatterns: [

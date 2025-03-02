@@ -105,6 +105,6 @@ export const logout = async () => {
   LocalStorage.remove(KEYS.authDetails);
   showToast('You have successfully logged out. See you again soon!');
   setTimeout(() => {
-    window.open('http://localhost:3000/login', '_self');
+    window.open(`${process.env.NEXT_PUBLIC_BASE_URL}/login`, '_self');
   }, 600);
 };

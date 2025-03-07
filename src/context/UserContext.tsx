@@ -2,6 +2,8 @@
 
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import { usePathname } from 'next/navigation';
+import { authenticationRoutes } from '@/lib/routes';
 
 interface UserContextProps {
   mainUser: UserFieldProps | null;
@@ -27,14 +29,16 @@ interface UserFieldProps {
 
 const UserContext = createContext<UserContextProps>({
   mainUser: null,
-  setMainUser: () => {},
+  setMainUser: () => { },
   contextLoading: true,
-  fetchUser: () => {},
+  fetchUser: () => { },
 });
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [mainUser, setMainUser] = useState<UserFieldProps | null>(null);
   const [contextLoading, setContextLoading] = useState(true);
+  const pathname = usePathname();
+  const authenticatedRoutes = [authenticationRoutes.register, authenticationRoutes.login];
 
   // Fetch user data from session API
   const fetchUser = async () => {
@@ -52,8 +56,9 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    fetchUser();
-  }, []);
+    if (!authenticatedRoutes.includes(pathname))
+      fetchUser();
+  }, [pathname]);
 
   return (
     <UserContext.Provider value={{ mainUser, setMainUser, contextLoading, fetchUser }}>

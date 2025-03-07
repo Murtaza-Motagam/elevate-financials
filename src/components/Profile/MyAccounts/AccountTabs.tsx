@@ -27,7 +27,7 @@ const AccountTabs = ({ accInfo }: AccountTabsProps) => {
     <div className='-ml-6 p-6'>
       {/* Page Title & Notifications */}
       <div className='flex justify-between border-b border-gray-300 pb-3 items-center mb-6'>
-        <h1 className='font-bold text-xl text-gray-800 dark:text-white'>Account Details</h1>
+        <h1 className='font-bold text-xl text-gray-800 dark:text-white'>Account details</h1>
         <Button variant='ghost' size='icon'>
           <Bell className='w-6 h-6' />
         </Button>

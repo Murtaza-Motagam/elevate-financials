@@ -11,7 +11,7 @@ interface DocumentDetailsProps {
   onNext?: () => void;
 }
 
-const DocumentDetails: React.FC<DocumentDetailsProps> = ({ onNext = () => {} }) => {
+const DocumentDetails: React.FC<DocumentDetailsProps> = ({ onNext = () => { } }) => {
   const { hookform, onSubmitDocumentDetails, loading } = useDocumentDetails({ onNext });
 
   return (
@@ -77,9 +77,10 @@ const DocumentDetails: React.FC<DocumentDetailsProps> = ({ onNext = () => {} }) 
         <DefaultButton
           icon={loading && <RollLoader />}
           type='submit'
-          title={!loading ? 'Submit' : 'Processing'}
+          title={!loading ? 'Submit' : 'Please wait...'}
           className='text-center w-[300px] rounded-[5px]'
           loading={loading}
+          disabled={loading}
         />
       </div>
     </form>

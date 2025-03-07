@@ -19,6 +19,7 @@ import React, { useEffect, useState } from 'react';
 import ProfileImage from './Modals/ProfileImage';
 import EditProfile from './Modals/EditProfile';
 import AccountTabs from './AccountTabs';
+import PageLoader from '@/shared/Loaders/PageLoader';
 
 const checkForAccStatus = (accStatus: string) => {
   if (accStatus === 'active') {
@@ -30,12 +31,19 @@ const checkForAccStatus = (accStatus: string) => {
 const MyAccounts = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [userInfo, setUserInfo] = useState<any>();
+  const [loading, setLoading] = useState<boolean>(true);
   const [open, setOpen] = useState<boolean>(false);
   const [editProfile, setEditProfile] = useState<boolean>(false);
 
   const fetchUserInfo = async () => {
-    const userData = await getUserInfo();
-    setUserInfo(userData?.details);
+    try {
+      const userData = await getUserInfo();
+      setUserInfo(userData?.details);
+    } catch (error) {
+      console.log('error: ', error);
+    } finally {
+      setLoading(false)
+    }
   };
 
   useEffect(() => {
@@ -46,6 +54,14 @@ const MyAccounts = () => {
     balance: userInfo?.accountDetails?.balance,
     accNumber: userInfo?.accountDetails?.accountNumber,
   };
+
+  if (loading) {
+    return (
+      <div className='w-full flex items-center justify-center h-screen'>
+        <PageLoader />
+      </div>
+    )
+  }
 
   return (
     <div className='w-full overflow-y-scroll mx-4 pr-4'>
@@ -68,7 +84,7 @@ const MyAccounts = () => {
         </CardContent>
       </Card>
       <div className='border-b border-gray-400 pb-3 mt-5 font-bold flex items-center justify-between text-xl text-gray-800 dark:text-white'>
-        <span>Profile Details</span>
+        <span>Profile details</span>
         <Button
           variant='outline'
           onClick={() => setEditProfile(true)}
@@ -94,7 +110,7 @@ const MyAccounts = () => {
           )}
           {userInfo?.documentDetails?.profileImg && (
             <button
-              className='absolute inset-0 bg-black bg-opacity-40 hover:bg-opacity-60 flex items-center justify-center transition-opacity'
+              className='absolute inset-0 hover:bg-gray-600 bg-opacity-40 hover:bg-opacity-60 flex items-center justify-center transition-opacity'
               aria-label='View Profile Image'
               onClick={() => setOpen(true)}
             />
@@ -141,33 +157,33 @@ const MyAccounts = () => {
       {/* Banking Details */}
       <div className='w-full mt-8 mb-4'>
         <h1 className='border-b border-gray-400 pb-3 font-bold text-xl text-gray-800 dark:text-white'>
-          Banking Details
+          Banking details
         </h1>
 
         <div className='w-full mt-4 grid grid-cols-1 md:grid-cols-2 gap-4'>
           {[
             {
-              label: 'Account Number',
+              label: 'Account number',
               value: userInfo?.accountDetails?.accountNumber || '-',
               icon: <Hash />,
             },
             {
-              label: 'CRN Number',
+              label: 'CRN number',
               value: userInfo?.accountDetails?.crnNumber || '-',
               icon: <Landmark />,
             },
             {
-              label: 'IFSC Code',
+              label: 'IFSC code',
               value: userInfo?.accountDetails?.ifscCode || '-',
               icon: <ShieldCheck />,
             },
             {
-              label: 'Account Status',
+              label: 'Account status',
               value: checkForAccStatus(userInfo?.status),
               icon: <CircleCheckBig />,
             },
             {
-              label: 'Created On',
+              label: 'Created on',
               value: dateTimeDisplay(userInfo?.accountDetails?.createdAt) || '-',
               icon: <Calendar />,
             },

@@ -1,35 +1,36 @@
 import * as yup from 'yup';
 import { alphanumeric, mobNoValidate, passwordValidate } from '@/lib/regex';
+import { REQUIRED } from '@/lib/constant';
 
 export const personalDetails = yup.object().shape({
-  firstName: yup.string().required('First name is required'),
-  lastName: yup.string().required('Last name is required'),
-  dob: yup.date().typeError('Invalid date format').required('Date of birth is required'),
-  email: yup.string().email('Invalid email address').required('Email is required'),
-  genderNm: yup.string().required('Gender is required'),
+  firstName: yup.string().required(REQUIRED),
+  lastName: yup.string().required(REQUIRED),
+  dob: yup.date().typeError('Invalid date format').required(REQUIRED),
+  email: yup.string().email('Invalid email address').required(REQUIRED),
+  genderNm: yup.string().required(REQUIRED),
   mobNo: yup
     .string()
     .matches(mobNoValidate, 'Mobile number should must be 10 digits.')
-    .required('Mobile number is required'),
+    .required(REQUIRED),
 });
 
 export const documentDetails = yup.object().shape({
-  aadharNo: yup.string().required('Aadhar number is required'),
+  aadharNo: yup.string().required(REQUIRED),
   panNo: yup
     .string()
     .matches(alphanumeric, 'Pancard number must be alphanumeric')
-    .required('Pancard number is required'),
+    .required(REQUIRED),
   driverLicence: yup.string().optional(),
   profileImg: yup.string().optional(),
-  addressProofType: yup.string().required('Address proof is required'),
-  addressProofImg: yup.string().required('Address proof image is required'),
+  addressProofType: yup.string().required(REQUIRED),
+  addressProofImg: yup.string().required(REQUIRED),
 });
 
 export const bankingDetails = yup.object().shape({
-  accountType: yup.string().required('Account type is required'),
-  username: yup.string().required('Account type is required'),
+  accountType: yup.string().required(REQUIRED),
+  username: yup.string().required(REQUIRED),
   password: yup
     .string()
     .matches(passwordValidate, 'Password should must validate')
-    .required('Account type is required'),
+    .required(REQUIRED),
 });

@@ -21,8 +21,9 @@ const Login = () => {
               <NextLink
                 className='text-primary hover:text-black dark:hover:text-white'
                 href={publicRoutes.home}
-                title=' Elevate Financials'
-              />
+              >
+                Elevate Financials
+              </NextLink>
             </h2>
             <p className='text-sm mb-8 mt-1'>Enter to get tons of rewards and cashbacks.</p>
             <form className='space-y-6' onSubmit={hookform.handleSubmit(onSubmit)}>
@@ -44,18 +45,20 @@ const Login = () => {
               <DefaultButton
                 icon={loading && <RollLoader />}
                 type='submit'
-                title={!loading ? 'Submit' : 'Processing'}
+                title={!loading ? 'Submit' : 'Please wait...'}
                 className='text-center w-full rounded-[5px]'
                 loading={loading}
+                disabled={loading}
               />
             </form>
             {/* Forgot password link */}
             <p className='text-right my-2 dark:text-gray-400'>
               <NextLink
                 href={authenticationRoutes.forgotPassword}
-                title='Forgot Password?'
                 className='text-sm text-primary hover:underline'
-              />
+              >
+                Forgot Password?
+              </NextLink>
             </p>
 
             {/* Sign-up link */}
@@ -63,9 +66,10 @@ const Login = () => {
               Don&apos;t have an account yet?{' '}
               <NextLink
                 href={authenticationRoutes.register}
-                title='Register'
                 className='text-md text-primary hover:underline'
-              />
+              >
+                Register
+              </NextLink>
             </p>
 
             {/* Help section */}
@@ -73,9 +77,10 @@ const Login = () => {
               <p>Need help logging in?</p>
               <NextLink
                 href={publicRoutes.helpCenter}
-                title='Visit our Help Center'
                 className='text-primary hover:underline'
-              />
+              >
+                Visit our Help Center
+              </NextLink>
             </div>
           </div>
         </div>

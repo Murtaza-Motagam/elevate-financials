@@ -10,16 +10,12 @@ import { showToast } from '@/lib/common';
 import { publicRoutes } from '@/lib/routes';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useUser } from '@/context/UserContext';
+import { loginSchema } from '@/schema/loginSchema';
 
 interface LoginValues {
   username: string;
   password: string;
 }
-
-export const loginSchema = yup.object().shape({
-  username: yup.string().required('CRN number is required'),
-  password: yup.string().trim().required('Password is required'),
-});
 
 const useLogin = () => {
   const [loading, setLoading] = useState<boolean>(false);

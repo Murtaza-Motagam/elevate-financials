@@ -1,5 +1,6 @@
 import React from 'react';
 import { Facebook, Twitter, Linkedin, Instagram, Landmark } from 'lucide-react';
+import NextLink from '@/components/common/NextLink';
 
 const Footer = () => {
   return (
@@ -21,52 +22,52 @@ const Footer = () => {
           {/* Quick Links */}
           <div className='flex flex-wrap items-center gap-x-20 gap-y-10'>
             <div>
-              <h3 className='text-lg font-semibold mb-4'>Quick Links</h3>
+              <h3 className='text-lg font-semibold mb-4'>Quick links</h3>
               <ul className='dark:text-gray-400 space-y-2'>
                 <li>
-                  <a href='#' className='hover:text-white'>
+                  <NextLink href="#">
                     Home
-                  </a>
+                  </NextLink>
                 </li>
                 <li>
-                  <a href='#' className='hover:text-white'>
+                  <NextLink href="#">
                     Services
-                  </a>
+                  </NextLink>
                 </li>
                 <li>
-                  <a href='#' className='hover:text-white'>
-                    About Us
-                  </a>
+                  <NextLink href="#">
+                    About us
+                  </NextLink>
                 </li>
                 <li>
-                  <a href='#' className='hover:text-white'>
+                  <NextLink href="#">
                     Contact our officials
-                  </a>
+                  </NextLink>
                 </li>
               </ul>
             </div>
             <div>
-              <h3 className='text-lg font-semibold mb-4'>Customer Support</h3>
+              <h3 className='text-lg font-semibold mb-4'>Customer support</h3>
               <ul className='dark:text-gray-400 space-y-2'>
                 <li>
-                  <a href='#' className='hover:text-white'>
-                    Help Center
-                  </a>
+                  <NextLink href="#">
+                    Help center
+                  </NextLink>
                 </li>
                 <li>
-                  <a href='#' className='hover:text-white'>
+                  <NextLink href="#">
                     FAQs
-                  </a>
+                  </NextLink>
                 </li>
                 <li>
-                  <a href='#' className='hover:text-white'>
-                    Report an Issue
-                  </a>
+                  <NextLink href="#">
+                    Report an issue
+                  </NextLink>
                 </li>
                 <li>
-                  <a href='#' className='hover:text-white'>
+                  <NextLink href="#">
                     Security & Privacy
-                  </a>
+                  </NextLink>
                 </li>
               </ul>
             </div>
@@ -74,27 +75,27 @@ const Footer = () => {
 
           {/* Social Media */}
           <div>
-            <h3 className='text-lg font-semibold mb-4'>Follow Us</h3>
+            <h3 className='text-lg font-semibold mb-4'>Follow us</h3>
             <div className='flex space-x-4'>
-              <a href='#' className='hover:text-white'>
+              <NextLink href="#">
                 <Facebook size={24} />
-              </a>
-              <a href='#' className='hover:text-white'>
+              </NextLink>
+              <NextLink href="#">
                 <Twitter size={24} />
-              </a>
-              <a href='#' className='hover:text-white'>
+              </NextLink>
+              <NextLink href="#">
                 <Linkedin size={24} />
-              </a>
-              <a href='#' className='hover:text-white'>
+              </NextLink>
+              <NextLink href="#">
                 <Instagram size={24} />
-              </a>
+              </NextLink>
             </div>
           </div>
         </div>
 
         {/* Copyright Section */}
         <div className='border-t border-gray-700 mt-8 pt-4 text-center'>
-          © Copyright {new Date().getFullYear()} Elevate-financials. All Rights Reserved.
+          © Copyright {new Date().getFullYear()} Elevate-financials. All rights reserved.
         </div>
       </div>
     </footer>

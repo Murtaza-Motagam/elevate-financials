@@ -1,10 +1,20 @@
+import clsx from 'clsx';
 import Link from 'next/link';
 import React from 'react';
 
-const NextLink = ({ href = '', title = '', ...props }) => {
+interface NextLinkProps extends React.ComponentProps<typeof Link> {
+  href: string;
+  className?: string;
+  children: React.ReactNode;
+}
+
+const NextLink: React.FC<NextLinkProps> = ({ href, className, children, ...props }) => {
   return (
-    <Link href={href} {...props}>
-      {title}
+    <Link
+      href={href}
+      className={clsx('hover:text-primary dark:hover:text-white', className)}
+      {...props}>
+      {children}
     </Link>
   );
 };

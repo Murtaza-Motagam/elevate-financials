@@ -23,7 +23,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
   pathname,
   loading,
   isUser,
-  onClose = () => {},
+  onClose = () => { },
 }) => {
   const router = useRouter();
 
@@ -35,12 +35,12 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
   return (
     <>
       <SheetHeader>
-        <SheetTitle className='text-black dark:text-white uppercase'>
+        <SheetTitle className='text-black text-left dark:text-white uppercase'>
           Elevate <span className='text-primary'> Financials</span>
         </SheetTitle>
-        <SheetDescription>Elevate your financial growth for your secure future.</SheetDescription>
+        <SheetDescription className='text-left'>Elevate your financial growth for your secure future.</SheetDescription>
 
-        <div className='w-full mt-4 flex flex-col gap-y-5 text-center'>
+        <div className='w-full !mt-7 flex flex-col gap-y-5 text-center'>
           {loading ? (
             <BasicLoader />
           ) : !isUser && !loading ? (
@@ -53,21 +53,23 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
             </Button>
           ) : (
             <NextLink
-              title='My Profile'
               href={protectedRoutes.profile}
               className={getActiveClassMobile(protectedRoutes.profile, pathname, theme)}
-            />
+            >
+              My Profile
+            </NextLink>
           )}
         </div>
-        <div className='w-full mt-4 flex flex-col gap-y-5 text-center'>
+        <div className='w-full !mt-7 flex flex-col gap-y-5 text-center'>
           {navLinks.map((li) => {
             return (
-              <DefaultButton
+              <NextLink
                 key={li.redirectLink}
-                title={li.name}
-                onClick={() => redirectLink(li.redirectLink)}
+                href={li.redirectLink}
                 className={getActiveClassMobile(li.redirectLink, pathname, theme)}
-              />
+              >
+                {li.name}
+              </NextLink>
             );
           })}
         </div>

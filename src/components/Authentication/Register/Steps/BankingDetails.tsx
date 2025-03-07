@@ -42,9 +42,10 @@ const BankingDetails: React.FC = () => {
       <DefaultButton
         icon={loading && <RollLoader />}
         type='submit'
-        title={!loading ? 'Submit' : 'Processing'}
+        title={!loading ? 'Submit' : 'Please wait...'}
         className='text-center'
         loading={loading}
+        disabled={loading}
       />
     </form>
   );

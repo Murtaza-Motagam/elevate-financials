@@ -41,9 +41,10 @@ const Register = () => {
               <div className='mt-10'>
                 <NextLink
                   href={publicRoutes.home}
-                  title='Elevate Financials'
                   className='text-primary font-bold hover:text-black dark:hover:text-white uppercase'
-                />
+                >
+                  Elevate Financials
+                </NextLink>
                 <h2 className='text-2xl md:text-3xl flex items-center gap-x-2 mb-2 flex-wrap font-semibold'>
                   Create Your Account
                 </h2>
@@ -59,9 +60,10 @@ const Register = () => {
                 Already have an account?{' '}
                 <NextLink
                   href={authenticationRoutes.login}
-                  title='Login'
                   className='text-md text-primary hover:underline'
-                />
+                >
+                  Login
+                </NextLink>
               </p>
             </div>
           </div>

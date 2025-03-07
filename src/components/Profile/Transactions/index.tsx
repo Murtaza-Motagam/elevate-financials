@@ -24,8 +24,8 @@ const Transactions = () => {
       <h1 className='border-b border-gray-400 pb-2 font-semibold text-lg md:text-xl'>
         Transactions
       </h1>
-      <div className='w-full flex justify-between items-center my-3'>
-        <div className='w-1/3'>
+      <div className='w-full flex flex-col space-y-3 md:space-y-0 md:flex-row md:justify-between items-center my-3'>
+        <div className='w-full md:w-1/3'>
           <div className='relative w-full'>
             <Search
               size={20}
@@ -34,10 +34,10 @@ const Transactions = () => {
             <Input type='text' placeholder='Type Transaction ID to search' className='pl-10' />
           </div>
         </div>
-        <div ref={dropdownRef} className='relative flex items-center'>
+        <div ref={dropdownRef} className='w-full md:w-auto relative flex items-center'>
           <DefaultButton
             onClick={() => setTransactionOpen(true)}
-            className='rounded-r-none'
+            className='rounded-r-none w-full md:w-auto'
             icon={<FilePlus />}
             title='Create transaction'
           />

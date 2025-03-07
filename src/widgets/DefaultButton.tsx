@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import clsx from 'clsx';
 import React from 'react';
 
 interface DefaultBtnProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -8,14 +9,14 @@ interface DefaultBtnProps extends React.ButtonHTMLAttributes<HTMLButtonElement> 
   icon?: React.ReactNode;
   iconAlign?: string;
   variant?:
-    | 'default'
-    | 'destructive'
-    | 'outline'
-    | 'secondary'
-    | 'ghost'
-    | 'link'
-    | null
-    | undefined;
+  | 'default'
+  | 'destructive'
+  | 'outline'
+  | 'secondary'
+  | 'ghost'
+  | 'link'
+  | null
+  | undefined;
 }
 
 const DefaultButton: React.FC<DefaultBtnProps> = ({
@@ -30,7 +31,7 @@ const DefaultButton: React.FC<DefaultBtnProps> = ({
   return (
     <Button
       variant={variant}
-      className={`text-center ${loading && 'opacity-60'} ${icon && 'flex items-center gap-x-1'} ${className}`}
+      className={clsx("text-center", icon && "flex items-center gap-x-1", loading && '!cursor-not-allowed', className)}
       {...rest}
     >
       {iconAlign === 'right' ? (

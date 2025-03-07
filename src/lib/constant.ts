@@ -15,6 +15,7 @@ export const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 export const backendUrlUpload = process.env.NEXT_PUBLIC_BACKEND_URL_UPLOAD;
 export const backendUrlPreview = process.env.NEXT_PUBLIC_BACKEND_URL_PREVIEW;
 export const compNm = 'Elevate Financials';
+export const REQUIRED = 'Required';
 
 export const checkForModule = LocalStorage.getJSON('authDetails');
 export const token = checkForModule.token;

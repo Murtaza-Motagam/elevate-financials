@@ -35,7 +35,7 @@ const ContactSupport = () => {
   return (
     <div className='min-h-screen flex flex-col items-center justify-center'>
       {/* Card Container */}
-      <div className='w-full md:-mt-12 p-8 shadow-lg rounded-2xl'>
+      <div className='w-full md:-mt-12 p-8 rounded-2xl'>
         {/* Header Section */}
         <div className='text-center mb-8'>
           <h2 className='text-3xl font-bold'>Contact Support</h2>

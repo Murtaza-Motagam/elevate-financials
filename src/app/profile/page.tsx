@@ -3,7 +3,7 @@ import PageLoader from '@/shared/Loaders/PageLoader';
 import Head from 'next/head';
 import React, { Suspense } from 'react';
 
-const ProfilePage = () => {
+const ProfilePage = async () => {
   return (
     <>
       <Head>

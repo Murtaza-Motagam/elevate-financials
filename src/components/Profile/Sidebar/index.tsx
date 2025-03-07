@@ -1,21 +1,16 @@
 'use client';
 
-import React, { SetStateAction, useEffect, useState } from 'react';
-import { backendUrlPreview, sidebarLinks } from '@/lib/constant';
+import React, { SetStateAction } from 'react';
+import { sidebarLinks } from '@/lib/constant';
 import { getActiveClassSidebar } from '@/lib/common';
 import { useRouter } from 'next/navigation';
 import { protectedRoutes } from '@/lib/routes';
-import LazyLoadImg from '@/widgets/LazyLoadImg';
-import TextToImage from '@/components/common/TextToImage';
-import { Ellipsis } from 'lucide-react';
-import SettingModal from './Modals/SettingModal';
-import { useUser } from '@/context/UserContext';
 
 const ProfileSidebar = ({
   selectedTab,
-  setSelectedTab = () => {},
-  setLoading = () => {},
-  handleClose = () => {},
+  setSelectedTab = () => { },
+  setLoading = () => { },
+  handleClose = () => { },
   onSmallDv = false,
 }: {
   selectedTab?: number;
@@ -25,11 +20,6 @@ const ProfileSidebar = ({
   onSmallDv?: boolean;
 }) => {
   const router = useRouter();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [user, setUser] = useState<any>({});
-  const [userLoad, setUserLoad] = useState<boolean>(true);
-  const [open, setOpen] = useState<boolean>(false);
-  const { mainUser, contextLoading } = useUser();
 
   const handleTab = (tabIndex: number) => {
     handleClose();
@@ -37,17 +27,6 @@ const ProfileSidebar = ({
     setLoading(false);
     router.push(`${protectedRoutes.profile}?tab=${tabIndex}`);
   };
-
-  const getUserInfo = async () => {
-    setUserLoad(true);
-    setUser(mainUser || '');
-    setUserLoad(false);
-  };
-
-  useEffect(() => {
-    getUserInfo();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mainUser, contextLoading]);
 
   return (
     <div
@@ -80,40 +59,6 @@ const ProfileSidebar = ({
           </div>
         ))}
       </div>
-      {!userLoad && (
-        <div
-          className={`w-full flex items-start justify-start ${onSmallDv ? 'mt-20' : 'mt-5'} gap-x-3 border-t pl-2 pb-5 border-gray-500 pt-2 overflow-hidden`}
-        >
-          {user?.profileImg ? (
-            <LazyLoadImg
-              src={`${backendUrlPreview}/${user?.profileImg}`}
-              className='w-10 h-10 object-contain rounded-full mt-1 border-2 border-gray-800 dark:border-white'
-            />
-          ) : (
-            <TextToImage
-              nameText={user?.name}
-              className='rounded-full text-lg mt-1 w-10 h-10 border-2 border-gray-800 dark:border-white'
-            />
-          )}
-          <div className='flex flex-col'>
-            <div className='flex items-center justify-between'>
-              <h1 className='text-sm text-black dark:text-gray-200'>
-                {user?.name?.length <= 20 ? user?.name : `${user?.name?.substring(0, 20)}...`}
-              </h1>
-              <Ellipsis
-                onClick={() => setOpen(true)}
-                className='rounded-full p-2 hover:bg-primary hover:text-white cursor-pointer'
-                size={30}
-              />
-            </div>
-            <p className='text-[12px] text-gray-600 dark:text-gray-400 truncate overflow-hidden text-ellipsis whitespace-nowrap'>
-              {user?.email}
-            </p>
-          </div>
-        </div>
-      )}
-
-      <SettingModal user={user} open={open} setOpen={setOpen} />
     </div>
   );
 };

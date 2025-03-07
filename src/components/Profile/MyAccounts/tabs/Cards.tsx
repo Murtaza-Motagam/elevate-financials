@@ -7,14 +7,14 @@ const Cards = ({ accInfo }: AccountTabsProps) => {
   console.log('accInfo: ', accInfo);
   return (
     <div>
-      <h2 className='text-lg font-semibold mb-4'>Credit & Debit Cards</h2>
+      <h2 className='text-lg font-semibold mb-4'>Credit & Debit cards</h2>
       <Card className='p-4 flex justify-between items-center  rounded-xl'>
         <div>
-          <p className='dark:text-gray-300'>Platinum Credit Card</p>
-          <h3 className='text-lg font-bold'>**** **** **** 1234</h3>
-          <p className='text-sm text-gray-500'>Exp: 09/27</p>
+          <p className='dark:text-gray-300'>Platinum credit card</p>
+          <h3 className='text-lg font-bold italic'>**** **** **** 1234</h3>
+          <p className='text-sm text-red-500'>Exp: 09/27</p>
         </div>
-        <CreditCard className='w-8 h-8 text-gray-700' />
+        <CreditCard className='w-8 h-8 text-primary dark:text-white' />
       </Card>
     </div>
   );

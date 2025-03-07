@@ -53,9 +53,10 @@ const Header = () => {
             <NextLink
               key={li.redirectLink}
               href={li.redirectLink}
-              title={li.name}
               className={getActiveClass(li.redirectLink, pathname, theme)}
-            />
+            >
+              {li.name}
+            </NextLink>
           );
         })}
       </div>

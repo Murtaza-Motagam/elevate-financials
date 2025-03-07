@@ -184,13 +184,6 @@ const Uploader = <T extends FieldValues>({
               ref={cropperRef}
             />
           )}
-          {/* <button
-            type='button'
-            onClick={handleCrop}
-            className='mt-4 px-4 py-2 bg-primary text-white rounded'
-          >
-            Crop & Upload
-          </button> */}
           <DefaultButton
             onClick={handleCrop}
             loading={uploading}

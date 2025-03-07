@@ -20,7 +20,7 @@ export const getActiveClassMobile = (route: string, pathname: string, mode: stri
   const isActive = pathname === route;
   const colorClass = mode === 'light' ? 'text-primary' : 'text-white';
 
-  return `py-3 hover:border-2 hover:border-primary !bg-transparent font-medium text-sm ${isActive ? colorClass : 'text-gray-700 hover:text-primary dark:text-gray-400 dark:hover:text-white'}`;
+  return `py-2 hover:border-2 hover:border-primary !rounded-md !bg-transparent font-medium text-sm ${isActive ? colorClass : 'text-gray-700 hover:text-primary dark:text-gray-400 dark:hover:text-white'}`;
 };
 
 export const capitalizeFirstLetter = (string: string) =>

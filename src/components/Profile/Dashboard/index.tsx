@@ -6,7 +6,6 @@ const Dashboard = () => {
       <h1 className='border-b border-gray-400 pb-2 font-semibold text-lg md:text-xl uppercase'>
         Accounts Dashboard
       </h1>
-
     </div>
   );
 };

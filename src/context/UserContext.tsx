@@ -29,9 +29,9 @@ interface UserFieldProps {
 
 const UserContext = createContext<UserContextProps>({
   mainUser: null,
-  setMainUser: () => { },
+  setMainUser: () => {},
   contextLoading: true,
-  fetchUser: () => { },
+  fetchUser: () => {},
 });
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
@@ -56,8 +56,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    if (!authenticatedRoutes.includes(pathname))
-      fetchUser();
+    if (!authenticatedRoutes.includes(pathname)) fetchUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   return (

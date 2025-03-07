@@ -29,10 +29,6 @@ const Header = () => {
 
   const { mainUser } = states;
 
-  const handleClose = () => {
-    setOpen(false); // Automatically closes the sheet
-  };
-
   return (
     <header className='w-full flex items-center justify-between p-4 shadow-md sticky top-0 backdrop-blur-lg z-20'>
       <div
@@ -70,7 +66,6 @@ const Header = () => {
             </SheetTrigger>
             <SheetContent>
               <MobileHeader
-                onClose={handleClose}
                 theme={theme}
                 pathname={pathname}
                 loading={states.contextLoading}

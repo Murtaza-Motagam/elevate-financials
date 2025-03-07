@@ -14,7 +14,8 @@ const ProfilePage = async () => {
           <div className='w-full flex items-center justify-center h-screen'>
             <PageLoader />
           </div>
-        }>
+        }
+      >
         <Profile />
       </Suspense>
     </>

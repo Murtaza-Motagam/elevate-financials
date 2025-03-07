@@ -36,8 +36,9 @@ const PasswordInput: React.FC<passwordProps> = ({
       </Label>
       <div className='relative'>
         <Inputs
-          className={`${error ? 'border-2 border-red-500' : ''
-            } text-sm focus:!outline-none focus:ring-0 focus:border-none`}
+          className={`${
+            error ? 'border-2 border-red-500' : ''
+          } text-sm focus:!outline-none focus:ring-0 focus:border-none`}
           placeholder={placeholder}
           type={isVisible ? 'text' : 'password'}
           {...rest}

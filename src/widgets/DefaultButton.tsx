@@ -9,14 +9,14 @@ interface DefaultBtnProps extends React.ButtonHTMLAttributes<HTMLButtonElement> 
   icon?: React.ReactNode;
   iconAlign?: string;
   variant?:
-  | 'default'
-  | 'destructive'
-  | 'outline'
-  | 'secondary'
-  | 'ghost'
-  | 'link'
-  | null
-  | undefined;
+    | 'default'
+    | 'destructive'
+    | 'outline'
+    | 'secondary'
+    | 'ghost'
+    | 'link'
+    | null
+    | undefined;
 }
 
 const DefaultButton: React.FC<DefaultBtnProps> = ({
@@ -31,7 +31,12 @@ const DefaultButton: React.FC<DefaultBtnProps> = ({
   return (
     <Button
       variant={variant}
-      className={clsx("text-center", icon && "flex items-center gap-x-1", loading && '!cursor-not-allowed', className)}
+      className={clsx(
+        'text-center',
+        icon && 'flex items-center gap-x-1',
+        loading && '!cursor-not-allowed',
+        className,
+      )}
       {...rest}
     >
       {iconAlign === 'right' ? (

@@ -75,10 +75,7 @@ const Login = () => {
             {/* Help section */}
             <div className='mt-2 text-sm flex justify-center items-center gap-x-2 dark:text-gray-400'>
               <p>Need help logging in?</p>
-              <NextLink
-                href={publicRoutes.helpCenter}
-                className='text-primary hover:underline'
-              >
+              <NextLink href={publicRoutes.helpCenter} className='text-primary hover:underline'>
                 Visit our Help Center
               </NextLink>
             </div>

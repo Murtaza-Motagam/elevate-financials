@@ -25,24 +25,16 @@ const Footer = () => {
               <h3 className='text-lg font-semibold mb-4'>Quick links</h3>
               <ul className='dark:text-gray-400 space-y-2'>
                 <li>
-                  <NextLink href="#">
-                    Home
-                  </NextLink>
+                  <NextLink href='#'>Home</NextLink>
                 </li>
                 <li>
-                  <NextLink href="#">
-                    Services
-                  </NextLink>
+                  <NextLink href='#'>Services</NextLink>
                 </li>
                 <li>
-                  <NextLink href="#">
-                    About us
-                  </NextLink>
+                  <NextLink href='#'>About us</NextLink>
                 </li>
                 <li>
-                  <NextLink href="#">
-                    Contact our officials
-                  </NextLink>
+                  <NextLink href='#'>Contact our officials</NextLink>
                 </li>
               </ul>
             </div>
@@ -50,24 +42,16 @@ const Footer = () => {
               <h3 className='text-lg font-semibold mb-4'>Customer support</h3>
               <ul className='dark:text-gray-400 space-y-2'>
                 <li>
-                  <NextLink href="#">
-                    Help center
-                  </NextLink>
+                  <NextLink href='#'>Help center</NextLink>
                 </li>
                 <li>
-                  <NextLink href="#">
-                    FAQs
-                  </NextLink>
+                  <NextLink href='#'>FAQs</NextLink>
                 </li>
                 <li>
-                  <NextLink href="#">
-                    Report an issue
-                  </NextLink>
+                  <NextLink href='#'>Report an issue</NextLink>
                 </li>
                 <li>
-                  <NextLink href="#">
-                    Security & Privacy
-                  </NextLink>
+                  <NextLink href='#'>Security & Privacy</NextLink>
                 </li>
               </ul>
             </div>
@@ -77,16 +61,16 @@ const Footer = () => {
           <div>
             <h3 className='text-lg font-semibold mb-4'>Follow us</h3>
             <div className='flex space-x-4'>
-              <NextLink href="#">
+              <NextLink href='#'>
                 <Facebook size={24} />
               </NextLink>
-              <NextLink href="#">
+              <NextLink href='#'>
                 <Twitter size={24} />
               </NextLink>
-              <NextLink href="#">
+              <NextLink href='#'>
                 <Linkedin size={24} />
               </NextLink>
-              <NextLink href="#">
+              <NextLink href='#'>
                 <Instagram size={24} />
               </NextLink>
             </div>

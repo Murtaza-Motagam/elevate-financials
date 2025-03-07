@@ -9,7 +9,8 @@ const LoginPage = () => {
         <div className='w-full flex items-center justify-center h-screen'>
           <PageLoader />
         </div>
-      }>
+      }
+    >
       <Login />
     </Suspense>
   );

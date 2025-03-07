@@ -13,7 +13,8 @@ const NextLink: React.FC<NextLinkProps> = ({ href, className, children, ...props
     <Link
       href={href}
       className={clsx('hover:text-primary dark:hover:text-white', className)}
-      {...props}>
+      {...props}
+    >
       {children}
     </Link>
   );

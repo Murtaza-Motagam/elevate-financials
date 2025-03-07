@@ -8,9 +8,9 @@ import { protectedRoutes } from '@/lib/routes';
 
 const ProfileSidebar = ({
   selectedTab,
-  setSelectedTab = () => { },
-  setLoading = () => { },
-  handleClose = () => { },
+  setSelectedTab = () => {},
+  setLoading = () => {},
+  handleClose = () => {},
   onSmallDv = false,
 }: {
   selectedTab?: number;

@@ -42,7 +42,7 @@ const MyAccounts = () => {
     } catch (error) {
       console.log('error: ', error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -60,7 +60,7 @@ const MyAccounts = () => {
       <div className='w-full flex items-center justify-center h-screen'>
         <PageLoader />
       </div>
-    )
+    );
   }
 
   return (

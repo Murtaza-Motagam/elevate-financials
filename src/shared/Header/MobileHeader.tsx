@@ -8,29 +8,16 @@ import { useRouter } from 'next/navigation';
 import { authenticationRoutes, protectedRoutes } from '@/lib/routes';
 import { LogInIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import DefaultButton from '@/widgets/DefaultButton';
 
 interface MobileHeaderProps {
   theme?: string | undefined;
   loading: boolean;
   isUser: boolean | undefined;
   pathname: string;
-  onClose?: () => void;
 }
 
-const MobileHeader: React.FC<MobileHeaderProps> = ({
-  theme,
-  pathname,
-  loading,
-  isUser,
-  onClose = () => { },
-}) => {
+const MobileHeader: React.FC<MobileHeaderProps> = ({ theme, pathname, loading, isUser }) => {
   const router = useRouter();
-
-  const redirectLink = (link: string) => {
-    router.push(link);
-    onClose();
-  };
 
   return (
     <>
@@ -38,7 +25,9 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
         <SheetTitle className='text-black text-left dark:text-white uppercase'>
           Elevate <span className='text-primary'> Financials</span>
         </SheetTitle>
-        <SheetDescription className='text-left'>Elevate your financial growth for your secure future.</SheetDescription>
+        <SheetDescription className='text-left'>
+          Elevate your financial growth for your secure future.
+        </SheetDescription>
 
         <div className='w-full !mt-7 flex flex-col gap-y-5 text-center'>
           {loading ? (

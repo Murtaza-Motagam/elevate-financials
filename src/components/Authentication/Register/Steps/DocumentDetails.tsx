@@ -11,7 +11,7 @@ interface DocumentDetailsProps {
   onNext?: () => void;
 }
 
-const DocumentDetails: React.FC<DocumentDetailsProps> = ({ onNext = () => { } }) => {
+const DocumentDetails: React.FC<DocumentDetailsProps> = ({ onNext = () => {} }) => {
   const { hookform, onSubmitDocumentDetails, loading } = useDocumentDetails({ onNext });
 
   return (

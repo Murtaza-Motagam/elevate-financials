@@ -20,16 +20,16 @@ const TransactionDetails: React.FC<TransactionDetailProps> = ({
 }) => {
   const transactionData = [
     { index: 1, name: 'Transaction ID:', data: data.transactionId },
-    { index: 2, name: 'Account Number:', data: data.accountNumber },
-    { index: 3, name: 'IFSC Code:', data: data.ifscCodeNumber },
-    { index: 4, name: 'Payment Method:', data: data.paymentMethod },
-    { index: 5, name: 'Total Amount:', data: formatWithCommas(data.totalAmount) },
-    { index: 6, name: 'Balance Before:', data: formatWithCommas(data.balanceBefore) },
-    { index: 7, name: 'Balance After:', data: formatWithCommas(data.balanceAfter) },
-    { index: 8, name: 'Payment Status:', data: data.paymentStatus },
-    { index: 9, name: 'Transaction Date:', data: dateTimeDisplay(data.transactionDate) },
-    { index: 10, name: 'Transaction Fee:', data: data.transactionFee },
-    { index: 11, name: 'Device Info:', data: data.deviceInfo },
+    { index: 2, name: 'Account number:', data: data.accountNumber },
+    { index: 3, name: 'IFSC code:', data: data.ifscCodeNumber },
+    { index: 4, name: 'Payment method:', data: data.paymentMethod },
+    { index: 5, name: 'Total amount:', data: formatWithCommas(data.totalAmount) },
+    { index: 6, name: 'Balance before:', data: formatWithCommas(data.balanceBefore) },
+    { index: 7, name: 'Balance after:', data: formatWithCommas(data.balanceAfter) },
+    { index: 8, name: 'Payment status:', data: data.paymentStatus },
+    { index: 9, name: 'Transaction date:', data: dateTimeDisplay(data.transactionDate) },
+    { index: 10, name: 'Transaction fee:', data: data.transactionFee },
+    { index: 11, name: 'Device info:', data: data.deviceInfo },
     { index: 12, name: 'Remarks:', data: data.remarks },
   ];
 
@@ -50,7 +50,7 @@ const TransactionDetails: React.FC<TransactionDetailProps> = ({
     <LayoutModal open={open} setOpen={setOpen}>
       <div className='w-full flex flex-col gap-y-2'>
         <h1 className='w-full text-center text-lg md:text-xl font-semibold border-b-2 border-gray-400 pb-2'>
-          Transaction Details
+          Transaction details
         </h1>
 
         {transactionData.map((item) => (

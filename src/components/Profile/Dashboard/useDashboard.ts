@@ -19,10 +19,33 @@ const useDashboard = () => {
     { name: 'Current', value: 25 },
     { name: 'Fixed Deposit', value: 20 },
   ];
+  const lineChartData = [
+    { name: 'Jan', value: 400 },
+    { name: 'Feb', value: 600 },
+    { name: 'Mar', value: 800 },
+    { name: 'Apr', value: 500 },
+    { name: 'May', value: 700 },
+    { name: 'Jun', value: 900 },
+    { name: 'Jul', value: 1000 },
+    { name: 'Aug', value: 750 },
+    { name: 'Sep', value: 850 },
+    { name: 'Oct', value: 950 },
+    { name: 'Nov', value: 650 },
+    { name: 'Dec', value: 1100 },
+  ];
+
+  const bankingRadialData = [
+    { name: 'Savings', value: 65, color: '#3498db' },
+    { name: 'Loans', value: 45, color: '#e74c3c' },
+    { name: 'Investments', value: 80, color: '#f1c40f' },
+    { name: 'Credit', value: 55, color: '#2ecc71' },
+  ];
 
   return {
     barChartData,
     pieChartData,
+    bankingRadialData,
+    lineChartData,
   };
 };
 

@@ -1,6 +1,6 @@
 import NextLink from '@/components/common/NextLink';
 import { SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { navLinks } from '@/lib/constant';
+import { backendUrlPreview, navLinks } from '@/lib/constant';
 import { getActiveClassMobile } from '@/lib/common';
 import React from 'react';
 import BasicLoader from '../Loaders/BasicLoader';
@@ -8,15 +8,19 @@ import { useRouter } from 'next/navigation';
 import { authenticationRoutes, protectedRoutes } from '@/lib/routes';
 import { LogInIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import TextToImage from '@/components/common/TextToImage';
 
 interface MobileHeaderProps {
   theme?: string | undefined;
   loading: boolean;
   isUser: boolean | undefined;
   pathname: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  user?: any;
 }
 
-const MobileHeader: React.FC<MobileHeaderProps> = ({ theme, pathname, loading, isUser }) => {
+const MobileHeader: React.FC<MobileHeaderProps> = ({ theme, pathname, loading, isUser, user }) => {
   const router = useRouter();
 
   return (
@@ -43,9 +47,20 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({ theme, pathname, loading, i
           ) : (
             <NextLink
               href={protectedRoutes.profile}
-              className={getActiveClassMobile(protectedRoutes.profile, pathname, theme)}
+              className={`${getActiveClassMobile(protectedRoutes.profile, pathname, theme)} flex items-center justify-center gap-x-2`}
             >
-              My Profile
+              {user?.profileImg ? (
+                <Avatar>
+                  <AvatarImage src={`${backendUrlPreview}/${user?.profileImg}`} />
+                  <AvatarFallback>UR</AvatarFallback>
+                </Avatar>
+              ) : (
+                <TextToImage
+                  className='rounded-full'
+                  nameText={`${user?.firstName} ${user?.lastName}`}
+                />
+              )}
+              My profile
             </NextLink>
           )}
         </div>

@@ -35,8 +35,8 @@ const Table: React.FC<TableProps> = ({ columns, data, className, onRowClick, loa
   if (data?.length === 0 && !loading) {
     return (
       <div className='w-full flex flex-col items-center justify-center h-full'>
-        <LazyLoadImg src='/images/no-data-found.svg' className='h-[500px] w-[500px]' />
-        <h1 className='text-3xl font-semibold uppercase'>No data found!</h1>
+        <LazyLoadImg src='/images/no-data-found.svg' className='h-[400px] w-[400px]' />
+        <h1 className='text-2xl -mt-20 md:!-mt-6 font-semibold'>No data found!</h1>
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Facebook, Twitter, Linkedin, Instagram, Landmark } from 'lucide-react';
+import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
 import NextLink from '@/components/common/NextLink';
+import LazyLoadImg from '@/widgets/LazyLoadImg';
 
 const Footer = () => {
   return (
@@ -10,11 +11,22 @@ const Footer = () => {
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
           {/* Logo and Description */}
           <div className='flex flex-col items-start'>
-            <h1 className='text-lg md:text-xl font-bold text-primary dark:text-white flex items-center gap-x-2'>
-              <Landmark />
-              <span>Elevate Financials</span>
-            </h1>
-            <p className='dark:text-gray-400 mt-3'>
+            <h2 className='text-lg md:text-xl font-bold text-primary dark:text-white flex items-start gap-x-2'>
+              <LazyLoadImg
+                src='/images/logo.png'
+                alt='logo'
+                className='md:w-14 md:h-14 w-10 h-10 object-contain border-2 border-gray-800 dark:border-2 dark:border-gray-200 rounded-full'
+              />
+              <p className='md:mt-2 mt-1 flex flex-col items-center md:items-start justify-start'>
+                <span className='md:text-xl'>
+                  Elevate <span className='text-tertiary dark:text-white'>Financials</span>
+                </span>
+                <span className='text-xs text-gray-700 dark:text-gray-300 hidden md:block'>
+                  Empowering your financial future.
+                </span>
+              </p>
+            </h2>
+            <p className='dark:text-gray-400 text-sm mt-3'>
               Secure and reliable banking solutions for your financial needs.
             </p>
           </div>

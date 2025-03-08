@@ -32,8 +32,8 @@ const Header = () => {
 
   return (
     <header className='w-full flex items-center justify-between p-4 shadow-md sticky top-0 backdrop-blur-lg z-20'>
-      <div
-        onClick={() => router.push(publicRoutes.home)}
+      <NextLink
+        href={publicRoutes.home}
         className='logo cursor-pointer flex flex-col items-center gap-x-1'
       >
         <h2 className='text-lg md:text-xl font-bold text-primary dark:text-white flex items-start gap-x-2'>
@@ -51,7 +51,7 @@ const Header = () => {
             </span>
           </p>
         </h2>
-      </div>
+      </NextLink>
       <div className='hidden md:flex links items-center gap-x-4'>
         {navLinks.map((li) => {
           return (
@@ -67,7 +67,10 @@ const Header = () => {
       </div>
 
       <div className='flex items-center gap-x-4'>
-        <div className='sideNavigation flex items-center gap-x-2' suppressHydrationWarning>
+        <div
+          className='sideNavigation hidden md:flex items-center gap-x-2'
+          suppressHydrationWarning
+        >
           <span className='hidden md:block'>
             <ModeToggle />
           </span>
@@ -134,6 +137,7 @@ const Header = () => {
                 pathname={pathname}
                 loading={states.contextLoading}
                 isUser={states.isUser}
+                user={mainUser}
               />
             </SheetContent>
           </Sheet>

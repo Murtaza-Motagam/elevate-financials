@@ -56,7 +56,7 @@ export default {
           foreground: 'hsl(var(--destructive-foreground))',
         },
         tertiary: {
-          DEFAULT: '#001737'
+          DEFAULT: '#001737',
         },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

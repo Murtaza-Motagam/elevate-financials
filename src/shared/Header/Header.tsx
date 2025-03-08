@@ -7,7 +7,7 @@ import NextLink from '@/components/common/NextLink';
 import { getActiveClass } from '@/lib/common';
 import { ModeToggle } from '@/components/common/ModeToggle';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Landmark, LogInIcon, Menu } from 'lucide-react';
+import { LogInIcon, Menu } from 'lucide-react';
 import BasicLoader from '../Loaders/BasicLoader';
 import { Button } from '@/components/ui/button';
 import {
@@ -43,8 +43,12 @@ const Header = () => {
             className='md:w-14 md:h-14 w-10 h-10 object-contain border-2 border-gray-800 dark:border-2 dark:border-gray-200 rounded-full'
           />
           <p className='hidden md:mt-2 md:flex flex-col items-start justify-start'>
-            <span className='md:text-xl'>Elevate <span className='text-tertiary dark:text-white'>Financials</span></span>
-            <span className='text-xs text-gray-700 dark:text-gray-300'>Empowering your financial future.</span>
+            <span className='md:text-xl'>
+              Elevate <span className='text-tertiary dark:text-white'>Financials</span>
+            </span>
+            <span className='text-xs text-gray-700 dark:text-gray-300'>
+              Empowering your financial future.
+            </span>
           </p>
         </h2>
       </div>
@@ -63,12 +67,10 @@ const Header = () => {
       </div>
 
       <div className='flex items-center gap-x-4'>
-
-        <div
-          className='sideNavigation flex items-center gap-x-2'
-          suppressHydrationWarning
-        >
-          <span className='hidden md:block'><ModeToggle /></span>
+        <div className='sideNavigation flex items-center gap-x-2' suppressHydrationWarning>
+          <span className='hidden md:block'>
+            <ModeToggle />
+          </span>
           {states.contextLoading ? (
             <BasicLoader />
           ) : !states.isUser && !states.contextLoading ? (
@@ -88,7 +90,6 @@ const Header = () => {
                       <AvatarImage src={`${backendUrlPreview}/${mainUser?.profileImg}`} />
                       <AvatarFallback>UR</AvatarFallback>
                     </Avatar>
-
                   ) : (
                     <TextToImage nameText={`${mainUser?.firstName} ${mainUser?.lastName}`} />
                   )}
@@ -122,7 +123,10 @@ const Header = () => {
           <ModeToggle />
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger>
-              <Menu size={35} className='hover:bg-slate-100 dark:hover:bg-gray-700 rounded-md p-2' />
+              <Menu
+                size={35}
+                className='hover:bg-slate-100 dark:hover:bg-gray-700 rounded-md p-2'
+              />
             </SheetTrigger>
             <SheetContent>
               <MobileHeader

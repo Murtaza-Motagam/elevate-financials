@@ -8,11 +8,10 @@ import ImgSlider from '@/widgets/ImgSlider';
 import { Card, CardContent } from '../ui/card';
 import { mainHeroContent, sliderData } from './utils';
 import LazyLoadImg from '@/widgets/LazyLoadImg';
-import { useRouter } from 'next/navigation';
 import { publicRoutes } from '@/lib/routes';
+import NextLink from '../common/NextLink';
 
 const Home = () => {
-  const router = useRouter();
   return (
     <LayoutWrapper>
       <div className='mainHome'>
@@ -50,11 +49,12 @@ const Home = () => {
               transition={{ duration: 1, delay: 0.3 }}
               className='mt-6 flex flex-wrap gap-4 justify-center'
             >
-              <DefaultButton
-                onClick={() => router.push(publicRoutes.services)}
-                title='Get started'
-                className='rounded-full px-6 py-3 sm:px-7 sm:py-4'
-              />
+              <NextLink
+                href={publicRoutes.services}
+                className='rounded-full px-6 py-3 sm:px-7 sm:py-2.5 text-primary dark:text-white hover:text-white transition-all duration-300 border-2 border-primary hover:bg-primary'
+              >
+                Get started
+              </NextLink>
             </motion.div>
           </div>
 

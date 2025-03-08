@@ -28,7 +28,7 @@ const Login = () => {
             <p className='text-sm mb-8 mt-1'>Enter to get tons of rewards and cashbacks.</p>
             <form className='space-y-6' onSubmit={hookform.handleSubmit(onSubmit)}>
               <InputField
-                label='Username/Crn-Number'
+                label='Username/Crn-number'
                 rest={hookform.register('username')}
                 placeholder='Enter your username or crn number'
                 type='text'
@@ -76,7 +76,7 @@ const Login = () => {
             <div className='mt-2 text-sm flex justify-center items-center gap-x-2 dark:text-gray-400'>
               <p>Need help logging in?</p>
               <NextLink href={publicRoutes.helpCenter} className='text-primary hover:underline'>
-                Visit our Help Center
+                Visit our help center
               </NextLink>
             </div>
           </div>

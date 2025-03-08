@@ -48,7 +48,7 @@ const Transactions = () => {
           {ddOpen && (
             <Button
               variant='outline'
-              className='w-[200px] absolute top-10 right-0 rounded-[5px] bg-white text-black dark:hover:bg-gray-700 z-10'
+              className='w-full md:w-[200px] absolute top-10 right-0 rounded-[5px] bg-white text-black dark:hover:bg-gray-700 z-10'
             >
               <Download />
               Download history

@@ -22,6 +22,7 @@ import {
 import TextToImage from '@/components/common/TextToImage';
 import MobileHeader from './MobileHeader';
 import LazyLoadImg from '@/widgets/LazyLoadImg';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const Header = () => {
   const { router, pathname, theme, states, logout } = useHeader();
@@ -35,13 +36,17 @@ const Header = () => {
         onClick={() => router.push(publicRoutes.home)}
         className='logo cursor-pointer flex flex-col items-center gap-x-1'
       >
-        <h1 className='text-lg md:text-xl font-bold text-primary dark:text-white flex items-center gap-x-2'>
-          <Landmark />
-          <span>Elevate Financials</span>
-        </h1>
-        <span className='text-[10px] ml-12 dark:text-gray-300 text-gray-800'>
-          Empowering Your Financial Future.
-        </span>
+        <h2 className='text-lg md:text-xl font-bold text-primary dark:text-white flex items-start gap-x-2'>
+          <LazyLoadImg
+            src='/images/logo.png'
+            alt='logo'
+            className='md:w-14 md:h-14 w-10 h-10 object-contain border-2 border-gray-800 dark:border-2 dark:border-gray-200 rounded-full'
+          />
+          <p className='hidden md:mt-2 md:flex flex-col items-start justify-start'>
+            <span className='md:text-xl'>Elevate <span className='text-tertiary dark:text-white'>Financials</span></span>
+            <span className='text-xs text-gray-700 dark:text-gray-300'>Empowering your financial future.</span>
+          </p>
+        </h2>
       </div>
       <div className='hidden md:flex links items-center gap-x-4'>
         {navLinks.map((li) => {
@@ -56,29 +61,14 @@ const Header = () => {
           );
         })}
       </div>
+
       <div className='flex items-center gap-x-4'>
-        {/* Mode toggle for mobile devices */}
-        <div className='md:hidden flex items-center gap-x-1'>
-          <ModeToggle />
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger>
-              <Menu />
-            </SheetTrigger>
-            <SheetContent>
-              <MobileHeader
-                theme={theme}
-                pathname={pathname}
-                loading={states.contextLoading}
-                isUser={states.isUser}
-              />
-            </SheetContent>
-          </Sheet>
-        </div>
+
         <div
-          className='sideNavigation hidden md:flex items-center gap-x-2'
+          className='sideNavigation flex items-center gap-x-2'
           suppressHydrationWarning
         >
-          <ModeToggle />
+          <span className='hidden md:block'><ModeToggle /></span>
           {states.contextLoading ? (
             <BasicLoader />
           ) : !states.isUser && !states.contextLoading ? (
@@ -94,11 +84,11 @@ const Header = () => {
               <DropdownMenuTrigger asChild>
                 <div className=' rounded-full overflow-hidden cursor-pointer relative group'>
                   {mainUser?.profileImg ? (
-                    <LazyLoadImg
-                      src={`${backendUrlPreview}/${mainUser?.profileImg}`}
-                      alt='User Profile'
-                      className='w-10 h-10 object-contain border-2 border-gray-800 dark:border-2 dark:border-gray-200 rounded-full'
-                    />
+                    <Avatar>
+                      <AvatarImage src={`${backendUrlPreview}/${mainUser?.profileImg}`} />
+                      <AvatarFallback>UR</AvatarFallback>
+                    </Avatar>
+
                   ) : (
                     <TextToImage nameText={`${mainUser?.firstName} ${mainUser?.lastName}`} />
                   )}
@@ -126,6 +116,23 @@ const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           )}
+        </div>
+
+        <div className='md:hidden flex items-center gap-x-1'>
+          <ModeToggle />
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger>
+              <Menu size={35} className='hover:bg-slate-100 dark:hover:bg-gray-700 rounded-md p-2' />
+            </SheetTrigger>
+            <SheetContent>
+              <MobileHeader
+                theme={theme}
+                pathname={pathname}
+                loading={states.contextLoading}
+                isUser={states.isUser}
+              />
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>

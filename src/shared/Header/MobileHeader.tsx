@@ -22,8 +22,8 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({ theme, pathname, loading, i
   return (
     <>
       <SheetHeader>
-        <SheetTitle className='text-black text-left dark:text-white uppercase'>
-          Elevate <span className='text-primary'> Financials</span>
+        <SheetTitle className='text-primary text-left dark:text-white uppercase'>
+          Elevate <span className='text-tertiary dark:text-white'>Financials</span>
         </SheetTitle>
         <SheetDescription className='text-left'>
           Elevate your financial growth for your secure future.

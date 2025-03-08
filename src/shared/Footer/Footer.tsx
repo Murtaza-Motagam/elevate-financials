@@ -60,7 +60,7 @@ const Footer = () => {
           {/* Social Media */}
           <div>
             <h3 className='text-lg font-semibold mb-4'>Follow us</h3>
-            <div className='flex space-x-4'>
+            <div className='flex space-x-4 dark:text-gray-400'>
               <NextLink href='#'>
                 <Facebook size={24} />
               </NextLink>

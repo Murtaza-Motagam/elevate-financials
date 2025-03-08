@@ -4,11 +4,43 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { UserProvider } from '@/context/UserContext';
+import getConfig from 'next/config';
+
+const { publicRuntimeConfig } = getConfig();
 
 export const metadata: Metadata = {
-  title: 'Elevate Financials | Credit Cards, Rewards, Travel, Offers',
-  description: 'Welcome to Elevate Financials... | Credit Cards ',
+  title: 'Elevate Financials | Secure Banking, Credit Cards, Loans & Rewards',
+  description:
+    'Elevate Financials offers secure online banking, credit cards, personal and business loans, investment solutions, and exclusive rewards. Manage your finances with ease.',
+  keywords: [
+    'banking services',
+    'online banking',
+    'credit cards',
+    'personal loans',
+    'business banking',
+    'investment solutions',
+    'financial services',
+    'secure banking',
+    'mobile banking',
+    'mortgage loans',
+  ],
+  openGraph: {
+    title: 'Elevate Financials | Secure Banking & Financial Solutions',
+    description:
+      'Discover Elevate Financials: secure banking solutions, credit cards, loans, and exclusive rewards. Manage your finances with confidence.',
+    url: publicRuntimeConfig.NEXT_PUBLIC_BASE_URL,
+    type: 'website',
+    images: [
+      {
+        url: '/images/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'Elevate Financials - Secure Banking & Financial Solutions',
+      },
+    ],
+  },
 };
+
 
 export default function RootLayout({
   children,

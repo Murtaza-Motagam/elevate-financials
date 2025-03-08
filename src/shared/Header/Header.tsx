@@ -7,7 +7,7 @@ import NextLink from '@/components/common/NextLink';
 import { getActiveClass } from '@/lib/common';
 import { ModeToggle } from '@/components/common/ModeToggle';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Landmark, LogInIcon, Menu } from 'lucide-react';
+import { LogInIcon, Menu } from 'lucide-react';
 import BasicLoader from '../Loaders/BasicLoader';
 import { Button } from '@/components/ui/button';
 import {

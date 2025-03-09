@@ -7,7 +7,6 @@ import useAddTransaction from '../hooks/useAddTransaction';
 import DefaultButton from '@/widgets/DefaultButton';
 import SuccessModal from '@/widgets/Modals/SuccessModal';
 import RollLoader from '@/shared/Loaders/RollLoader';
-import { IndianRupeeIcon } from 'lucide-react';
 
 interface AddTransactionProps {
   open: boolean;
@@ -17,8 +16,8 @@ interface AddTransactionProps {
 
 const AddTransaction: React.FC<AddTransactionProps> = ({
   open,
-  setOpen = () => { },
-  getTransaction = () => { },
+  setOpen = () => {},
+  getTransaction = () => {},
 }) => {
   const { hookform, ...dt } = useAddTransaction({ setOpen, getTransaction });
 
@@ -87,11 +86,11 @@ const AddTransaction: React.FC<AddTransactionProps> = ({
       <SuccessModal
         open={dt.succesModalOpen}
         onOpenChange={() => dt.setSuccessModalOpen(false)}
-        title="Transaction Successful!"
-        description="Your transaction has been completed successfully."
+        title='Transaction Successful!'
+        description='Your transaction has been completed successfully.'
         details={[
-          { label: "Transaction ID", value: dt.data.transactionId },
-          { label: "Amount", value: `${dt.data.amt}/-` },
+          { label: 'Transaction ID', value: dt.data.transactionId },
+          { label: 'Amount', value: `${dt.data.amt}/-` },
         ]}
       />
     </>

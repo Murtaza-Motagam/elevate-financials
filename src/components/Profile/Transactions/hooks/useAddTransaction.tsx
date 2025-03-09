@@ -31,14 +31,15 @@ const defaultValues = {
 };
 
 const useAddTransaction = ({
-  setOpen = () => { },
-  getTransaction = () => { },
+  setOpen = () => {},
+  getTransaction = () => {},
 }: {
   setOpen: React.Dispatch<SetStateAction<boolean>>;
   getTransaction?: () => void;
 }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [succesModalOpen, setSuccessModalOpen] = useState<boolean>(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [data, setData] = useState<any>({});
   const {
     register,
@@ -81,7 +82,7 @@ const useAddTransaction = ({
         getTransaction();
         console.log('response: ', response);
         setData(response.details);
-        setSuccessModalOpen(true)
+        setSuccessModalOpen(true);
       } else {
         showToast(response?.message, 'error');
       }
@@ -111,7 +112,7 @@ const useAddTransaction = ({
     closeModal,
     succesModalOpen,
     setSuccessModalOpen,
-    data
+    data,
   };
 };
 

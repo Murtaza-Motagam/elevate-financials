@@ -103,33 +103,37 @@ const Dashboard = () => {
                 Last four transaction from your account.
               </p>
               <div className='mt-5'>
-                {analyticsData.latestTransactions?.length > 0 ? analyticsData.latestTransactions.map(
-                  (val: latestTransactionType, index: number) => (
-                    <div
-                      key={index}
-                      className='flex items-center justify-between gap-x-3 border-b p-2 rounded-[6px] my-1.5'
-                    >
-                      <div className='flex items-center gap-x-2'>
-                        {/* <LazyLoadImg src={val.profileImg} className='w-10 h-10 rounded-full' /> */}
-                        {val?.profileImg ? (
-                          <AvatarDefault profileImg={val.profileImg} />
-                        ) : (
-                          <TextToImage nameText={val.name} />
-                        )}
-                        <p className='text-base font-normal flex flex-col items-start justify-start text-gray-700 dark:text-gray-200'>
-                          <span>{val.name}</span>
-                          <span className='text-xs text-gray-500 '>{val.accountType}</span>
+                {analyticsData.latestTransactions?.length > 0 ? (
+                  analyticsData.latestTransactions.map(
+                    (val: latestTransactionType, index: number) => (
+                      <div
+                        key={index}
+                        className='flex items-center justify-between gap-x-3 border-b p-2 rounded-[6px] my-1.5'
+                      >
+                        <div className='flex items-center gap-x-2'>
+                          {/* <LazyLoadImg src={val.profileImg} className='w-10 h-10 rounded-full' /> */}
+                          {val?.profileImg ? (
+                            <AvatarDefault profileImg={val.profileImg} />
+                          ) : (
+                            <TextToImage nameText={val.name} />
+                          )}
+                          <p className='text-base font-normal flex flex-col items-start justify-start text-gray-700 dark:text-gray-200'>
+                            <span>{val.name}</span>
+                            <span className='text-xs text-gray-500 '>{val.accountType}</span>
+                          </p>
+                        </div>
+                        <p className='text-sm font-normal text-gray-700 dark:text-gray-200'>
+                          INR {val.amt && `${val.amt}/-`}
                         </p>
                       </div>
-                      <p className='text-sm font-normal text-gray-700 dark:text-gray-200'>
-                        INR {val.amt && `${val.amt}/-`}
-                      </p>
-                    </div>
-                  ),
+                    ),
+                  )
                 ) : (
-                  <div className="flex flex-col w-full items-center justify-center">
-                    <img src='animations/empty.gif' className='w-40 mt-10' />
-                    <p className='mt-5 text-gray-600 dark:text-gray-300'>Looks like no transactions available at the moment.</p>
+                  <div className='flex flex-col w-full items-center justify-center'>
+                    <LazyLoadImg src='animations/empty.gif' className='w-40 mt-10' />
+                    <p className='mt-5 text-gray-600 dark:text-gray-300'>
+                      Looks like no transactions available at the moment.
+                    </p>
                   </div>
                 )}
               </div>

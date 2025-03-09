@@ -71,7 +71,6 @@ const Transactions = () => {
       />
 
       <TransactionDetails open={detailsOpen} setOpen={setDetailsOpen} data={dt.trData} />
-
     </div>
   );
 };

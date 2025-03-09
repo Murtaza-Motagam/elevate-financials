@@ -7,10 +7,7 @@ export const transactionSchema = yup.object().shape({
     .required(REQUIRED)
     .matches(/^\d+$/, 'Only numbers are allowed')
     .min(12, 'Minimum 12 digits required'),
-  ifscCodeNumber: yup
-    .string()
-    .required(REQUIRED)
-    .min(12, 'Minimum 12 digits required'),
+  ifscCodeNumber: yup.string().required(REQUIRED).min(12, 'Minimum 12 digits required'),
   amt: yup
     .string()
     .required(REQUIRED)

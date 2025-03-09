@@ -7,7 +7,7 @@ import NextLink from '@/components/common/NextLink';
 import { getActiveClass } from '@/lib/common';
 import { ModeToggle } from '@/components/common/ModeToggle';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { LogInIcon, Menu } from 'lucide-react';
+import { LogInIcon, LogOut, Menu } from 'lucide-react';
 import BasicLoader from '../Loaders/BasicLoader';
 import { Button } from '@/components/ui/button';
 import {
@@ -108,14 +108,14 @@ const Header = () => {
                     className='cursor-pointer dark:text-gray-200 dark:hover:text-white'
                     onClick={() => router.push(protectedRoutes.profile)}
                   >
-                    My Profile
+                    View profile
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuItem
-                  className='text-red-500 hover:!text-red-500 cursor-pointer'
+                  className='text-red-500 hover:!text-red-500 font-semibold cursor-pointer'
                   onClick={() => logout()}
                 >
-                  Logout
+                  <LogOut /> Logout
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

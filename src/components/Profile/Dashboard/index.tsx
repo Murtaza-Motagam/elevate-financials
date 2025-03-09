@@ -11,6 +11,7 @@ import { profile_tabs } from '@/lib/constant';
 import PageLoader from '@/shared/Loaders/PageLoader';
 import AvatarDefault from '@/widgets/AvatarDefault';
 import TextToImage from '@/components/common/TextToImage';
+import LazyLoadImg from '@/widgets/LazyLoadImg';
 
 const Dashboard = () => {
   const { bankingRadialData, lineChartData, analyticsData, loading } = useDashboard();
@@ -51,7 +52,7 @@ const Dashboard = () => {
               colors={['#6366F1', '#60A5FA', '#A78BFA']}
               keys={['name', 'totalAmount', 'totalBalance']}
               keyLabels={{
-                name: 'Name',
+                name: 'Month',
                 totalAmount: 'Total amount',
                 totalBalance: 'Balance month end',
               }}
@@ -102,7 +103,7 @@ const Dashboard = () => {
                 Last four transaction from your account.
               </p>
               <div className='mt-5'>
-                {analyticsData.latestTransactions.map(
+                {analyticsData.latestTransactions?.length > 0 ? analyticsData.latestTransactions.map(
                   (val: latestTransactionType, index: number) => (
                     <div
                       key={index}
@@ -125,6 +126,11 @@ const Dashboard = () => {
                       </p>
                     </div>
                   ),
+                ) : (
+                  <div className="flex flex-col w-full items-center justify-center">
+                    <img src='animations/empty.gif' className='w-40 mt-10' />
+                    <p className='mt-5 text-gray-600 dark:text-gray-300'>Looks like no transactions available at the moment.</p>
+                  </div>
                 )}
               </div>
             </div>

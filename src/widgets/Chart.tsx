@@ -60,9 +60,9 @@ const Chart = ({
       case 'bar':
         return (
           <ReBarChart data={data}>
-            <XAxis dataKey='name' tickFormatter={() => keyLabels.name} />
-            <YAxis tickFormatter={(value) => value.toLocaleString()} />
-            <Tooltip formatter={(value, name) => [value, keyLabels[name] || name]} />
+            <XAxis dataKey='name' />
+            <YAxis />
+            <Tooltip />
             {keys.map((key, index) => (
               <Bar
                 key={key}

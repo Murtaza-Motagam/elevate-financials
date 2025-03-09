@@ -10,6 +10,7 @@ interface useAddTransactionProps {
   receiverAccNum: string;
   amt: string;
   remarks?: string | undefined;
+  ifscCodeNumber: string;
   transactionTypeNm: string;
 }
 interface apiRequestProps {
@@ -18,24 +19,27 @@ interface apiRequestProps {
   success: string;
   message: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data?: any;
+  details?: any;
 }
 
 const defaultValues = {
   receiverAccNum: '',
   amt: '',
   remarks: '',
+  ifscCodeNumber: '',
   transactionTypeNm: '',
 };
 
 const useAddTransaction = ({
-  setOpen = () => {},
-  getTransaction = () => {},
+  setOpen = () => { },
+  getTransaction = () => { },
 }: {
   setOpen: React.Dispatch<SetStateAction<boolean>>;
   getTransaction?: () => void;
 }) => {
   const [loading, setLoading] = useState<boolean>(false);
+  const [succesModalOpen, setSuccessModalOpen] = useState<boolean>(false);
+  const [data, setData] = useState<any>({});
   const {
     register,
     reset,
@@ -58,10 +62,11 @@ const useAddTransaction = ({
 
   const createTransaction = async (data: useAddTransactionProps) => {
     setLoading(true);
-    const { receiverAccNum, amt, ...rest } = data;
+    const { receiverAccNum, amt, ifscCodeNumber, ...rest } = data;
     const payload = {
       receiverAccNum: parseInt(receiverAccNum),
       amt: parseInt(amt),
+      ifscCodeNumber: parseInt(ifscCodeNumber),
       ...rest,
     };
     try {
@@ -72,9 +77,11 @@ const useAddTransaction = ({
       });
 
       if (response.success) {
-        showToast(response?.message);
         closeModal();
         getTransaction();
+        console.log('response: ', response);
+        setData(response.details);
+        setSuccessModalOpen(true)
       } else {
         showToast(response?.message, 'error');
       }
@@ -102,6 +109,9 @@ const useAddTransaction = ({
     loading,
     createTransaction,
     closeModal,
+    succesModalOpen,
+    setSuccessModalOpen,
+    data
   };
 };
 

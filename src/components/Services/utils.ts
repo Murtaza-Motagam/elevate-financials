@@ -17,6 +17,7 @@ import {
   Users,
 } from 'lucide-react';
 import UpiIcon from '@/icons/Upi';
+import { protectedRoutes } from '@/lib/routes';
 
 const routes = {
   accountActivity: `/profile/?tab=${profile_tabs.dashboard}`,
@@ -29,7 +30,7 @@ const routes = {
   billpay: '#',
   upi: '#',
   qrPay: '#',
-  oneTime: '#',
+  oneTime: protectedRoutes.oneTimeTransfer,
   payContact: '#',
   manageBen: '#',
 };

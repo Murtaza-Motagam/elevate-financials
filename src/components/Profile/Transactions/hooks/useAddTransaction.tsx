@@ -3,7 +3,7 @@ import { showToast } from '@/lib/common';
 import { endpoints } from '@/lib/apiEndpoint';
 import { transactionSchema } from '@/schema/transactionSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { SetStateAction, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 interface useAddTransactionProps {
@@ -34,8 +34,8 @@ const useAddTransaction = ({
   setOpen = () => {},
   getTransaction = () => {},
 }: {
-  setOpen: React.Dispatch<SetStateAction<boolean>>;
-  getTransaction?: () => void;
+  setOpen?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
+  getTransaction?: () => void | undefined;
 }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [succesModalOpen, setSuccessModalOpen] = useState<boolean>(false);
@@ -63,11 +63,10 @@ const useAddTransaction = ({
 
   const createTransaction = async (data: useAddTransactionProps) => {
     setLoading(true);
-    const { receiverAccNum, amt, ifscCodeNumber, ...rest } = data;
+    const { receiverAccNum, amt, ...rest } = data;
     const payload = {
       receiverAccNum: parseInt(receiverAccNum),
       amt: parseInt(amt),
-      ifscCodeNumber: parseInt(ifscCodeNumber),
       ...rest,
     };
     try {

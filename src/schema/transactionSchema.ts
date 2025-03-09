@@ -16,5 +16,5 @@ export const transactionSchema = yup.object().shape({
       return Number(value) > 0;
     }),
   remarks: yup.string().optional(),
-  transactionTypeNm: yup.string().required('Transaction type is required'),
+  transactionTypeNm: yup.string().required(REQUIRED),
 });

@@ -38,7 +38,7 @@ const Dashboard = () => {
               <p className='text-lg font-semibold flex items-center space-x-3'>
                 INR &nbsp;
                 <IndianRupee size={15} />{' '}
-                {analyticsData?.totalRevenue
+                {analyticsData?.totalRevenue?.length > 0
                   ? `${analyticsData?.totalRevenue?.[0]?.totalBalance}.00`
                   : 0}
               </p>

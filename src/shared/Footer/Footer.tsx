@@ -5,7 +5,7 @@ import LazyLoadImg from '@/widgets/LazyLoadImg';
 
 const Footer = () => {
   return (
-    <footer className='border-t-2 bg-gray-50 dark:bg-transparent py-10'>
+    <footer className='border-t-2 bg-gray-50 dark:bg-transparent py-10 !z-[40]'>
       <div className='container mx-auto px-6 lg:px-16'>
         {/* Grid Layout */}
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>

@@ -22,8 +22,8 @@ export const documentDetails = yup.object().shape({
     .required(REQUIRED),
   driverLicence: yup.string().optional(),
   profileImg: yup.string().optional(),
-  addressProofType: yup.string().required(REQUIRED),
-  addressProofImg: yup.string().required(REQUIRED),
+  addressProofType: yup.string().optional(),
+  addressProofImg: yup.string().optional(),
 });
 
 export const bankingDetails = yup.object().shape({

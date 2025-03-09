@@ -1,7 +1,6 @@
 import React, { SetStateAction } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 import LazyLoadImg from '@/widgets/LazyLoadImg';
-import { backendUrlPreview } from '@/lib/constant';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 interface ProfileImgProps {
@@ -22,7 +21,7 @@ const ProfileImage: React.FC<ProfileImgProps> = ({ open, setOpen = () => {}, use
       <DialogContent>
         {userInfo?.documentDetails?.profileImg && (
           <LazyLoadImg
-            src={`${backendUrlPreview}/${userInfo?.documentDetails?.profileImg}`}
+            src={userInfo?.documentDetails?.profileImg}
             className='mt-2 w-full h-full object-contain'
           />
         )}

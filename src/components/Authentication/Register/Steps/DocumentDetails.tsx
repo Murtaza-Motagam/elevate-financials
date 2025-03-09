@@ -70,7 +70,6 @@ const DocumentDetails: React.FC<DocumentDetailsProps> = ({ onNext = () => {} }) 
           clearErrors={hookform.clearErrors}
           setError={hookform.setError}
           label='Upload address document'
-          mandatory
         />
       )}
       <div className='md:col-span-2 w-full flex items-center justify-center mt-3'>

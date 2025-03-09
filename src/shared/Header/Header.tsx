@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import useHeader from './hooks/useHeader';
 import { authenticationRoutes, protectedRoutes, publicRoutes } from '@/lib/routes';
-import { backendUrlPreview, navLinks } from '@/lib/constant';
+import { navLinks } from '@/lib/constant';
 import NextLink from '@/components/common/NextLink';
 import { getActiveClass } from '@/lib/common';
 import { ModeToggle } from '@/components/common/ModeToggle';
@@ -90,7 +90,7 @@ const Header = () => {
                 <div className=' rounded-full overflow-hidden cursor-pointer relative group'>
                   {mainUser?.profileImg ? (
                     <Avatar>
-                      <AvatarImage src={`${backendUrlPreview}/${mainUser?.profileImg}`} />
+                      <AvatarImage src={mainUser?.profileImg} />
                       <AvatarFallback>UR</AvatarFallback>
                     </Avatar>
                   ) : (

@@ -3,16 +3,26 @@ import React from 'react';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { ArrowLeftRight, IndianRupee } from 'lucide-react';
 import Chart from '@/widgets/Chart';
-import useDashboard from './useDashboard';
+import useDashboard, { latestTransactionType } from './useDashboard';
 import { protectedRoutes } from '@/lib/routes';
 import DefaultButton from '@/widgets/DefaultButton';
 import { useRouter } from 'next/navigation';
-import LazyLoadImg from '@/widgets/LazyLoadImg';
 import { profile_tabs } from '@/lib/constant';
+import PageLoader from '@/shared/Loaders/PageLoader';
+import AvatarDefault from '@/widgets/AvatarDefault';
+import TextToImage from '@/components/common/TextToImage';
 
 const Dashboard = () => {
-  const { barChartData, pieChartData, bankingRadialData, lineChartData } = useDashboard();
+  const { bankingRadialData, lineChartData, analyticsData, loading } = useDashboard();
   const router = useRouter();
+
+  if (loading) {
+    return (
+      <div className='w-full flex items-center justify-center h-screen'>
+        <PageLoader />
+      </div>
+    );
+  }
 
   return (
     <div className='w-full p-2 !pb-10'>
@@ -21,10 +31,15 @@ const Dashboard = () => {
         <Card className='md:col-span-8'>
           <CardContent>
             <div className='space-y-1 my-5'>
-              <p className='text-sm text-slate-600 dark:text-gray-300 font-semibold'>Revenue</p>
+              <p className='text-sm text-slate-600 dark:text-gray-300 font-semibold'>
+                Balance history
+              </p>
               <p className='text-lg font-semibold flex items-center space-x-3'>
                 INR &nbsp;
-                <IndianRupee size={15} /> 7,852.00
+                <IndianRupee size={15} />{' '}
+                {analyticsData?.totalRevenue
+                  ? `${analyticsData?.totalRevenue?.[0]?.totalBalance}.00`
+                  : 0}
               </p>
               <p className='text-xs text-gray-700 dark:text-gray-400'>
                 <span className='text-green-500'>▲ 2.1%</span> vs last week
@@ -32,9 +47,14 @@ const Dashboard = () => {
             </div>
             <Chart
               type='bar'
-              data={barChartData}
+              data={analyticsData.transactionHistory}
               colors={['#6366F1', '#60A5FA', '#A78BFA']}
-              keys={['revenue', 'transactions']}
+              keys={['name', 'totalAmount', 'totalBalance']}
+              keyLabels={{
+                name: 'Name',
+                totalAmount: 'Total amount',
+                totalBalance: 'Balance month end',
+              }}
             />
           </CardContent>
         </Card>
@@ -43,12 +63,14 @@ const Dashboard = () => {
         <Card className='md:col-span-4'>
           <CardContent>
             <div className='text-sm my-5 font-semibold text-slate-600 dark:text-gray-300'>
-              <h2 className=''>Accounts stats</h2>
-              <p className='text-xs mt-1 font-normal text-gray-400'>
-                From 1 february - 1 march 2025
-              </p>
+              <h2 className=''>Transaction type statistics</h2>
+              <p className='text-xs mt-1 font-normal text-gray-400'>From created time</p>
             </div>
-            <Chart type='pie' data={pieChartData} colors={['#6366F1', '#60A5FA', '#A78BFA']} />
+            <Chart
+              type='pie'
+              data={analyticsData.transactionType}
+              colors={['#6366F1', '#60A5FA', '#A78BFA']}
+            />
           </CardContent>
         </Card>
       </div>
@@ -77,26 +99,33 @@ const Dashboard = () => {
             <div className='text-sm my-5 font-semibold text-slate-600 dark:text-gray-300'>
               <h2 className=''>Recent transactions</h2>
               <p className='text-xs mt-1 font-normal text-gray-400'>
-                From 1 february - 1 march 2025
+                Last four transaction from your account.
               </p>
               <div className='mt-5'>
-                {[1, 2, 3, 4].map((val) => (
-                  <div
-                    key={val}
-                    className='flex items-center justify-between gap-x-3 border-b p-2 rounded-[6px] my-1.5'
-                  >
-                    <div className='flex items-center gap-x-2'>
-                      <LazyLoadImg src='/images/logo.png' className='w-10 h-10' />
-                      <p className='text-base font-normal flex flex-col items-start justify-start text-gray-700 dark:text-gray-200'>
-                        <span>Jane smith</span>
-                        <span className='text-xs text-gray-500 '>[ Current A/C ]</span>
+                {analyticsData.latestTransactions.map(
+                  (val: latestTransactionType, index: number) => (
+                    <div
+                      key={index}
+                      className='flex items-center justify-between gap-x-3 border-b p-2 rounded-[6px] my-1.5'
+                    >
+                      <div className='flex items-center gap-x-2'>
+                        {/* <LazyLoadImg src={val.profileImg} className='w-10 h-10 rounded-full' /> */}
+                        {val?.profileImg ? (
+                          <AvatarDefault profileImg={val.profileImg} />
+                        ) : (
+                          <TextToImage nameText={val.name} />
+                        )}
+                        <p className='text-base font-normal flex flex-col items-start justify-start text-gray-700 dark:text-gray-200'>
+                          <span>{val.name}</span>
+                          <span className='text-xs text-gray-500 '>{val.accountType}</span>
+                        </p>
+                      </div>
+                      <p className='text-sm font-normal text-gray-700 dark:text-gray-200'>
+                        INR {val.amt && `${val.amt}/-`}
                       </p>
                     </div>
-                    <p className='text-sm font-normal text-gray-700 dark:text-gray-200'>
-                      INR 9000/-
-                    </p>
-                  </div>
-                ))}
+                  ),
+                )}
               </div>
             </div>
           </CardContent>

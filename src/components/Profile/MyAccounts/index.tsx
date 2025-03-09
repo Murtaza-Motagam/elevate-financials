@@ -2,7 +2,6 @@
 import TextToImage from '@/components/common/TextToImage';
 import { Button } from '@/components/ui/button';
 import { dateTimeDisplay, formatWithCommas, getUserInfo } from '@/lib/common';
-import { backendUrlPreview } from '@/lib/constant';
 import LazyLoadImg from '@/widgets/LazyLoadImg';
 import { Card, CardContent } from '@/components/ui/card';
 import {
@@ -99,7 +98,7 @@ const MyAccounts = () => {
         <div className='relative w-36 h-36 rounded-full shadow-md overflow-hidden border-2 border-gray-300 dark:border-gray-700'>
           {userInfo?.documentDetails?.profileImg ? (
             <LazyLoadImg
-              src={`${backendUrlPreview}/${userInfo?.documentDetails?.profileImg}`}
+              src={userInfo?.documentDetails?.profileImg}
               className='w-full h-full object-cover'
             />
           ) : (

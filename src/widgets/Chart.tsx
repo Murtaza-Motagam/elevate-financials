@@ -24,6 +24,8 @@ type ChartProps = {
   data: { name: string; value?: number; color?: string; transactions?: number }[]; // Pie & Radial charts use 'value'
   keys?: string[]; // For bar and line charts
   colors?: string[]; // Colors for each dataset
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  keyLabels?: any;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -46,17 +48,28 @@ const CustomLegend = ({ payload }: { payload?: any[] }) => {
   );
 };
 
-const Chart = ({ type, data, keys = [], colors = ['#6366F1', '#CBD5E1'] }: ChartProps) => {
+const Chart = ({
+  type,
+  data,
+  keys = [],
+  colors = ['#6366F1', '#CBD5E1'],
+  keyLabels,
+}: ChartProps) => {
   const renderChart = () => {
     switch (type) {
       case 'bar':
         return (
           <ReBarChart data={data}>
-            <XAxis dataKey='name' />
-            <YAxis />
-            <Tooltip wrapperClassName='capitalize' />
+            <XAxis dataKey='name' tickFormatter={() => keyLabels.name} />
+            <YAxis tickFormatter={(value) => value.toLocaleString()} />
+            <Tooltip formatter={(value, name) => [value, keyLabels[name] || name]} />
             {keys.map((key, index) => (
-              <Bar key={key} dataKey={key} fill={colors[index] || '#6366F1'} />
+              <Bar
+                key={key}
+                dataKey={key}
+                name={keyLabels[key] || key}
+                fill={colors[index] || '#6366F1'}
+              />
             ))}
           </ReBarChart>
         );

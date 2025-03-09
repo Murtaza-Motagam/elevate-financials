@@ -1,7 +1,7 @@
 'use client';
 import Details from '@/components/common/Details';
 import TextToImage from '@/components/common/TextToImage';
-import { backendUrl, backendUrlPreview, compNm, KEYS } from '@/lib/constant';
+import { backendUrl, compNm, KEYS } from '@/lib/constant';
 import { LocalStorage } from '@/lib/localStorage';
 import LayoutWrapper from '@/shared/wrapper/LayoutWrapper';
 import LazyLoadImg from '@/widgets/LazyLoadImg';
@@ -153,7 +153,7 @@ Balance: ${user?.accountDetails?.balance}
               <div className='name flex flex-col items-center space-y-3'>
                 {user?.documentDetails?.profileImg ? (
                   <LazyLoadImg
-                    src={`${backendUrlPreview}/${user?.documentDetails?.profileImg}`}
+                    src={user?.documentDetails?.profileImg}
                     className='w-14 h-14 object-contain border-2 border-gray-800 dark:border-2 dark:border-gray-200 rounded-full'
                   />
                 ) : (

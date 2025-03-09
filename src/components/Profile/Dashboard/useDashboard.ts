@@ -1,24 +1,33 @@
-const useDashboard = () => {
-  const barChartData = [
-    { name: 'Jan', revenue: 12000, transactions: 800 },
-    { name: 'Feb', revenue: 15000, transactions: 950 },
-    { name: 'Mar', revenue: 18000, transactions: 1100 },
-    { name: 'Apr', revenue: 17000, transactions: 1050 },
-    { name: 'May', revenue: 19000, transactions: 1200 },
-    { name: 'June', revenue: 21000, transactions: 1300 },
-    { name: 'July', revenue: 25000, transactions: 1450 },
-    { name: 'Aug', revenue: 24000, transactions: 1400 },
-    { name: 'Sep', revenue: 23000, transactions: 1350 },
-    { name: 'Oct', revenue: 22000, transactions: 1300 },
-    { name: 'Nov', revenue: 20000, transactions: 1250 },
-    { name: 'Dec', revenue: 27000, transactions: 1600 },
-  ];
+import apiRequest from '@/lib/api';
+import { endpoints } from '@/lib/apiEndpoint';
+import { useEffect, useState } from 'react';
 
-  const pieChartData = [
-    { name: 'Savings', value: 35 },
-    { name: 'Current', value: 25 },
-    { name: 'Fixed Deposit', value: 20 },
-  ];
+interface apiRequestProps {
+  url: string;
+  method: string;
+  success: string;
+  message: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data?: any;
+}
+
+interface transactionHistoryType {
+  name?: string;
+  totalBalance?: number;
+  totalAmount?: number;
+}
+export interface latestTransactionType {
+  name?: string;
+  amt?: number;
+  accountType?: string;
+  profileImg: string;
+}
+
+const useDashboard = () => {
+  const [loading, setLoading] = useState<boolean>(true);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [analyticsData, setAnalyticsData] = useState<any>({});
+
   const lineChartData = [
     { name: 'Jan', value: 400 },
     { name: 'Feb', value: 600 },
@@ -41,11 +50,37 @@ const useDashboard = () => {
     { name: 'Credit', value: 55, color: '#2ecc71' },
   ];
 
+  const getAnalytics = async () => {
+    try {
+      const response = await apiRequest<apiRequestProps>({
+        url: endpoints.getAnalytics,
+        method: 'get',
+      });
+      const resData = response.data;
+      const totalRevenue = resData.transactionHistory
+        .filter((data: transactionHistoryType) => data.totalBalance !== 0)
+        .map((val: transactionHistoryType) => ({
+          totalBalance: val.totalBalance,
+        }));
+      resData.totalRevenue = totalRevenue;
+      console.log('resData: ', resData);
+      setAnalyticsData(resData);
+    } catch (error) {
+      console.log('error: ', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getAnalytics();
+  }, []);
+
   return {
-    barChartData,
-    pieChartData,
     bankingRadialData,
     lineChartData,
+    analyticsData,
+    loading,
   };
 };
 

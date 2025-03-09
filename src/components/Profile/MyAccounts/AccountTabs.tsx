@@ -24,7 +24,7 @@ export interface AccountTabsProps {
 
 const AccountTabs = ({ accInfo }: AccountTabsProps) => {
   return (
-    <div className='-ml-6 p-6'>
+    <div className='-ml-6 p-6 pb-32'>
       {/* Page Title & Notifications */}
       <div className='flex justify-between border-b border-gray-300 pb-3 items-center mb-6'>
         <h1 className='font-bold text-xl text-gray-800 dark:text-white'>Account details</h1>

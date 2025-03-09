@@ -1,6 +1,6 @@
 import NextLink from '@/components/common/NextLink';
 import { SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { backendUrlPreview, navLinks } from '@/lib/constant';
+import { navLinks } from '@/lib/constant';
 import { getActiveClassMobile } from '@/lib/common';
 import React from 'react';
 import BasicLoader from '../Loaders/BasicLoader';
@@ -51,7 +51,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({ theme, pathname, loading, i
             >
               {user?.profileImg ? (
                 <Avatar>
-                  <AvatarImage src={`${backendUrlPreview}/${user?.profileImg}`} />
+                  <AvatarImage src={user?.profileImg} />
                   <AvatarFallback>UR</AvatarFallback>
                 </Avatar>
               ) : (

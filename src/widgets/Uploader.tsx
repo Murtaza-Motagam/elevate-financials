@@ -8,7 +8,7 @@ import 'cropperjs/dist/cropper.css'; // Import Cropper styles
 import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'; // ShadCN Modal components
 import axios from 'axios';
-import { backendUrlPreview, backendUrlUpload } from '@/lib/constant';
+import { backendUrlUpload } from '@/lib/constant';
 import { FieldValues, UseFormClearErrors, UseFormSetError, Path } from 'react-hook-form';
 import DefaultButton from './DefaultButton';
 import RollLoader from '@/shared/Loaders/RollLoader';
@@ -83,7 +83,7 @@ const Uploader = <T extends FieldValues>({
           });
           const resData = response.data;
           if (resData?.success) {
-            setImg(resData?.data?.path); // Update img state with the uploaded file path
+            setImg(resData?.imageUrl); // Update img state with the uploaded file path
             clearErrors(name); // Clear any errors for this field
           } else {
             showToast(resData?.message, 'error');
@@ -149,7 +149,7 @@ const Uploader = <T extends FieldValues>({
         {preview && !showCropperModal && !uploading && (
           <div className='mt-4 relative pb-5'>
             <LazyLoadImg
-              src={`${backendUrlPreview}/${preview}`}
+              src={preview}
               alt='Preview'
               className='mx-auto h-32 w-32 object-cover rounded-md border'
             />

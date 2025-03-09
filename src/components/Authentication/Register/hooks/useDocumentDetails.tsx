@@ -17,8 +17,8 @@ interface useDocumentDetailsFieldProps {
   panNo: string;
   profileImg?: string;
   driverLicence?: string;
-  addressProofType: string;
-  addressProofImg: string;
+  addressProofType?: string;
+  addressProofImg?: string;
 }
 
 const useDocumentDetails = ({ onNext = () => {} }: useDocumentDetailsProps) => {

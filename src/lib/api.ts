@@ -1,6 +1,7 @@
 import axios, { Method } from 'axios';
 import { LocalStorage } from './localStorage';
 import { backendUrl } from './constant';
+import { decryptData, encryptData } from './encryptions';
 
 interface ApiRequestArgs {
   url: string;
@@ -22,6 +23,7 @@ const apiRequest = async <T = unknown>({
   try {
     const { token } = LocalStorage.get('authDetails');
     const fullUrl = `${backendUrl}${url}`;
+    const encryptedPayload = encryptData(data);
     const response = await axios({
       url: fullUrl,
       method,
@@ -30,10 +32,10 @@ const apiRequest = async <T = unknown>({
         ...headers,
       },
       params,
-      data,
+      data: { encrypted: encryptedPayload },
     });
-
-    return response.data;
+    const decryptedData = decryptData(response.data.encrypted);
+    return JSON.parse(decryptedData);
   } catch (error) {
     console.error('API Error:', error);
     throw error;

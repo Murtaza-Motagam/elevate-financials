@@ -8,10 +8,7 @@ export async function GET() {
     const token = await getCookie(COOKIE_KEYS.token);
     const user = await getCookie(COOKIE_KEYS.user);
 
-    return NextResponse.json(
-      { success: true, token: token, data: user },
-      { status: 200 },
-    );
+    return NextResponse.json({ success: true, token: token, data: user }, { status: 200 });
   } catch (error) {
     console.error('Error fetching token:', error);
     return NextResponse.json({ success: false, message: 'Server error' }, { status: 500 });
@@ -61,7 +58,6 @@ export async function PUT(req: Request) {
 }
 
 export async function DELETE() {
-
   await clearCookies();
 
   return NextResponse.json({ success: true, message: 'User logged out successfully' });

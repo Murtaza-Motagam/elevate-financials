@@ -1,11 +1,9 @@
 'use client';
 import Details from '@/components/common/Details';
 import TextToImage from '@/components/common/TextToImage';
-import { backendUrl, compNm, KEYS } from '@/lib/constant';
-import { LocalStorage } from '@/lib/localStorage';
+import { compNm } from '@/lib/constant';
 import LayoutWrapper from '@/shared/wrapper/LayoutWrapper';
 import LazyLoadImg from '@/widgets/LazyLoadImg';
-import axios from 'axios';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
   CircleCheck,
@@ -25,14 +23,23 @@ import { capitalizeFirstLetter, copyToClipboard } from '@/lib/common';
 import DefaultButton from '@/widgets/DefaultButton';
 import { useRouter } from 'next/navigation';
 import { publicRoutes } from '@/lib/routes';
+import apiRequest from '@/lib/api';
+import { endpoints } from '@/lib/apiEndpoint';
+
+interface apiRequestProps {
+  url: string;
+  method: string;
+  success: string;
+  message: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  details?: any;
+}
 
 const BankingDetails = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [copy, setCopy] = useState<boolean>(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [user, setUser] = useState<any>();
-  const checkForModule = LocalStorage.getJSON(KEYS.authDetails);
-  const url = `${backendUrl}/user/get-user`;
   const router = useRouter();
 
   const handleCopy = () => {
@@ -55,14 +62,9 @@ Balance: ${user?.accountDetails?.balance}
   const getUser = async () => {
     setLoading(true);
     try {
-      const response = await axios({
-        url,
-        method: 'get',
-        headers: {
-          Authorization: checkForModule?.token,
-        },
+      const resData = await apiRequest<apiRequestProps>({
+        url: endpoints.getUser,
       });
-      const resData = response.data;
       setUser(resData?.details || '');
     } catch (error) {
       console.error(error);
@@ -73,7 +75,6 @@ Balance: ${user?.accountDetails?.balance}
 
   useEffect(() => {
     getUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

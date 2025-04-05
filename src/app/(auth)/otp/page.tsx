@@ -1,8 +1,8 @@
-import React from 'react'
-import OtpVerify from '@/components/Authentication/OtpVerify'
+import React from 'react';
+import OtpVerify from '@/components/Authentication/OtpVerify';
 
 const OtpPage = () => {
-    return <OtpVerify />
-}
+  return <OtpVerify />;
+};
 
-export default OtpPage
+export default OtpPage;

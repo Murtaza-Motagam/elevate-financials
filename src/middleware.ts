@@ -14,10 +14,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  if (
-    token &&
-    authRoutes.has(request.nextUrl.pathname)
-  ) {
+  if (token && authRoutes.has(request.nextUrl.pathname)) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 

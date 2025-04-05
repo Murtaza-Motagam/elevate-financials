@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
-import { backendUrl, KEYS } from '@/lib/constant';
+import { KEYS } from '@/lib/constant';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import { LocalStorage } from '@/lib/localStorage';
@@ -10,10 +10,22 @@ import { publicRoutes } from '@/lib/routes';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useUser } from '@/context/UserContext';
 import { loginSchema } from '@/schema/loginSchema';
+import apiRequest from '@/lib/api';
+import { endpoints } from '@/lib/apiEndpoint';
 
 interface LoginValues {
   username: string;
   password: string;
+}
+
+interface apiRequestProps {
+  url: string;
+  method: string;
+  success: string;
+  message: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  user?: any;
+  authtoken: string;
 }
 
 const useLogin = () => {
@@ -33,17 +45,14 @@ const useLogin = () => {
 
   const onSubmit = async (data: LoginValues) => {
     setLoading(true);
-
-    const url = `${backendUrl}/auth/login`;
-    const response = await axios({
-      url,
+    const resData = await apiRequest<apiRequestProps>({
+      url: endpoints.login,
+      method: 'post',
       data: {
         username: data?.username,
         password: data?.password,
       },
-      method: 'post',
     });
-    const resData = response.data;
     if (resData?.success) {
       const LocalData = {
         token: resData?.authtoken,

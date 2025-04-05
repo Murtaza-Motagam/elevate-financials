@@ -1,9 +1,9 @@
+import apiRequest from '@/lib/api';
+import { endpoints } from '@/lib/apiEndpoint';
 import { showToast } from '@/lib/common';
-import { backendUrl } from '@/lib/constant';
 import { LocalStorage } from '@/lib/localStorage';
 import { personalDetails } from '@/schema/register';
 import { yupResolver } from '@hookform/resolvers/yup';
-import axios from 'axios';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -18,6 +18,15 @@ interface personalDetailFieldProps {
   dob: Date;
   mobNo: string;
   email: string;
+}
+
+interface apiRequestProps {
+  url: string;
+  method: string;
+  success: string;
+  message: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  details?: any;
 }
 
 const usePersonalDetails = ({ onNext = () => {} }: usePersonalDetailProps) => {
@@ -46,13 +55,11 @@ const usePersonalDetails = ({ onNext = () => {} }: usePersonalDetailProps) => {
       gender: genderNm,
     };
     try {
-      const url = `${backendUrl}/auth/save-personal-details`;
-      const response = await axios({
-        url,
-        data: { personalDetails },
+      const resData = await apiRequest<apiRequestProps>({
+        url: endpoints.savePersonalDetails,
         method: 'post',
+        data: { personalDetails },
       });
-      const resData = response.data;
       if (resData?.success) {
         LocalStorage.setJSON('personalDetails', resData?.details?.personalDetails);
         showToast(resData?.message, 'success');

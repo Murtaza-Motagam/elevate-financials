@@ -155,5 +155,5 @@ export const profile_tabs = {
 
 export const COOKIE_KEYS = {
   user: 'user',
-  token: 'token'
-}
+  token: 'token',
+};

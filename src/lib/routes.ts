@@ -19,4 +19,3 @@ export const authenticationRoutes = {
   otp: '/otp',
   forgotPassword: '/forgot-password',
 };
-

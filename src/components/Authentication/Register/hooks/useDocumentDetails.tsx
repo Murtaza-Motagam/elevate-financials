@@ -1,9 +1,10 @@
+import apiRequest from '@/lib/api';
+import { endpoints } from '@/lib/apiEndpoint';
 import { showToast, formattedPath } from '@/lib/common';
-import { backendUrl, KEYS } from '@/lib/constant';
+import { KEYS } from '@/lib/constant';
 import { LocalStorage } from '@/lib/localStorage';
 import { documentDetails } from '@/schema/register';
 import { yupResolver } from '@hookform/resolvers/yup';
-import axios from 'axios';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -19,6 +20,15 @@ interface useDocumentDetailsFieldProps {
   driverLicence?: string;
   addressProofType?: string;
   addressProofImg?: string;
+}
+
+interface apiRequestProps {
+  url: string;
+  method: string;
+  success: string;
+  message: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  details?: any;
 }
 
 const useDocumentDetails = ({ onNext = () => {} }: useDocumentDetailsProps) => {
@@ -58,13 +68,11 @@ const useDocumentDetails = ({ onNext = () => {} }: useDocumentDetailsProps) => {
       },
     };
     try {
-      const url = `${backendUrl}/auth/save-document-details`;
-      const response = await axios({
-        url,
-        data: payload,
+      const resData = await apiRequest<apiRequestProps>({
+        url: endpoints.saveDocumentDetails,
         method: 'post',
+        data: payload,
       });
-      const resData = response.data;
       if (resData?.success) {
         LocalStorage.setJSON(KEYS.documentDetails, resData?.details);
         showToast(resData?.message, 'success');

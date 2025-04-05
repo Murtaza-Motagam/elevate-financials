@@ -45,7 +45,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
     field: { value, onChange },
   } = useController({ name, control });
 
-  const fallbackDate = new Date(endYear, 0, 1)
+  const fallbackDate = new Date(endYear, 0, 1);
   const date = value ? new Date(value) : fallbackDate;
 
   const months = [

@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import axios from 'axios';
 import { backendUrl, KEYS } from './constant';
 import { LocalStorage } from './localStorage';
+import { decryptData } from './encryptions';
 
 export const isAuthenticated = () => {
   return Cookies.get('Authorization-token');
@@ -87,7 +88,8 @@ export const getUserInfo = async () => {
         Authorization: checkForModule?.token,
       },
     });
-    const resData = response.data;
+    const decryptedData = decryptData(response.data.encrypted);
+    const resData = JSON.parse(decryptedData);
     return resData;
   } catch (error) {
     console.error(error);

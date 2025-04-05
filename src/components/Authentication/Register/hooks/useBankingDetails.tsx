@@ -1,19 +1,28 @@
 import { showToast } from '@/lib/common';
-import { backendUrl, KEYS } from '@/lib/constant';
+import { KEYS } from '@/lib/constant';
 import { LocalStorage } from '@/lib/localStorage';
 import { bankingDetails } from '@/schema/register';
 import { yupResolver } from '@hookform/resolvers/yup';
-import axios from 'axios';
 import { useState } from 'react';
-import Cookies from 'js-cookie';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { authenticationRoutes } from '@/lib/routes';
+import apiRequest from '@/lib/api';
+import { endpoints } from '@/lib/apiEndpoint';
 
 interface useBankingProps {
   accountType: string;
   username: string;
   password: string;
+}
+
+interface apiRequestProps {
+  url: string;
+  method: string;
+  success: string;
+  message: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  details?: any;
 }
 
 const useBankingDetails = () => {
@@ -46,13 +55,11 @@ const useBankingDetails = () => {
       },
     };
     try {
-      const url = `${backendUrl}/auth/save-banking-details`;
-      const response = await axios({
-        url,
-        data: payload,
+      const resData = await apiRequest<apiRequestProps>({
+        url: endpoints.saveBankingDetails,
         method: 'post',
+        data: payload,
       });
-      const resData = response.data;
       if (resData?.success) {
         showToast(resData?.message, 'success');
         router.push(authenticationRoutes.otp);

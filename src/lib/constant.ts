@@ -49,6 +49,7 @@ export const genderOptions = [
 ];
 
 export const PROTECTED_ROUTES = ['/profile', '/services', '/one-time-transfer'];
+export const AUTHENTICATION_ROUTES = ['/register', '/login', '/otp'];
 
 export const accountTypeOptions = [
   { value: 'Savings', label: 'Savings' },
@@ -151,3 +152,8 @@ export const profile_tabs = {
   transaction: 2,
   contact: 7,
 };
+
+export const COOKIE_KEYS = {
+  user: 'user',
+  token: 'token'
+}

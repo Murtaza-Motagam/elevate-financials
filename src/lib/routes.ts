@@ -16,5 +16,7 @@ export const protectedRoutes = {
 export const authenticationRoutes = {
   register: '/register',
   login: '/login',
+  otp: '/otp',
   forgotPassword: '/forgot-password',
 };
+

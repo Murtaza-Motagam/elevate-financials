@@ -8,7 +8,7 @@ import { useState } from 'react';
 import Cookies from 'js-cookie';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import { publicRoutes } from '@/lib/routes';
+import { authenticationRoutes } from '@/lib/routes';
 
 interface useBankingProps {
   accountType: string;
@@ -54,32 +54,8 @@ const useBankingDetails = () => {
       });
       const resData = response.data;
       if (resData?.success) {
-        const LocalData = {
-          token: resData?.authtoken,
-        };
-        Cookies.set('Authorization-token', resData.authtoken, { expires: 7, secure: true });
-        LocalStorage.setJSON(KEYS.authDetails, LocalData);
-        const { data } = resData;
-        await axios.post('/api/user', {
-          user: {
-            id: data?._id,
-            profileImg: data?.documentDetails?.profileImg,
-            firstName: data?.personalDetails?.firstName,
-            lastName: data?.personalDetails?.lastName,
-            name: `${data?.personalDetails?.firstName} ${data?.personalDetails?.lastName}`,
-            username: data?.authentication?.username,
-            mobNo: data?.personalDetails?.mobNo,
-            status: data?.status,
-            email: data?.personalDetails?.email,
-            role: data?.authentication?.roles?.[0],
-            accountDetails: data?.accountDetails,
-          },
-          token: resData?.authtoken,
-        });
         showToast(resData?.message, 'success');
-        LocalStorage.remove(KEYS.personalDetails);
-        LocalStorage.remove(KEYS.documentDetails);
-        router.push(publicRoutes.bankingDetail);
+        router.push(authenticationRoutes.otp);
       } else {
         showToast(resData?.message, 'error');
       }

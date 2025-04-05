@@ -3,4 +3,5 @@ export const endpoints = {
   createTransaction: '/transactions/create-transaction',
   updateProfile: '/user/update-profile',
   getAnalytics: '/user/get-analytics',
+  verifyOtp: '/auth/verify-otp'
 };

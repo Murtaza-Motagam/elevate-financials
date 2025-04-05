@@ -29,16 +29,16 @@ interface UserFieldProps {
 
 const UserContext = createContext<UserContextProps>({
   mainUser: null,
-  setMainUser: () => {},
+  setMainUser: () => { },
   contextLoading: true,
-  fetchUser: () => {},
+  fetchUser: () => { },
 });
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [mainUser, setMainUser] = useState<UserFieldProps | null>(null);
   const [contextLoading, setContextLoading] = useState(true);
   const pathname = usePathname();
-  const authenticatedRoutes = [authenticationRoutes.register, authenticationRoutes.login];
+  const authenticatedRoutes = [authenticationRoutes.register, authenticationRoutes.login, authenticationRoutes.otp];
 
   // Fetch user data from session API
   const fetchUser = async () => {

@@ -6,6 +6,7 @@ import SingleSelect from '@/widgets/SingleSelect';
 import { genderOptions } from '@/lib/constant';
 import DefaultButton from '@/widgets/DefaultButton';
 import RollLoader from '@/shared/Loaders/RollLoader';
+import { getYear } from 'date-fns';
 
 interface PersonalDetailsProps {
   onNext: () => void;
@@ -70,6 +71,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({ onNext }) => {
         control={hookform.control}
         placeholder='Select date of birth'
         error={hookform.errors?.dob?.message}
+        endYear={getYear(new Date()) - 18}
         mandatory
       />
       <div className='md:col-span-2 w-full flex items-center justify-center mt-3'>

@@ -4,9 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { UserProvider } from '@/context/UserContext';
-import getConfig from 'next/config';
 
-const { publicRuntimeConfig } = getConfig();
 
 export const metadata: Metadata = {
   title: 'Elevate Financials | Secure Banking, Credit Cards, Loans & Rewards',
@@ -28,7 +26,7 @@ export const metadata: Metadata = {
     title: 'Elevate Financials | Secure Banking & Financial Solutions',
     description:
       'Discover Elevate Financials: secure banking solutions, credit cards, loans, and exclusive rewards. Manage your finances with confidence.',
-    url: publicRuntimeConfig.NEXT_PUBLIC_BASE_URL,
+    url: process.env.NEXT_PUBLIC_BASE_URL,
     type: 'website',
     images: [
       {

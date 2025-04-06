@@ -1,4 +1,4 @@
-'use client'; // Required for Next.js App Router
+'use client';
 
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
@@ -29,9 +29,9 @@ interface UserFieldProps {
 
 const UserContext = createContext<UserContextProps>({
   mainUser: null,
-  setMainUser: () => {},
+  setMainUser: () => { },
   contextLoading: true,
-  fetchUser: () => {},
+  fetchUser: () => { },
 });
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
@@ -42,6 +42,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     authenticationRoutes.register,
     authenticationRoutes.login,
     authenticationRoutes.otp,
+    authenticationRoutes.forgotPassword,
   ];
 
   // Fetch user data from session API

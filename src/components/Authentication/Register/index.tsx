@@ -46,7 +46,7 @@ const Register = () => {
                   Elevate Financials
                 </NextLink>
                 <h2 className='text-2xl md:text-3xl flex items-center gap-x-2 mb-2 flex-wrap font-semibold'>
-                  Create Your Account
+                  Create your account
                 </h2>
                 <p className='text-xs mb-3'>Enter to get tons of rewards and cashbacks.</p>
               </div>

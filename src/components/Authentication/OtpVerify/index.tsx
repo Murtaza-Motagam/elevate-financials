@@ -41,9 +41,10 @@ const OtpVerify = () => {
             onChange={setOtp}
             numInputs={6}
             renderSeparator={<span className='mx-1' />}
-            renderInput={(props) => (
+            renderInput={(props, index) => (
               <input
                 {...props}
+                autoFocus={index === 0}
                 className='!w-10 !h-10 md:!w-14 md:!h-14 rounded-[3px] border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-center text-xl font-semibold text-gray-900 dark:text-white focus:outline-none focus:border-blue-600 dark:focus:border-blue-400 transition-all'
               />
             )}

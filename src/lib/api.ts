@@ -34,11 +34,14 @@ const apiRequest = async <T = unknown>({
       params,
       data: { encrypted: encryptedPayload },
     });
-    const decryptedData = decryptData(response.data.encrypted);
-    return JSON.parse(decryptedData);
-  } catch (error) {
-    console.error('API Error:', error);
-    throw error;
+    if (response.data.encrypted) {
+      const decryptedData = decryptData(response.data.encrypted);
+      return JSON.parse(decryptedData);
+    }
+    return response.data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    console.error(error);
   }
 };
 

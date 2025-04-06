@@ -100,7 +100,6 @@ const useEditProfile = ({
       }
     } catch (err) {
       console.error('error: ', err);
-      showToast('Some error has occurred. Please wait for some time', 'error');
     } finally {
       reset(defaultValues);
       setLoading(false);

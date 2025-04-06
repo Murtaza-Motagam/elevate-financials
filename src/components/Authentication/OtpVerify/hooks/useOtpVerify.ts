@@ -40,7 +40,7 @@ const useOtpVerify = () => {
         method: 'post',
         data: {
           email: getPersonalData?.email,
-          otpNumber: otp,
+          otpNumber: otp?.toString(),
         },
       });
       if (resData?.success) {
@@ -75,7 +75,6 @@ const useOtpVerify = () => {
       }
     } catch (err) {
       console.error('error: ', err);
-      showToast('Some error has occurred. Please wait for some time', 'error');
     } finally {
       setLoading(false);
     }

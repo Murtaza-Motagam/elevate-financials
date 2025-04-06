@@ -5,7 +5,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { UserProvider } from '@/context/UserContext';
 
-
 export const metadata: Metadata = {
   title: 'Elevate Financials | Secure Banking, Credit Cards, Loans & Rewards',
   description:

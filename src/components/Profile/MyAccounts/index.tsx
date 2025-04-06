@@ -13,12 +13,16 @@ import {
   Landmark,
   ShieldCheck,
   Download,
+  QrCode,
 } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import ProfileImage from './Modals/ProfileImage';
 import EditProfile from './Modals/EditProfile';
 import AccountTabs from './AccountTabs';
 import PageLoader from '@/shared/Loaders/PageLoader';
+import { Tooltip } from 'react-tooltip';
+import ProfileQr from './Modals/ProfileQr';
+import useProfile from './hooks/useProfile';
 
 const checkForAccStatus = (accStatus: string) => {
   if (accStatus === 'active') {
@@ -33,6 +37,7 @@ const MyAccounts = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [open, setOpen] = useState<boolean>(false);
   const [editProfile, setEditProfile] = useState<boolean>(false);
+  const { qrOpen, setQrOpen, handleQrGenerator, ...profileData } = useProfile();
 
   const fetchUserInfo = async () => {
     try {
@@ -84,13 +89,28 @@ const MyAccounts = () => {
       </Card>
       <div className='border-b border-gray-400 pb-3 mt-5 font-bold flex items-center justify-between text-xl text-gray-800 dark:text-white'>
         <span>Profile details</span>
-        <Button
-          variant='outline'
-          onClick={() => setEditProfile(true)}
-          className='hover:bg-primary hover:text-white rounded-full p-2'
-        >
-          <EditIcon />
-        </Button>
+        <div className='flex gap-x-2'>
+          <Button
+            data-tooltip-content='Create profile QR'
+            data-tooltip-id='qr'
+            variant='outline'
+            onClick={handleQrGenerator}
+            className='hover:bg-primary hover:text-white rounded-full p-2'
+          >
+            <QrCode />
+            <Tooltip id='qr' />
+          </Button>
+          <Button
+            data-tooltip-content='Edit profile'
+            data-tooltip-id='editProfile'
+            variant='outline'
+            onClick={() => setEditProfile(true)}
+            className='hover:bg-primary hover:text-white rounded-full p-2'
+          >
+            <EditIcon />
+            <Tooltip id='editProfile' />
+          </Button>
+        </div>
       </div>
 
       <div className='mt-6 bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8'>
@@ -206,6 +226,7 @@ const MyAccounts = () => {
       {/* Modals */}
       {/* Profile Image modal */}
       <ProfileImage userInfo={userInfo} open={open} setOpen={setOpen} />
+      <ProfileQr profileData={profileData} open={qrOpen} setOpen={setQrOpen} />
       <EditProfile open={editProfile} setOpen={setEditProfile} fetchUserInfo={fetchUserInfo} />
     </div>
   );

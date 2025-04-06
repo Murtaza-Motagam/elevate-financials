@@ -29,9 +29,9 @@ interface UserFieldProps {
 
 const UserContext = createContext<UserContextProps>({
   mainUser: null,
-  setMainUser: () => { },
+  setMainUser: () => {},
   contextLoading: true,
-  fetchUser: () => { },
+  fetchUser: () => {},
 });
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {

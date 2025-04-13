@@ -4,9 +4,13 @@ import React, { useEffect, useState } from 'react';
 import LayoutWrapper from '@/shared/wrapper/LayoutWrapper';
 import { servicesData } from './utils';
 import Link from 'next/link';
+import { profile_tabs } from '@/lib/constant';
+import { protectedRoutes } from '@/lib/routes';
+import { useRouter } from 'next/navigation';
 
 const Services = () => {
   const [mounted, setMounted] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
@@ -44,20 +48,22 @@ const Services = () => {
         </div>
         <aside className='hidden md:block w-1/4 p-4 bg-gray-100 border-2 h-fit dark:bg-slate-900 rounded-lg shadow-md'>
           <h1 className='text-lg font-bold text-gray-800 dark:text-gray-100 border-b pb-2'>
-            Quick actions
+            Quick Actions
           </h1>
           <ul className='mt-3 space-y-2'>
-            <li className='p-2 text-sm font-medium border-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer'>
+            <li
+              onClick={() =>
+                router.push(`${protectedRoutes.profile}?tab=${profile_tabs.transaction}`)
+              }
+              className='p-2 text-sm font-medium border-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer'
+            >
               View Recent Transactions
             </li>
-            <li className='p-2 text-sm font-medium border-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer'>
+            <li
+              onClick={() => router.push(`${protectedRoutes.oneTimeTransfer}`)}
+              className='p-2 text-sm font-medium border-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer'
+            >
               Quick Transfer
-            </li>
-            <li className='p-2 text-sm font-medium border-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer'>
-              Pay Bills
-            </li>
-            <li className='p-2 text-sm font-medium border-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer'>
-              Check Loan Status
             </li>
           </ul>
         </aside>

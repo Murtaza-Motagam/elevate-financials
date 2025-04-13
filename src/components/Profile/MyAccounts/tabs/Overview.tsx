@@ -11,14 +11,14 @@ const Overview = ({ accInfo }: AccountTabsProps) => {
         <Banknote className='w-6 h-6 text-blue-600' />
         <div>
           <p className='dark:text-gray-300'>Savings Balance</p>
-          <h3 className='text-lg font-bold'>${formatWithCommas(accInfo?.balance)}</h3>
+          <h3 className='text-lg font-bold'>₹{formatWithCommas(accInfo?.balance)}</h3>
         </div>
       </Card>
       <Card className='p-4 flex items-center gap-3 w-full bg-slate-100 dark:bg-slate-900'>
         <CreditCard className='w-6 h-6 text-green-600' />
         <div>
           <p className='dark:text-gray-300'>Credit Card Due</p>
-          <h3 className='text-lg font-bold'>$230.00</h3>
+          <h3 className='text-lg font-bold'>₹230.00</h3>
         </div>
       </Card>
       <Card className='p-4 flex items-center gap-3 w-full bg-slate-100 dark:bg-slate-900'>

@@ -23,6 +23,9 @@ import PageLoader from '@/shared/Loaders/PageLoader';
 import { Tooltip } from 'react-tooltip';
 import ProfileQr from './Modals/ProfileQr';
 import useProfile from './hooks/useProfile';
+import { useRouter } from 'next/navigation';
+import { protectedRoutes } from '@/lib/routes';
+import { profile_tabs } from '@/lib/constant';
 
 const checkForAccStatus = (accStatus: string) => {
   if (accStatus === 'active') {
@@ -38,6 +41,7 @@ const MyAccounts = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [editProfile, setEditProfile] = useState<boolean>(false);
   const { qrOpen, setQrOpen, handleQrGenerator, ...profileData } = useProfile();
+  const router = useRouter();
 
   const fetchUserInfo = async () => {
     try {
@@ -75,14 +79,19 @@ const MyAccounts = () => {
           <div>
             <p className='text-lg'>Current balance</p>
             <h2 className='text-3xl font-bold'>
-              ${formatWithCommas(userInfo?.accountDetails?.balance)}
+              ₹{formatWithCommas(userInfo?.accountDetails?.balance)}
             </h2>
             <p className='text-sm mt-1'>
               Account N/O •{' '}
               <span className='italic'>{userInfo?.accountDetails?.accountNumber}</span>
             </p>
           </div>
-          <Button className='dark:bg-white text-white dark:text-primary dark:hover:bg-transparent dark:hover:border dark:hover:border-white dark:hover:text-white mt-6'>
+          <Button
+            onClick={() =>
+              router.push(`${protectedRoutes.profile}?tab=${profile_tabs.transaction}`)
+            }
+            className='dark:bg-white text-white dark:text-primary dark:hover:bg-transparent dark:hover:border dark:hover:border-white dark:hover:text-white mt-6'
+          >
             View statements <Download className='ml-2 h-4 w-4' />
           </Button>
         </CardContent>

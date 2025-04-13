@@ -11,6 +11,7 @@ export const protectedRoutes = {
   profile: '/profile',
   services: '/services',
   oneTimeTransfer: '/services/onetimetransfer',
+  qrPay: '/services/qrpay',
 };
 
 export const authenticationRoutes = {

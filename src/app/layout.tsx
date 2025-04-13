@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { UserProvider } from '@/context/UserContext';
+import PreloaderWrapper from '@/components/common/PreloaderWrapper';
 
 export const metadata: Metadata = {
   title: 'Elevate Financials | Secure Banking, Credit Cards, Loans & Rewards',
@@ -59,7 +60,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <UserProvider>{children}</UserProvider>
+          <PreloaderWrapper>
+            <UserProvider>{children}</UserProvider>
+          </PreloaderWrapper>
         </ThemeProvider>
         <ToastContainer />
       </body>

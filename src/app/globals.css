@@ -376,3 +376,32 @@ input[type='number'] {
     @apply bg-background text-foreground;
   }
 }
+
+.preloader {
+  width: 66px;
+  height: 66px;
+  display: grid;
+  animation: preloader-plncf9 3s infinite;
+}
+
+.preloader::before,
+.preloader::after {
+  content: '';
+  grid-area: 1/1;
+  border: 9px solid;
+  border-radius: 50%;
+  border-color: hsl(var(--primary)) hsl(var(--primary)) #0000 #0000;
+  mix-blend-mode: darken;
+  animation: preloader-plncf9 1s infinite linear;
+}
+
+.preloader::after {
+  border-color: #0000 #0000 #dbdcef #dbdcef;
+  animation-direction: reverse;
+}
+
+@keyframes preloader-plncf9 {
+  100% {
+    transform: rotate(1turn);
+  }
+}

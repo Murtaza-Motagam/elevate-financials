@@ -14,6 +14,12 @@ export const protectedRoutes = {
   qrPay: '/services/qrpay',
 };
 
+export const profile_routes = {
+  dashboard: '/profile?tab=0',
+  MyAccounts: '/profile?tab=1',
+  transaction: '/profile?tab=2',
+};
+
 export const authenticationRoutes = {
   register: '/register',
   login: '/login',

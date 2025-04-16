@@ -110,3 +110,9 @@ export const logout = async () => {
     window.open(`${process.env.NEXT_PUBLIC_BASE_URL}/login`, '_self');
   }, 600);
 };
+
+export const handleNumbers = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  if (['e', 'E', '+', '-', '.'].includes(e.key)) {
+    return e.preventDefault();
+  }
+};

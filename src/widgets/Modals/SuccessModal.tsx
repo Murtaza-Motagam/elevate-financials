@@ -3,28 +3,31 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/compone
 import { CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import DefaultButton from '../DefaultButton';
+import { useRouter } from 'next/navigation';
+import { profile_routes } from '@/lib/routes';
 
 interface SuccessModalProps {
   open: boolean;
-  onOpenChange: () => void;
+  onClose: () => void;
   title?: string;
   description?: string;
-  details?: { label: string; value: string }[]; // For dynamic transaction details
+  details?: { label: string; value: string; detailClassName?: string }[]; // For dynamic transaction details
   icon?: React.ReactNode; // Custom icon support
   buttonText?: string;
 }
 
 const SuccessModal: React.FC<SuccessModalProps> = ({
   open,
-  onOpenChange,
+  onClose,
   title = 'Success!',
   description = '',
   details = [],
   icon = <CheckCircle className='text-green-500 w-16 h-16' />,
   buttonText = 'Close',
 }) => {
+  const router = useRouter();
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className='flex flex-col items-center text-center p-8 rounded-2xl shadow-lg w-full max-w-md'>
         {/* Animated icon */}
         <motion.div
@@ -70,7 +73,7 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
                 className='flex justify-between text-sm text-gray-700 dark:text-gray-100 mt-2'
               >
                 <span>{detail.label}:</span>
-                <span className='font-medium'>{detail.value}</span>
+                <span className={`${detail.detailClassName}`}>{detail.value}</span>
               </div>
             ))}
           </motion.div>
@@ -81,12 +84,18 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.8, duration: 0.3 }}
-          className='w-full mt-6'
+          className='w-full mt-6 flex items-center justify-between gap-x-3'
         >
           <DefaultButton
             title={buttonText}
             className='w-full bg-transparent hover:bg-primary border border-primary text-primary hover:text-white dark:text-white py-2 rounded-lg shadow-md transition-all'
-            onClick={onOpenChange}
+            onClick={onClose}
+          />
+
+          <DefaultButton
+            title='Go to transaction'
+            className='w-full bg-transparent hover:bg-primary border border-primary text-primary hover:text-white dark:text-white py-2 rounded-lg shadow-md transition-all'
+            onClick={() => router.push(profile_routes.transaction)}
           />
         </motion.div>
       </DialogContent>

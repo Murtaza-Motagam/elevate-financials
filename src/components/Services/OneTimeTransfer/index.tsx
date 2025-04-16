@@ -3,21 +3,23 @@ import LayoutWrapper from '@/shared/wrapper/LayoutWrapper';
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { motion } from 'framer-motion';
-import { Send } from 'lucide-react';
+import { IndianRupee, LockKeyhole, NotepadText, Send, User } from 'lucide-react';
 import LazyLoadImg from '@/widgets/LazyLoadImg';
 import InputField from '@/widgets/Input';
 import SingleSelect from '@/widgets/SingleSelect';
 import RollLoader from '@/shared/Loaders/RollLoader';
 import DefaultButton from '@/widgets/DefaultButton';
-import useAddTransaction from '@/components/Profile/Transactions/hooks/useAddTransaction';
+import useAddTransaction from '@/components/Services/OneTimeTransfer/hooks/useAddTransaction';
 import { transactionType } from '@/lib/constant';
 import SuccessModal from '@/widgets/Modals/SuccessModal';
+import { formatWithCommas, handleNumbers } from '@/lib/common';
+import TextAreaField from '@/widgets/TextArea';
 
 const OneTimeTransfer = () => {
   const { hookform, ...dt } = useAddTransaction({});
   return (
     <LayoutWrapper childClass='!min-h-0'>
-      <div className='grid grid-cols-1 md:grid-cols-2 h-[700px] p-0 mb-5'>
+      <div className='grid grid-cols-1 md:grid-cols-2 h-[750px] p-0 mb-5'>
         {/* Left Side */}
         <motion.div
           initial={{ opacity: 0, x: 50 }}
@@ -60,18 +62,21 @@ const OneTimeTransfer = () => {
           </div>
         </motion.div>
 
-        {/* Right Side */}
+        {/* Right Side  */}
         <motion.div
           initial={{ opacity: 0, x: 0 }}
           animate={{ opacity: 1, y: 50 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className='flex items-center justify-center m-2 mb-10 md:-mt-5'
         >
-          <Card className='w-full md:max-w-md py-2 md:p-6 shadow-lg bg-slate-100 dark:bg-slate-900 rounded-none md:rounded-[6px]'>
+          <Card className='w-full md:max-w-lg shadow-none border-none'>
             <CardHeader>
-              <CardTitle className='text-2xl -mt-8 font-normal text-center text-gray-800 dark:text-gray-100'>
-                Instant money transfer
+              <CardTitle className='text-2xl text-center font-semibold text-gray-800 dark:text-white'>
+                Instant Money Transfer
               </CardTitle>
+              <p className='text-sm text-center text-gray-500 dark:text-gray-400'>
+                Secure and fast transactions within seconds
+              </p>
             </CardHeader>
             <CardContent>
               <form className='space-y-4'>
@@ -80,6 +85,7 @@ const OneTimeTransfer = () => {
                   rest={hookform.register('receiverAccNum')}
                   placeholder='Enter reciever account number'
                   error={hookform.errors?.receiverAccNum?.message}
+                  inputIcon={<User size={17} className='text-gray-400' />}
                   mandatory
                 />
                 <InputField
@@ -87,6 +93,7 @@ const OneTimeTransfer = () => {
                   rest={hookform.register('ifscCodeNumber')}
                   placeholder='Enter IFSC code number'
                   error={hookform.errors?.ifscCodeNumber?.message}
+                  inputIcon={<LockKeyhole size={17} className='text-gray-400' />}
                   mandatory
                 />
                 <InputField
@@ -94,13 +101,16 @@ const OneTimeTransfer = () => {
                   rest={hookform.register('amt')}
                   placeholder='Type amount'
                   error={hookform.errors?.amt?.message}
+                  inputIcon={<IndianRupee size={17} className='text-gray-400' />}
+                  type='number'
+                  onKeyDown={handleNumbers}
                   mandatory
                 />
-                <InputField
+                <TextAreaField
                   label='Remarks'
                   rest={hookform.register('remarks')}
                   placeholder='Remarks (optional)'
-                  type='text'
+                  inputIcon={<NotepadText size={17} className='text-gray-400' />}
                 />
                 <SingleSelect
                   name='transactionTypeNm'
@@ -116,23 +126,41 @@ const OneTimeTransfer = () => {
                   icon={dt.loading ? <RollLoader /> : <Send className='mr-2' size={18} />}
                   onClick={hookform.handleSubmit(dt.createTransaction)}
                   type='submit'
-                  title={!dt.loading ? 'Transfer money' : 'Processing...'}
-                  className='w-full text-center'
+                  title={!dt.loading ? 'Transfer Money' : 'Processing...'}
+                  className='w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold py-2 rounded-md transition-all duration-300 shadow-md'
                   loading={dt.loading}
                 />
               </form>
             </CardContent>
           </Card>
         </motion.div>
-
         <SuccessModal
           open={dt.succesModalOpen}
-          onOpenChange={() => dt.setSuccessModalOpen(false)}
+          onClose={() => dt.setSuccessModalOpen(false)}
           title='Transaction Successful!'
           description='Your transaction has been completed successfully.'
           details={[
-            { label: 'Transaction ID', value: dt.data.transactionId },
-            { label: 'Amount', value: `${dt.data.amt}/-` },
+            {
+              label: 'Transaction ID',
+              value: dt.data.transactionId,
+              detailClassName: 'font-semibold',
+            },
+            {
+              label: 'Amount',
+              value: `${dt.data.currency} ${formatWithCommas(dt.data.amt)}`,
+              detailClassName: 'font-semibold',
+            },
+            {
+              label: 'Status',
+              value: dt.data.status,
+              detailClassName: 'text-green-500 font-semibold',
+            },
+            {
+              label: 'Transaction Type',
+              value: dt.data.transactionType,
+              detailClassName: 'font-semibold',
+            },
+            { label: 'Remarks', value: dt.data.remarks, detailClassName: 'font-normal' },
           ]}
         />
       </div>

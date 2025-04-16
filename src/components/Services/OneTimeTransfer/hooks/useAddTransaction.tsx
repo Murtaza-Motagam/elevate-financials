@@ -79,7 +79,6 @@ const useAddTransaction = ({
       if (response.success) {
         closeModal();
         getTransaction();
-        console.log('response: ', response);
         setData(response.details);
         setSuccessModalOpen(true);
       } else {

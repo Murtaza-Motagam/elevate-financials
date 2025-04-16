@@ -1,21 +1,14 @@
 'use client';
-import React, { useRef, useState } from 'react';
-import { ChevronDown, Download, FilePlus, Search } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import React, { useState } from 'react';
+import { Download, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-import useClickOutside from '@/hooks/useClickOutside';
 import DefaultButton from '@/widgets/DefaultButton';
 import useTransaction from './hooks/useTransaction';
-import AddTransaction from './Form/AddTransaction';
 import TransactionDetails from './Form/TransactionDetails';
 import Table from '@/widgets/Table';
 
 const Transactions = () => {
-  const [ddOpen, setDdOpen] = useState<boolean>(false);
-  const [openTransactionModal, setTransactionOpen] = useState<boolean>(false);
   const [detailsOpen, setDetailsOpen] = useState<boolean>(false);
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
-  useClickOutside(dropdownRef, () => setDdOpen(false));
 
   const { invoices, ...dt } = useTransaction();
 
@@ -34,27 +27,11 @@ const Transactions = () => {
             <Input type='text' placeholder='Type Transaction ID to search' className='pl-10' />
           </div>
         </div>
-        <div ref={dropdownRef} className='w-full md:w-auto relative flex items-center'>
-          <DefaultButton
-            onClick={() => setTransactionOpen(true)}
-            className='rounded-r-none w-full md:w-auto'
-            icon={<FilePlus />}
-            title='Create transaction'
-          />
-          <Button onClick={() => setDdOpen(!ddOpen)} className='rounded-l-none px-2 border-l-2'>
-            <ChevronDown />
-          </Button>
-
-          {ddOpen && (
-            <Button
-              variant='outline'
-              className='w-full md:w-[200px] absolute top-10 right-0 rounded-[5px] bg-white text-black dark:hover:bg-gray-700 z-10'
-            >
-              <Download />
-              Download history
-            </Button>
-          )}
-        </div>
+        <DefaultButton
+          className='rounded-md w-full md:w-auto'
+          icon={<Download />}
+          title='Download history'
+        />
       </div>
       <Table
         columns={dt.columns}
@@ -62,12 +39,6 @@ const Transactions = () => {
         className='mt-7'
         loading={dt.loading}
         onRowClick={(row) => dt.handleTransactionDetails(row, setDetailsOpen)}
-      />
-
-      <AddTransaction
-        open={openTransactionModal}
-        setOpen={setTransactionOpen}
-        getTransaction={dt.getTransactions}
       />
 
       <TransactionDetails open={detailsOpen} setOpen={setDetailsOpen} data={dt.trData} />

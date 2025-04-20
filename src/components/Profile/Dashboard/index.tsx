@@ -111,7 +111,6 @@ const Dashboard = () => {
                         className='flex items-center justify-between gap-x-3 border-b p-2 rounded-[6px] my-1.5'
                       >
                         <div className='flex items-center gap-x-2'>
-                          {/* <LazyLoadImg src={val.profileImg} className='w-10 h-10 rounded-full' /> */}
                           {val?.profileImg ? (
                             <AvatarDefault profileImg={val.profileImg} />
                           ) : (
@@ -122,9 +121,11 @@ const Dashboard = () => {
                             <span className='text-xs text-gray-500 '>{val.accountType}</span>
                           </p>
                         </div>
-                        <p className='text-sm font-normal text-gray-700 dark:text-gray-200'>
-                          INR {val.amt && `${val.amt}/-`}
-                        </p>
+                        {val.amt && (
+                          <p className='text-sm flex items-center font-normal text-gray-700 dark:text-gray-200'>
+                            <IndianRupee size={15} />{val.amt}/-
+                          </p>
+                        )}
                       </div>
                     ),
                   )

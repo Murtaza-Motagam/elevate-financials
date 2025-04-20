@@ -63,7 +63,6 @@ const useDashboard = () => {
           totalBalance: val.totalBalance,
         }));
       resData.totalRevenue = totalRevenue;
-      console.log('resData: ', resData);
       setAnalyticsData(resData);
     } catch (error) {
       console.log('error: ', error);
